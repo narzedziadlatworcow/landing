@@ -1,4 +1,4 @@
-import { Check, X, Lock, Zap, ArrowRight, Shield, Sparkles } from "lucide-react";
+import { Check, X, Zap, ArrowRight, Shield, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { SectionHead } from "@/components/ui/SectionHead";
@@ -23,11 +23,11 @@ const coursePlan = {
 };
 
 const subPlan = {
-  eyebrow: "Subskrybcja",
+  eyebrow: "Zajawka",
   title: "Aplikacja NDT",
   price: "79 zł",
   priceUnit: "/ mies",
-  priceNote: "start po becie · 1 workspace",
+  priceNote: "startuje Q3 2026 · 1 workspace",
   features: [
     { t: "Wszystko z kursu" },
     { t: "Aplikacja: research, pisanie, eksport" },
@@ -49,22 +49,13 @@ const lifetimePlan = {
   ],
   total: "1 147 zł+",
   todayPrice: "399 zł",
-  payoff: "≈ 65% taniej · zwrot po ~5 miesiącach aplikacji",
+  payoff: "≈ 65% taniej od sumy wartości",
   cta: "Chcę lifetime — wejdź do bety",
 };
 
 export function Pricing() {
   return (
     <section id="pricing" className="py-20 md:py-28 relative">
-      {/* Decorative blob */}
-      <div
-        className="absolute top-10 left-0 w-[400px] h-[400px] rounded-full opacity-20 blur-3xl pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(circle, hsl(286 86% 57% / 0.4) 0%, transparent 70%)",
-        }}
-      />
-
       <div className="relative mx-auto max-w-[1200px] px-6">
         <SectionHead
           n="07"
@@ -80,7 +71,7 @@ export function Pricing() {
             {" "}jako jeden z pierwszych.
           </h2>
           <p className="mt-4 text-ink/70 text-[16px] max-w-[620px] mx-auto">
-            Subskrybcja otworzy się po becie. Lifetime daje dostęp do środka
+            Subskrypcja otworzy się po becie. Lifetime daje dostęp do środka
             już teraz — i cenę zamrożoną na zawsze.
           </p>
         </div>
@@ -104,17 +95,17 @@ export function Pricing() {
             </Button>
           </PlanCard>
 
-          {/* PLAN 2 — Subscription (locked) */}
+          {/* PLAN 2 — Subscription (peek) */}
           <PlanCard
             eyebrow={subPlan.eyebrow}
             title={subPlan.title}
             price={subPlan.price}
             priceUnit={subPlan.priceUnit}
             priceNote={subPlan.priceNote}
-            locked
+            peek
           >
-            <FeatureList items={subPlan.features} muted />
-            <div className="mt-auto rounded-lg border border-dashed border-brand/50 bg-brand-soft/40 p-3 text-center">
+            <FeatureList items={subPlan.features} />
+            <div className="mt-auto rounded-lg bg-white/70 p-3 text-center">
               <div className="font-hand text-[15px] text-ink/85">
                 Chcesz wejść teraz?
               </div>
@@ -139,7 +130,7 @@ export function Pricing() {
                 Best value
               </Badge>
               <Badge tone="gold">
-                ⚡ Limited · 50 miejsc
+                30 miejsc w becie
               </Badge>
             </div>
 
@@ -219,7 +210,7 @@ function PlanCard({
   price,
   priceUnit,
   priceNote,
-  locked,
+  peek,
   children,
 }: {
   eyebrow: string;
@@ -227,37 +218,36 @@ function PlanCard({
   price: string;
   priceUnit?: string;
   priceNote: string;
-  locked?: boolean;
+  peek?: boolean;
   children: React.ReactNode;
 }) {
   return (
     <div
       className={cn(
-        "relative rounded-2xl border p-6 flex flex-col bg-white/90",
-        locked
-          ? "border-border-soft opacity-80"
-          : "border-border-soft shadow-[0_10px_30px_-12px_hsl(266_51%_16%_/_0.15)]",
+        "relative rounded-2xl p-6 flex flex-col",
+        peek
+          ? "bg-brand-soft/50 border-2 border-dashed border-brand/40"
+          : "bg-white/90 border border-border-soft shadow-[0_10px_30px_-12px_hsl(266_51%_16%_/_0.15)]",
       )}
+      style={peek ? { transform: "rotate(0.5deg)" } : undefined}
     >
-      {locked && (
-        <div className="absolute top-4 right-4">
-          <Badge tone="muted" icon={<Lock className="size-3" />}>
-            Beta zamknięta
-          </Badge>
+      {peek && (
+        <div className="absolute -top-3 right-5">
+          <Badge tone="brand">Wkrótce</Badge>
         </div>
       )}
 
-      <div className="text-[11px] font-semibold tracking-[0.18em] uppercase text-muted">
+      <div
+        className={cn(
+          "text-[11px] font-semibold tracking-[0.18em] uppercase",
+          peek ? "text-brand" : "text-muted",
+        )}
+      >
         {eyebrow}
       </div>
       <h3 className="mt-1 text-[20px] font-semibold text-ink">{title}</h3>
       <div className="mt-4 flex items-baseline gap-1">
-        <span
-          className={cn(
-            "text-[36px] font-bold leading-none tracking-tight",
-            locked ? "text-muted" : "text-ink",
-          )}
-        >
+        <span className="text-[36px] font-bold leading-none tracking-tight text-ink">
           {price}
         </span>
         {priceUnit && (
@@ -265,19 +255,18 @@ function PlanCard({
         )}
       </div>
       <div className="mt-1.5 text-[12px] text-muted">{priceNote}</div>
-      <div className="my-5 h-px bg-border-soft" />
+      <div
+        className={cn(
+          "my-5 h-px",
+          peek ? "bg-brand/20" : "bg-border-soft",
+        )}
+      />
       {children}
     </div>
   );
 }
 
-function FeatureList({
-  items,
-  muted = false,
-}: {
-  items: PlanFeature[];
-  muted?: boolean;
-}) {
+function FeatureList({ items }: { items: PlanFeature[] }) {
   return (
     <ul className="space-y-2 mb-5 flex-1">
       {items.map((f, i) => (
@@ -285,19 +274,13 @@ function FeatureList({
           key={i}
           className={cn(
             "flex items-start gap-2 text-[13.5px] leading-snug",
-            f.off ? "text-muted" : muted ? "text-ink/65" : "text-ink/85",
+            f.off ? "text-muted" : "text-ink/85",
           )}
         >
           {f.off ? (
             <X className="size-4 text-muted/70 shrink-0 mt-0.5" strokeWidth={2.25} />
           ) : (
-            <Check
-              className={cn(
-                "size-4 shrink-0 mt-0.5",
-                muted ? "text-muted/80" : "text-brand",
-              )}
-              strokeWidth={2.5}
-            />
+            <Check className="size-4 text-brand shrink-0 mt-0.5" strokeWidth={2.5} />
           )}
           {f.t}
         </li>

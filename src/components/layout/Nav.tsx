@@ -14,10 +14,8 @@ export function Nav() {
     <header className="sticky top-0 z-40 backdrop-blur-md bg-white/60 border-b border-border-soft/50">
       <div className="mx-auto max-w-[1200px] px-6 h-16 flex items-center justify-between">
         <a href="#top" className="flex items-center gap-2.5">
-          <span className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand to-brand-ring grid place-items-center text-white font-bold text-sm shadow-[0_4px_10px_-2px_hsl(286_86%_57%_/_0.45)]">
-            N
-          </span>
-          <span className="font-semibold text-ink text-[15px] tracking-tight">
+          <img src="/logo.png" alt="NDT" className="h-7 w-auto" />
+          <span className="font-semibold text-ink text-[15px] tracking-tight sr-only">
             NDT
           </span>
         </a>

@@ -1,14 +1,14 @@
-import { Play, CheckCircle2, ArrowRight } from "lucide-react";
+import { Play, CheckCircle2, ArrowRight, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { SectionHead } from "@/components/ui/SectionHead";
 
 const modules = [
-  { n: "01", t: "Dlaczego strategia, a nie taktyka", time: "18 min" },
-  { n: "02", t: "Nadaj treściom kierunek", time: "24 min" },
-  { n: "03", t: "Twoja widownia — persony, które zamieniają się w klientów", time: "32 min" },
-  { n: "04", t: "Ton, styl, serie — jak brzmieć jak Ty", time: "28 min" },
-  { n: "05", t: "Produkcja bez wypalenia — szablon na tydzień", time: "22 min" },
+  { n: "01", t: "Tożsamość twórcy", time: "27 min" },
+  { n: "02", t: "Cele twórcy", time: "24 min" },
+  { n: "03", t: "Odbiorcy", time: "24 min" },
+  { n: "04", t: "Styl komunikacji", time: "22 min" },
+  { n: "05", t: "Format treści", time: "23 min" },
 ];
 
 export function Course() {
@@ -29,7 +29,7 @@ export function Course() {
           <div>
             <Badge tone="brand" className="mb-4">
               <span className="w-1.5 h-1.5 rounded-full bg-brand" />
-              12 modułów · 3h 20min
+              10 lekcji · ok. 2h
             </Badge>
 
             <h2 className="text-[36px] md:text-[44px] font-semibold tracking-tight text-ink leading-[1.05]">
@@ -47,7 +47,7 @@ export function Course() {
 
             <ul className="mt-6 space-y-2.5 max-w-[480px]">
               {[
-                "12 modułów video (3h 20min) z Nikodemem",
+                "10 lekcji video (ok. 2h) z Nikodemem, w 5 sekcjach",
                 "Workbook strategii marki (PDF)",
                 "Szablony: serii, tematów, kalendarza",
                 "Dożywotni dostęp + przyszłe aktualizacje",
@@ -63,7 +63,9 @@ export function Course() {
               <Button size="lg" variant="primary" rightIcon={<ArrowRight className="size-4" />}>
                 Program kursu
               </Button>
-              <Badge tone="muted">💬 540+ twórców w społeczności</Badge>
+              <Badge tone="muted" icon={<MessageCircle className="size-3" />}>
+                540+ twórców w społeczności
+              </Badge>
             </div>
           </div>
 
@@ -130,7 +132,7 @@ export function Course() {
                   </li>
                 ))}
                 <li className="text-[11px] text-muted italic text-center pt-1">
-                  + 7 modułów głębi · strategia krok po kroku
+                  Każda sekcja = 2 lekcje video krok po kroku
                 </li>
               </ul>
             </div>

@@ -1,16 +1,110 @@
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
 import { ArrowRight, Play } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { StrategyMockup } from "@/components/mockups/StrategyMockup";
 import { EditorMockup } from "@/components/mockups/EditorMockup";
+import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
+
+function splitWords(text: string) {
+  // Split preserving spaces. Each word is a nowrap container so chars don't break mid-word.
+  const tokens = text.split(/(\s+)/); // keeps whitespace tokens
+  return tokens.map((token, ti) => {
+    if (/^\s+$/.test(token)) {
+      return (
+        <span key={`s${ti}`} data-char style={{ opacity: 0, whiteSpace: "pre" }}>
+          {token}
+        </span>
+      );
+    }
+    return (
+      <span
+        key={`w${ti}`}
+        style={{ display: "inline-block", whiteSpace: "nowrap" }}
+      >
+        {Array.from(token).map((ch, ci) => (
+          <span
+            key={ci}
+            data-char
+            style={{ opacity: 0, display: "inline-block" }}
+          >
+            {ch}
+          </span>
+        ))}
+      </span>
+    );
+  });
+}
 
 export function Hero() {
+  const rootRef = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      const reduced = prefersReducedMotion();
+
+      if (reduced) {
+        gsap.set("[data-char]", { opacity: 1 });
+        gsap.set("[data-hero-scribble]", { strokeDashoffset: 0 });
+        gsap.set("[data-hero-editor]", { opacity: 1, x: 0, rotate: 1.5 });
+        gsap.set("[data-hero-strategy]", { opacity: 1, x: 0, rotate: -3 });
+        return;
+      }
+
+      // Editor starts hidden (Strategy is the visible one at top of hero)
+      gsap.set("[data-hero-editor]", { opacity: 0, x: 80, rotate: 8 });
+      gsap.set("[data-hero-strategy]", { opacity: 1, x: 0, rotate: -3 });
+
+      // Typewriter on mount
+      const intro = gsap.timeline({ defaults: { ease: "none" } });
+      intro
+        .to("[data-char]", {
+          opacity: 1,
+          duration: 0.01,
+          stagger: 0.022,
+          delay: 0.1,
+        })
+        .to(
+          "[data-hero-scribble]",
+          { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" },
+          ">+=0.1",
+        );
+
+      // Scroll-pinned mockup swap
+      const swap = gsap.timeline();
+      swap
+        .to("[data-hero-strategy]", {
+          opacity: 0,
+          x: -90,
+          rotate: -18,
+          duration: 1,
+        })
+        .to(
+          "[data-hero-editor]",
+          { opacity: 1, x: 0, rotate: 1.5, duration: 1 },
+          0.3,
+        );
+
+      ScrollTrigger.create({
+        trigger: rootRef.current,
+        start: "top top",
+        end: "+=58%",
+        pin: true,
+        scrub: 1,
+        animation: swap,
+      });
+    },
+    { scope: rootRef },
+  );
+
   return (
     <section
+      ref={rootRef}
       id="top"
-      className="relative overflow-hidden pt-14 md:pt-20 pb-24 md:pb-32"
+      className="relative overflow-hidden min-h-screen flex items-center pt-20 pb-16"
     >
-      <div className="mx-auto max-w-[1200px] px-6">
+      <div className="mx-auto max-w-[1200px] w-full px-6">
         <div className="grid md:grid-cols-[1.15fr_1fr] gap-10 md:gap-14 items-center">
           {/* Copy column */}
           <div>
@@ -20,29 +114,32 @@ export function Hero() {
             </Badge>
 
             <h1 className="font-semibold tracking-tight text-ink leading-[1.02] text-[44px] sm:text-[56px] md:text-[64px]">
-              Nadaj treściom{" "}
+              {splitWords("Nadaj treściom ")}
               <span className="relative italic text-brand">
-                kierunek
+                {splitWords("kierunek")}
                 <svg
                   viewBox="0 0 220 12"
                   className="absolute left-0 -bottom-2 w-full h-3"
                   aria-hidden
                 >
                   <path
+                    data-hero-scribble
                     d="M2 8 Q 55 2, 110 6 T 218 5"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="3"
                     strokeLinecap="round"
+                    strokeDasharray="240"
+                    strokeDashoffset="240"
                   />
                 </svg>
               </span>
-              .
+              {splitWords(".")}
             </h1>
 
-            <p className="mt-6 text-ink/75 text-[17px] leading-relaxed max-w-[520px]">
-              Strategia marki, bank pomysłów i produkcja treści — w jednym miejscu.
-              Stworzone dla twórców, którzy robią to na serio.
+            <p className="mt-6 text-ink/75 text-[16px] leading-relaxed max-w-[520px]">
+              Od strategii do gotowych scenariuszy — w jednej sesji. Dla twórców,
+              którzy chcą wreszcie wiedzieć, co publikować.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
@@ -72,14 +169,18 @@ export function Hero() {
             </div>
 
             {/* Author attribution */}
-            <div className="mt-10 flex items-center gap-3">
-              <div className="size-10 rounded-full bg-gradient-to-br from-brand via-brand-ring to-fuchsia-400 text-white grid place-items-center font-bold text-sm shadow-[0_4px_10px_-2px_hsl(286_86%_57%_/_0.45)]">
-                NR
-              </div>
-              <div className="font-hand text-[15px] text-ink/85 leading-tight">
-                Od <b className="text-ink">@Szhakal</b> — twórcy, który przeszedł tę drogę.
-                <div className="text-[12px] text-muted font-sans">
-                  631K na TikToku · kurs „Nadaj treściom kierunek” wbudowany w produkt
+            <div className="mt-10 flex items-center gap-3.5">
+              <img
+                src="/nikodem-professional.jpg"
+                alt="Nikodem Rudziński"
+                className="size-14 rounded-full object-cover border-2 border-white shadow-[0_6px_14px_-2px_hsl(266_51%_16%_/_0.25)]"
+              />
+              <div className="leading-tight">
+                <div className="font-hand text-[20px] text-ink">
+                  Od <b>@Szhakal</b> — twórcy, który przeszedł tę drogę.
+                </div>
+                <div className="text-[12.5px] text-muted mt-1">
+                  631K na TikToku · 151K na Instagramie
                 </div>
               </div>
             </div>
@@ -87,41 +188,31 @@ export function Hero() {
 
           {/* Mockup column */}
           <div className="relative min-h-[480px] md:min-h-[520px]">
-            {/* Strategy — main, rotate +1.5deg */}
+            {/* Strategy — visible at start, swaps out on scroll */}
             <div
-              className="absolute top-0 right-0 w-[100%] max-w-[520px] float-slow"
-              style={{ ["--rot" as string]: "1.5deg" }}
+              data-hero-strategy
+              className="absolute inset-0 flex items-center justify-center"
             >
-              <div
-                className="transform"
-                style={{ transform: "rotate(1.5deg)" }}
-              >
-                <StrategyMockup />
-              </div>
+              <StrategyMockup className="w-[300px] md:w-[360px]" />
             </div>
 
-            {/* Editor — smaller, rotate -3deg, bottom-left */}
+            {/* Editor — hidden at start, swaps in on scroll */}
             <div
-              className="absolute bottom-0 -left-4 md:left-[-20px] w-[260px] md:w-[300px] float-slow"
-              style={{ ["--rot" as string]: "-3deg", animationDelay: "1.2s" }}
+              data-hero-editor
+              className="absolute inset-0 flex items-center justify-center"
             >
-              <div
-                className="transform"
-                style={{ transform: "rotate(-3deg)" }}
-              >
-                <EditorMockup />
-              </div>
+              <EditorMockup className="w-full max-w-[480px]" />
             </div>
 
             {/* Floating scribble anno */}
             <span
-              className="absolute top-[-12px] left-[10px] font-scribble text-brand text-2xl"
+              className="absolute -top-8 left-[10px] font-scribble scribble-sticker text-brand text-2xl z-10 pointer-events-none"
               style={{ transform: "rotate(-6deg)" }}
             >
               ✦ 7 etapów, 1 strategia
             </span>
             <span
-              className="absolute bottom-[10px] right-[-6px] font-scribble text-ink/70 text-lg"
+              className="absolute -bottom-7 right-[6px] font-scribble scribble-sticker text-ink/80 text-lg z-10 pointer-events-none"
               style={{ transform: "rotate(4deg)" }}
             >
               → pamięć Twojej marki
@@ -129,15 +220,6 @@ export function Hero() {
           </div>
         </div>
       </div>
-
-      {/* Decorative gradient blob */}
-      <div
-        className="absolute -top-20 -right-40 w-[520px] h-[520px] rounded-full opacity-30 blur-3xl pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(circle, hsl(286 86% 57% / 0.5) 0%, transparent 70%)",
-        }}
-      />
     </section>
   );
 }

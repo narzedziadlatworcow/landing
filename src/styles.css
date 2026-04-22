@@ -82,6 +82,15 @@ body {
   font-family: var(--font-scribble);
 }
 
+/* Biały „halo" outline — gdy scribble nachodzi na mockup / ramkę i słabo go widać */
+.scribble-sticker {
+  text-shadow:
+    0 0 3px #fff,
+    0 0 6px #fff,
+    0 0 10px #fff,
+    0 0 14px #fff;
+}
+
 /* ─── Glass — z aplikacji NDT ───────────────────────────────────── */
 
 .glass {

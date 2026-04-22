@@ -6,16 +6,24 @@ import { cn } from "@/lib/cn";
 
 const faqs = [
   {
+    q: "Co dokładnie dostaję za 199 zł?",
+    a: `Pełny kurs Nikodema „Nadaj treściom kierunek" — 10 lekcji video w 5 sekcjach (ok. 2h), workbook strategii marki (PDF), szablony serii, tematów i kalendarza. Dostęp dożywotni z przyszłymi aktualizacjami. Aplikacja NDT dostępna w planie lifetime (399 zł) albo w subskrypcji 79 zł/mies po publicznym starcie.`,
+  },
+  {
+    q: "Czy potrzebuję doświadczenia w marketingu?",
+    a: `Nie. Kurs jest zaprojektowany od zera — zakładam tylko, że masz pomysł na siebie, a brakuje ci struktury. Prowadzę krok po kroku od „kim jestem jako twórca" do „co publikuję w przyszłym tygodniu". Żadnego korpo-marketingu, żadnych funnel-hacków — pracujesz na swojej marce.`,
+  },
+  {
     q: "Kiedy ruszy pełna aplikacja?",
-    a: "Aktualnie jesteśmy w zamkniętej becie — dostęp dostają użytkownicy lifetime. Publiczny start subskrybcji planujemy w Q3 2026, po fazie stabilizacji i zebraniu feedbacku z bety.",
+    a: "Aktualnie jesteśmy w zamkniętej becie — dostęp dostają użytkownicy lifetime. Publiczny start subskrypcji planujemy w Q3 2026, po fazie stabilizacji i zebraniu feedbacku z bety.",
   },
   {
     q: "Czym różni się lifetime od subskrypcji?",
-    a: "Lifetime to jednorazowe 399 zł — dostajesz dostęp do bety od zaraz, wszystko z kursu, rok aplikacji w cenie i 20% rabatu na kolejne lata. Subskrybcja to 79 zł/mies, ale otworzy się dopiero po becie.",
+    a: "Lifetime to jednorazowe 399 zł — dostajesz dostęp do bety od zaraz, wszystko z kursu, rok aplikacji w cenie i 20% rabatu na kolejne lata. Subskrypcja to 79 zł/mies, ale otworzy się dopiero po becie.",
   },
   {
     q: "Czy kurs jest po polsku?",
-    a: "Tak — cały kurs Nikodema (3h 20min, 12 modułów) jest po polsku. Aplikacja też. Obsługuje treści pisane w dowolnym języku, ale interfejs i kurs — tylko PL (EN w planach post-MVP).",
+    a: "Tak — cały kurs Nikodema (10 lekcji, ok. 2h) jest po polsku. Aplikacja też. Obsługuje treści pisane w dowolnym języku, ale interfejs i kurs — tylko PL (EN w planach post-MVP).",
   },
   {
     q: "Co jeśli nie będzie mi się podobać?",
@@ -23,7 +31,7 @@ const faqs = [
   },
   {
     q: "Ile miejsc lifetime zostało?",
-    a: "Pula 50 miejsc — aktualny stan pokazujemy na stronie zakupu w czasie rzeczywistym. Gdy zamkniemy lifetime, zostanie tylko subskrybcja po becie.",
+    a: "Pula 30 miejsc — aktualny stan pokazujemy na stronie zakupu w czasie rzeczywistym. Gdy zamkniemy lifetime, zostanie tylko subskrypcja po becie.",
   },
 ];
 
@@ -50,7 +58,7 @@ export function FaqAndFinalCta() {
             >
               {/* Decorative scribble */}
               <span
-                className="absolute -top-4 -right-3 font-scribble text-brand text-xl md:text-2xl"
+                className="absolute -top-7 -right-5 font-scribble scribble-sticker text-brand text-xl md:text-2xl z-10"
                 style={{ transform: "rotate(6deg)" }}
               >
                 ✦ od dziś
@@ -79,10 +87,12 @@ export function FaqAndFinalCta() {
                 </Button>
               </div>
 
-              <div className="mt-5 flex items-center gap-2 text-[12px] text-muted">
-                <MessageCircle className="size-3.5 text-brand" />
-                <span className="font-hand text-[14px]">
-                  Discord społeczność — dostępna po zakupie
+              <div className="mt-5 flex items-start gap-2 text-[12px] text-muted">
+                <MessageCircle className="size-3.5 text-brand shrink-0 mt-1" />
+                <span className="font-hand text-[14px] leading-snug">
+                  Discord polski-startup — otwarty dla wszystkich.
+                  <br />
+                  Zamknięta grupa NDT tylko dla lifetime.
                 </span>
               </div>
             </div>
