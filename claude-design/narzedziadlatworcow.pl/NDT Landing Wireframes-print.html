@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8"/>
+<title>NDT — Landing Wireframe G (print)</title>
+<meta name="viewport" content="width=1120"/>
+<link rel="icon" href="assets/favicon.svg"/>
+<link rel="stylesheet" href="wireframe.css"/>
+<style>
+  html, body { margin:0; padding:0; background:#fff; font-family:"Inter",sans-serif; color:#2b1645; }
+  body { width: 1120px; margin: 0 auto; }
+  .cover {
+    padding: 60px 48px 40px;
+    border-bottom: 2px dashed rgba(43,22,69,0.25);
+    margin-bottom: 24px;
+  }
+  .cover h1 {
+    font-family: "Caveat", cursive;
+    font-size: 56px;
+    margin: 0 0 8px;
+    color: #2b1645;
+  }
+  .cover .sub {
+    font-size: 15px;
+    color: #6b5a87;
+    max-width: 720px;
+    line-height: 1.5;
+  }
+  .cover .meta {
+    display: flex; gap: 32px; margin-top: 20px; font-size: 12px; color: #8a7aa8;
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .cover .meta b { color: #2b1645; display:block; font-size:13px; letter-spacing:0; text-transform:none; font-family:"Inter",sans-serif; font-weight:600; margin-top:2px;}
+
+  /* Avoid splitting core building blocks across pages */
+  .wf-section { break-inside: avoid; page-break-inside: avoid; }
+  .wf-box, .wf-box-accent, .wf-box-dashed, .wf-box-thick { break-inside: avoid; page-break-inside: avoid; }
+  .wf-section-head { break-after: avoid; page-break-after: avoid; }
+
+  @page {
+    size: A3 portrait;
+    margin: 12mm;
+  }
+
+  @media print {
+    html, body { background: #fff !important; }
+    body { width: auto; margin: 0; }
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    .cover { break-after: page; page-break-after: always; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div style="font-size:11px; color:#8a7aa8; text-transform:uppercase; letter-spacing:0.12em; margin-bottom:6px;">narzedziadlatworcow.pl · wireframe · v1</div>
+  <h1>NDT — Landing sprzedażowy</h1>
+  <p class="sub">Wariant G — ostateczna propozycja wireframe'u.
+  Ścieżka narracyjna: Hero → Cytaty problemu → Dark point → Manifest → Jak działa → Kurs → Pricing (Hormozi-style) → FAQ + CTA.</p>
+  <div class="meta">
+    <div>Sekcje<b>8</b></div>
+    <div>CTA primary<b>Zacznij od 199 zł</b></div>
+    <div>Pricing<b>199 zł · 79 zł/mc · 399 zł lifetime</b></div>
+    <div>Social proof<b>Discord community</b></div>
+    <div>Data<b>2026</b></div>
+  </div>
+</div>
+
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="wf-shared.jsx"></script>
+<script type="text/babel" src="variant-g.jsx"></script>
+<script type="text/babel">
+  const root = ReactDOM.createRoot(document.getElementById("root"));
+  root.render(<VariantG headlineIdx={0} ctaIdx={0} long={true} />);
+
+  // Auto-print once fonts loaded, React rendered, and a short settle delay passed
+  window.addEventListener("load", () => {
+    Promise.resolve(document.fonts ? document.fonts.ready : null).then(() => {
+      setTimeout(() => {
+        try { window.print(); } catch (e) { console.warn("print failed", e); }
+      }, 800);
+    });
+  });
+</script>
+</body>
+</html>
