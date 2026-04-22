@@ -1,0 +1,27 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css"><style>
+body{margin:0;padding:20px;background:#fff;font-family:var(--font-sans);}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+.btn{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 14px;border-radius:12px;font-size:13px;font-weight:500;border:1px solid transparent;cursor:pointer;font-family:inherit;transition:all .15s;}
+.primary{background:hsl(286 86% 57%);color:#fff;}
+.primary:hover{background:hsl(286 86% 52%);}
+.secondary{background:hsl(289 100% 97%);color:hsl(270 60% 30%);border-color:hsl(283 68% 88%);}
+.ghost{background:transparent;color:var(--foreground);}
+.ghost:hover{background:hsl(276 100% 96%);}
+.destructive{background:hsl(348 87% 60%);color:#fff;}
+.icon{width:36px;padding:0;justify-content:center;}
+.sm{height:28px;font-size:12px;padding:0 10px;border-radius:8px;}
+svg{width:14px;height:14px;}
+</style></head><body>
+<div class="row" style="margin-bottom:10px;">
+  <button class="btn primary">Zacznij za darmo</button>
+  <button class="btn secondary">Dowiedz się więcej</button>
+  <button class="btn ghost">Anuluj</button>
+  <button class="btn destructive">Usuń</button>
+</div>
+<div class="row">
+  <button class="btn primary sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Kontynuuj</button>
+  <button class="btn secondary sm">Edytuj</button>
+  <button class="btn ghost icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5v14"/></svg></button>
+  <button class="btn ghost icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></button>
+</div>
+</body></html>

@@ -1,0 +1,30 @@
+# NDT Landing — CLAUDE.md
+
+Landing page dla kursu Nikodema Rudzińskiego (@Szhakal) + aplikacji NDT (Narzędzia dla Twórców). Polski rynek, B2C, twórcy YouTube/TikTok/Instagram.
+
+**Stack**: React 19 + Vite + Tailwind 4 + TypeScript. Główne fonty: Inter (body), Caveat (handwritten), Shadows Into Light (scribble). Paleta: fiolet `hsl(286 86% 57%)` jako brand na jasnym motywie z pastelowym gradientem.
+
+**Dev**: `bun run dev` | **Build**: `bun run build`
+
+## Design Context
+
+### Users
+B2C — mali twórcy treści, osoby prowadzące JDG, oraz ci, którzy dopiero zaczynają lub rozważają start na YouTube, TikTok, Instagram. Szeroki przekrój: od kompletnie początkujących po ambitnych twórców chcących profesjonalizować swój content. Nie-B2B, nie-enterprise. Odwiedzający jest zwykle sam przy telefonie lub laptopie, szuka kierunku i struktury dla swoich pomysłów, a landing ma przekonać go do zakupu kursu — zakup kursu ma w dalszym horyzoncie konwertować na aktywnego użytkownika aplikacji NDT.
+
+### Brand Personality
+Kreatywny scrapbook. Autentyczny, ręczny, twórczy — jak notatnik twórcy pełen pomysłów, taśm klejących, zakreśleń i marginalnych doklejek. Trzy słowa: **autentyczny, twórczy, kierunkujący**. Emocjonalnie: inspiracja + zaufanie + poczucie "to jest dla mnie jako twórcy, nie dla korpo-marketerów". Głos: ludzki, mentorski, w pierwszej osobie; po polsku, bez anglicyzmów wciskanych na siłę.
+
+### Aesthetic Direction
+Editorial scrapbook w jasnym motywie. Fiolet (hsl 286 86% 57%) jako kolor marki, pastelowy gradient niebiesko-fioletowy jako tło, białe powierzchnie z delikatnym tłem SVG. Typografia trzy-głosowa: **Inter** (body), **Caveat** (odręczne akcenty), **Shadows Into Light** (scribble — zakreślenia, dopiski). Elementy decoratywne: taśma klejąca, zakreślone owale wokół słów, podkreślenia pędzlem, lekko obrócone karty (−2°/+1°) jak przyklejone do tablicy korkowej.
+
+**Anty-referencje** (landing NIE MOŻE przypominać):
+- Generyczny kurs online (Hotmart/SaaS-kurs — czerwone CTA, stock laptop, fake-countdown, pasek "30-dniowa gwarancja")
+- Influencer-grind (zdjęcia z Rolexem, dark mode + neon, "zarabiaj $10k/msc", fake urgency)
+- Korporacyjny lifeless (zimny, sterylny, brak osobowości, stockowe ilustracje z laptopami)
+
+### Design Principles
+1. **Autentyczność ponad perfekcję** — scrapbook ma wyglądać jak prawdziwa tablica twórcy, nie jak template'owany "rustic" motyw. Lekkie przesunięcia rotacji, organiczne owale zakreśleń, niedokończone linie podkreśleń. Zero pixel-perfect symetrii.
+2. **Jasny motyw, fiolet jako akcent punktowy** — nie neon-glow, nie dark-mode-by-default, nie gradient text. Fiolet używany oszczędnie na tym co naprawdę ważne: główne CTA, cena kursu, kluczowe słowa w hero.
+3. **Hierarchia editoriala, nie grid'owa** — asymetria, breaking the grid dla emphasis, varied spacing (tight groups + generous separations). Unikaj "identical card grids" z tymi samymi ikonami i tym samym tekstem pod nimi.
+4. **Ludzki głos zamiast marketingowego** — polski, mentorski, pierwsza osoba ("pokażę ci", "wiem z czym się zmagasz"). Zero korpo-bełkotu ("synergia", "unlock your potential"), zero fake-urgency ("zostało tylko 3 miejsca!").
+5. **Mówimy językiem potrzeby twórcy, nie funkcji aplikacji** — landing sprzedaje *kierunek i strategię*, nie feature-list. Feature'y aplikacji pojawiają się dopiero po tym, jak odbiorca uwierzy, że rozumiemy jego ból.

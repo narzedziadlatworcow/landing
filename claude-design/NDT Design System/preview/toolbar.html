@@ -1,0 +1,25 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css"><style>
+body{margin:0;padding:20px;background-color:#fff;background-image:url("../assets/ndtbg.svg"),linear-gradient(135deg,#dbeafe 0%,#ffffff 50%,#f3e8ff 100%);background-size:180%,cover;background-position:30% 30%,center;background-repeat:no-repeat;font-family:var(--font-sans);color:var(--foreground);}
+.bar{display:flex;align-items:center;gap:12px;height:48px;padding:0 14px;border-radius:14px;background:hsl(0 0% 100% / 0.75);backdrop-filter:blur(12px);border:1px solid hsl(283 68% 88% / 0.4);box-shadow:0 4px 6px -1px hsl(283 68% 88% / 0.1),0 10px 15px -3px hsl(283 68% 88% / 0.15);}
+.logo{height:24px;}
+.ws{display:flex;align-items:center;gap:8px;padding:4px 10px;border-radius:8px;background:hsl(289 100% 97%);font-size:12px;font-weight:500;}
+.ws .d{width:20px;height:20px;border-radius:6px;background:var(--brand-gradient);}
+.nav{display:flex;gap:4px;margin-left:12px;}
+.tab{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:8px;font-size:12.5px;color:var(--muted-foreground);cursor:pointer;}
+.tab.active{background:hsl(276 100% 96%);color:hsl(286 86% 47%);font-weight:500;}
+.tab svg{width:14px;height:14px;}
+.spacer{flex:1;}
+.avatar{width:28px;height:28px;border-radius:50%;background:var(--brand-gradient);display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:600;}
+</style></head><body>
+<div class="bar">
+  <img src="../assets/logo.png" class="logo">
+  <div class="ws"><span class="d"></span>Moje studio<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></div>
+  <div class="nav">
+    <span class="tab active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v2M5.6 5.6l1.4 1.4M3 12h2M5.6 18.4l1.4-1.4M12 21v-2M18.4 18.4l-1.4-1.4M21 12h-2M18.4 5.6l-1.4 1.4"/><circle cx="12" cy="12" r="4"/></svg>Strategia</span>
+    <span class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>Inspiracje</span>
+    <span class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>Content</span>
+  </div>
+  <div class="spacer"></div>
+  <div class="avatar">KN</div>
+</div>
+</body></html>

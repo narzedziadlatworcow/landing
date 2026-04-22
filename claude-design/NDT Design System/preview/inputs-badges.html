@@ -1,0 +1,25 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css"><style>
+body{margin:0;padding:20px;background:#fff;font-family:var(--font-sans);color:var(--foreground);display:flex;flex-direction:column;gap:12px;}
+.row{display:flex;gap:10px;align-items:center;}
+.input{height:36px;padding:0 12px 0 34px;border:1px solid hsl(283 68% 88%);border-radius:12px;font-size:13px;font-family:inherit;background:#fff;width:240px;outline:none;color:var(--foreground);}
+.input:focus{border-color:hsl(277 90% 61%);box-shadow:0 0 0 3px hsl(277 90% 61% / 0.15);}
+.wrap{position:relative;}
+.wrap svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:14px;height:14px;color:var(--muted-foreground);}
+.badge{display:inline-flex;align-items:center;gap:4px;height:22px;padding:0 10px;border-radius:999px;font-size:11px;font-weight:500;}
+.b-muted{background:hsl(289 100% 97%);color:hsl(270 60% 30%);}
+.b-primary{background:hsl(286 86% 57% / 0.15);color:hsl(286 86% 47%);}
+.b-success{background:hsl(142 70% 45% / 0.15);color:hsl(142 70% 30%);}
+.b-dest{background:hsl(348 87% 60% / 0.15);color:hsl(348 70% 42%);}
+</style></head><body>
+<div class="row">
+  <div class="wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><input class="input" placeholder="Szukaj..."></div>
+  <div class="wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><input class="input" placeholder="email@ndt.pl" value="kasia@ndt.pl"></div>
+</div>
+<div class="row">
+  <span class="badge b-muted">Draft</span>
+  <span class="badge b-primary">Pro</span>
+  <span class="badge b-success">Aktywny</span>
+  <span class="badge b-dest">Wygasa</span>
+  <span class="badge b-muted">3 000 tokenów</span>
+</div>
+</body></html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html><html lang="pl"><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css"><style>
+  body{
+    margin:0; padding:28px 22px;
+    background-color: #ffffff;
+    background-image:
+      url("../assets/ndtbg.svg"),
+      linear-gradient(135deg, #dbeafe 0%, #ffffff 45%, #f3e8ff 100%);
+    background-size: 180%, cover;
+    background-position: 30% 30%, center;
+    background-repeat: no-repeat;
+    font-family: var(--font-sans);
+    color: var(--foreground);
+    min-height: 220px;
+  }
+  .row{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    align-items: stretch;
+  }
+  .box{
+    border-radius: 14px;
+    min-height: 132px;
+    padding: 14px;
+    display:flex; flex-direction:column; justify-content:space-between;
+  }
+  .label{ font-size:10px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color: var(--muted-foreground); }
+  .spec{ font-family: var(--font-mono); font-size:10.5px; color: var(--muted-foreground); line-height:1.5; }
+  .name{ font-size:13px; font-weight:600; margin-top:4px; }
+
+  .flat{ background:#fff; border: 1px solid hsl(283 68% 88%); }
+  .s-sm{ background:#fff; box-shadow: 0 4px 6px -1px hsl(283 68% 88% / 0.25), 0 10px 15px -3px hsl(283 68% 88% / 0.30); }
+  .s-md{ background:#fff; box-shadow: 0 10px 15px -3px hsl(283 68% 88% / 0.35), 0 20px 25px -5px hsl(283 68% 88% / 0.40); }
+  .s-glow{
+    background:#fff;
+    box-shadow:
+      0 10px 30px -5px hsla(286, 86%, 57%, 0.28),
+      0 4px 10px -2px hsla(286, 86%, 57%, 0.18);
+  }
+
+  .glass-row{ margin-top: 18px; display:grid; grid-template-columns: 1fr 1fr; gap:16px;}
+  .glass{
+    background: hsl(0 0% 100% / 0.55);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid hsl(0 0% 100% / 0.6);
+    box-shadow: 0 8px 32px -4px hsla(270, 60%, 40%, 0.18), inset 0 1px 0 hsla(0,0%,100%,0.7);
+    border-radius: 16px;
+    padding: 14px 16px;
+    min-height: 92px;
+    display:flex; flex-direction:column; justify-content:space-between;
+  }
+  .glass.dark-surface{
+    background: hsl(266 45% 16% / 0.55);
+    color: #fff;
+    border: 1px solid hsl(286 70% 60% / 0.3);
+    box-shadow: 0 12px 36px -6px hsla(266, 60%, 15%, 0.5), inset 0 1px 0 hsla(286, 80%, 70%, 0.25);
+  }
+  .glass.dark-surface .label{ color: hsl(280 40% 75%); }
+  .glass.dark-surface .spec{ color: hsl(280 15% 70%); }
+</style></head>
+<body>
+  <div class="row">
+    <div class="box flat">
+      <span class="label">Rest · flat</span>
+      <div>
+        <div class="name">border only</div>
+        <div class="spec">1px hsl(283 68% 88%)</div>
+      </div>
+    </div>
+    <div class="box s-sm">
+      <span class="label">glass-sm</span>
+      <div>
+        <div class="name">cards, tiles</div>
+        <div class="spec">y-4/y-10 · violet 25–30%</div>
+      </div>
+    </div>
+    <div class="box s-md">
+      <span class="label">glass-md · elevated</span>
+      <div>
+        <div class="name">hovered, popovers</div>
+        <div class="spec">y-10/y-20 · violet 35–40%</div>
+      </div>
+    </div>
+    <div class="box s-glow">
+      <span class="label">Primary glow</span>
+      <div>
+        <div class="name">CTA halo</div>
+        <div class="spec">y-10, blur 30 · primary 28%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="glass-row">
+    <div class="glass">
+      <span class="label">.glass · light</span>
+      <div>
+        <div class="name" style="font-size:13px">65% white · blur(14) · inset highlight</div>
+        <div class="spec">signature motif — activates over the brand bg</div>
+      </div>
+    </div>
+    <div class="glass dark-surface">
+      <span class="label">.glass · dark surface</span>
+      <div>
+        <div class="name" style="font-size:13px">plum @ 55% · violet edge</div>
+        <div class="spec">for dark hero / course cover</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
