@@ -73,10 +73,11 @@ export function Manifest() {
           "-=0.15",
         );
 
+      const isMobile = window.matchMedia("(max-width: 767px)").matches;
       ScrollTrigger.create({
         trigger: rootRef.current,
         start: "top top",
-        end: "+=143%",
+        end: isMobile ? "+=100%" : "+=143%",
         pin: true,
         scrub: 1,
         animation: tl,
@@ -90,7 +91,7 @@ export function Manifest() {
       <div className="mx-auto max-w-[1200px] px-6 min-h-screen flex flex-col justify-center py-20 md:py-28">
         <SectionHead n="04" title="Manifest" align="center" />
 
-        <h2 className="mx-auto max-w-[820px] text-center tracking-tight text-ink leading-[1.12] text-[40px] md:text-[52px]">
+        <h2 className="mx-auto max-w-[820px] text-center tracking-tight text-ink leading-[1.12] text-[30px] sm:text-[36px] md:text-[52px]">
           {splitWords("Wierzymy, że tworzenie ")}
           {splitWords("zasługuje", true)}
           <br />

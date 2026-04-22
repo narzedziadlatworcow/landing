@@ -23,7 +23,7 @@ export function DarkPain() {
         defaults: { ease: "power3.out" },
         scrollTrigger: {
           trigger: rootRef.current,
-          start: "top 80%",
+          start: "top 70%",
           once: true,
         },
       });

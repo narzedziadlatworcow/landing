@@ -45,10 +45,11 @@ export function Problem() {
         .to('[data-problem-index="3"]', { opacity: 1, scale: 1, y: 0, duration: 1 }, "-=0.3")
         .to("[data-problem-outro]", { opacity: 1, y: 0, duration: 1 }, "+=1");
 
+      const isMobile = window.matchMedia("(max-width: 767px)").matches;
       ScrollTrigger.create({
         trigger: rootRef.current,
-        start: "top top",
-        end: "+=228%",
+        start: "top top-=20%",
+        end: isMobile ? "+=160%" : "+=228%",
         pin: true,
         scrub: 1,
         animation: tl,
@@ -62,13 +63,13 @@ export function Problem() {
       <div className="mx-auto max-w-[1200px] px-6 py-16 md:py-20 min-h-screen flex flex-col justify-center">
         <SectionHead n="02" title="Znasz to uczucie?" right="lekki problem" />
 
-        <div className="relative mt-10 flex-1 grid place-items-center min-h-[280px] md:min-h-[320px]">
+        <div className="relative mt-6 md:mt-10 flex-1 grid place-items-center min-h-[220px] md:min-h-[320px]">
           {quotes.map((q, i) => (
             <div
               key={i}
               data-problem-card
               data-problem-index={i + 1}
-              className="absolute w-full max-w-[520px] px-6"
+              className="absolute w-full max-w-[380px] md:max-w-[520px] px-4 md:px-6"
               style={{ transform: `rotate(${q.rotate}deg)` }}
             >
               <div className="relative">
@@ -85,9 +86,9 @@ export function Problem() {
                 />
                 <Box
                   variant="dashed"
-                  className="p-8 md:p-10 min-h-[180px] flex items-center bg-white/90"
+                  className="p-6 md:p-10 min-h-[140px] md:min-h-[180px] flex items-center bg-white/90"
                 >
-                  <p className="font-hand text-[24px] md:text-[32px] text-ink/90 leading-snug">
+                  <p className="font-hand text-[20px] md:text-[32px] text-ink/90 leading-snug">
                     „{q.text}”
                   </p>
                 </Box>

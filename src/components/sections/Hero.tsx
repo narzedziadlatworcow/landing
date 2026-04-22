@@ -2,7 +2,6 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { ArrowRight, Play } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { Badge } from "@/components/ui/Badge";
 import { StrategyMockup } from "@/components/mockups/StrategyMockup";
 import { EditorMockup } from "@/components/mockups/EditorMockup";
 import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
@@ -86,10 +85,11 @@ export function Hero() {
           0.3,
         );
 
+      const isMobile = window.matchMedia("(max-width: 767px)").matches;
       ScrollTrigger.create({
         trigger: rootRef.current,
-        start: "top top",
-        end: "+=58%",
+        start: isMobile ? "top top-=40%" : "top top",
+        end: isMobile ? "+=40%" : "+=58%",
         pin: true,
         scrub: 1,
         animation: swap,
@@ -108,10 +108,6 @@ export function Hero() {
         <div className="grid md:grid-cols-[1.15fr_1fr] gap-10 md:gap-14 items-center">
           {/* Copy column */}
           <div>
-            <Badge tone="brand" className="mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-brand animate-pulse" />
-              Early access · zamknięta beta
-            </Badge>
 
             <h1 className="font-semibold tracking-tight text-ink leading-[1.02] text-[44px] sm:text-[56px] md:text-[64px]">
               {splitWords("Nadaj treściom ")}
@@ -187,32 +183,32 @@ export function Hero() {
           </div>
 
           {/* Mockup column */}
-          <div className="relative min-h-[480px] md:min-h-[520px]">
+          <div className="relative min-h-[460px] md:min-h-[520px]">
             {/* Strategy — visible at start, swaps out on scroll */}
             <div
               data-hero-strategy
-              className="absolute inset-0 flex items-center justify-center"
+              className="absolute top-[70px] md:top-0 inset-x-0 bottom-0 flex items-center justify-center"
             >
-              <StrategyMockup className="w-[300px] md:w-[360px]" />
+              <StrategyMockup className="w-[320px] md:w-[360px]" />
             </div>
 
             {/* Editor — hidden at start, swaps in on scroll */}
             <div
               data-hero-editor
-              className="absolute inset-0 flex items-center justify-center"
+              className="absolute top-[70px] md:top-0 inset-x-0 bottom-0 flex items-center justify-center"
             >
-              <EditorMockup className="w-full max-w-[480px]" />
+              <EditorMockup className="w-full max-w-[320px] md:max-w-[480px]" />
             </div>
 
-            {/* Floating scribble anno */}
+            {/* Floating scribble anno — na mobile wewnątrz column, na desktop wystają */}
             <span
-              className="absolute -top-8 left-[10px] font-scribble scribble-sticker text-brand text-2xl z-10 pointer-events-none"
+              className="absolute top-0 md:-top-8 left-[10px] font-scribble scribble-sticker text-brand text-xl md:text-2xl z-10 pointer-events-none"
               style={{ transform: "rotate(-6deg)" }}
             >
               ✦ 7 etapów, 1 strategia
             </span>
             <span
-              className="absolute -bottom-7 right-[6px] font-scribble scribble-sticker text-ink/80 text-lg z-10 pointer-events-none"
+              className="absolute -bottom-5 md:-bottom-2 right-[6px] font-scribble scribble-sticker text-ink/80 text-base md:text-lg z-10 pointer-events-none"
               style={{ transform: "rotate(4deg)" }}
             >
               → pamięć Twojej marki

@@ -40,14 +40,26 @@ export function HowItWorks() {
   useGSAP(
     () => {
       if (prefersReducedMotion()) {
-        gsap.set("[data-step]", { opacity: 1, x: 0 });
+        gsap.set("[data-step]", { opacity: 1, y: 0 });
         gsap.set('[data-dot="0"]', { backgroundColor: "hsl(286 86% 57%)", scale: 1.3 });
         return;
       }
 
       gsap.set("[data-step]", { opacity: 0, y: 80 });
-      gsap.set('[data-step="0"]', { opacity: 1, y: 0 });
       gsap.set('[data-dot="0"]', { backgroundColor: "hsl(286 86% 57%)", scale: 1.3 });
+
+      // Step 0 fade-in gdy sekcja wchodzi w viewport (przed startem pinu)
+      gsap.to('[data-step="0"]', {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: rootRef.current,
+          start: "top 50%",
+          once: true,
+        },
+      });
 
       const tl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
 
@@ -78,10 +90,11 @@ export function HowItWorks() {
       }
       tl.to({}, { duration: 0.8 }); // final hold
 
+      const isMobile = window.matchMedia("(max-width: 767px)").matches;
       ScrollTrigger.create({
         trigger: rootRef.current,
         start: "top top",
-        end: "+=260%",
+        end: isMobile ? "+=182%" : "+=260%",
         pin: true,
         scrub: 1,
         animation: tl,
@@ -100,7 +113,7 @@ export function HowItWorks() {
             <div
               key={s.t}
               data-step={i}
-              className="absolute inset-0 grid md:grid-cols-[1fr_1.15fr] gap-6 md:gap-12 items-center px-2"
+              className="absolute inset-0 grid md:grid-cols-[1fr_1.15fr] gap-4 md:gap-12 items-start px-2"
             >
               {/* Copy column */}
               <div>

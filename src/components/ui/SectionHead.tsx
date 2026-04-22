@@ -30,7 +30,7 @@ export function SectionHead({
         defaults: { ease: "power3.out" },
         scrollTrigger: {
           trigger: rootRef.current,
-          start: "top 85%",
+          start: "top 75%",
           once: true,
         },
       });
