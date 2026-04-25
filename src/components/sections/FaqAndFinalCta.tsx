@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { useGSAP } from "@gsap/react";
 import { Plus, ArrowRight, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { SectionHead } from "@/components/ui/SectionHead";
 import { cn } from "@/lib/cn";
+import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
 
 const faqs = [
   {
@@ -36,16 +38,98 @@ const faqs = [
 ];
 
 export function FaqAndFinalCta() {
+  const rootRef = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      if (prefersReducedMotion()) return;
+
+      // FAQ — każdy item animuje się gdy SAM wchodzi w viewport (batch).
+      // Zapobiega temu że dolne items animują się zanim user do nich dotrze.
+      gsap.set("[data-faq-item]", { opacity: 0, y: 18 });
+      ScrollTrigger.batch("[data-faq-item]", {
+        start: "top 80%",
+        onEnter: (batch) =>
+          gsap.to(batch, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power2.out",
+            stagger: 0.1,
+          }),
+        once: true,
+      });
+
+      // Final CTA — peak-end emphasis: karta z lekkim overshoot, potem content
+      const ctaTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: "[data-cta-card]",
+          start: "top 55%",
+          once: true,
+        },
+      });
+
+      ctaTl
+        .from("[data-cta-card]", {
+          opacity: 0,
+          scale: 0.94,
+          y: 26,
+          duration: 0.75,
+          ease: "back.out(1.6)",
+        })
+        .from(
+          "[data-cta-title]",
+          { opacity: 0, y: 18, duration: 0.6, ease: "power2.out" },
+          "-=0.35",
+        )
+        .from(
+          "[data-cta-desc]",
+          { opacity: 0, y: 16, duration: 0.55, ease: "power2.out" },
+          "-=0.4",
+        )
+        .from(
+          "[data-cta-buttons] > *",
+          {
+            opacity: 0,
+            y: 16,
+            duration: 0.55,
+            ease: "power2.out",
+            stagger: 0.12,
+          },
+          "-=0.38",
+        )
+        .from(
+          "[data-cta-footer]",
+          { opacity: 0, y: 14, duration: 0.5, ease: "power2.out" },
+          "-=0.3",
+        )
+        .from(
+          "[data-cta-scribble]",
+          {
+            opacity: 0,
+            rotate: 18,
+            scale: 0.8,
+            duration: 0.6,
+            ease: "back.out(2)",
+          },
+          "-=0.5",
+        );
+    },
+    { scope: rootRef },
+  );
+
   return (
-    <section id="faq" className="py-20 md:py-24">
+    <section ref={rootRef} id="faq" className="py-20 md:py-24">
       <div className="mx-auto max-w-[1200px] px-6">
         <div className="grid md:grid-cols-[1.15fr_1fr] gap-10 md:gap-14 items-start">
           {/* FAQ */}
           <div>
             <SectionHead n="08" title="FAQ" right="ostatnie wątpliwości" />
-            <div className="space-y-2.5">
+            <div data-faq-list className="space-y-2.5">
               {faqs.map((f, i) => (
-                <FaqItem key={i} question={f.q} answer={f.a} defaultOpen={i === 0} />
+                <div key={i} data-faq-item>
+                  <FaqItem question={f.q} answer={f.a} defaultOpen={i === 0} />
+                </div>
               ))}
             </div>
           </div>
@@ -54,26 +138,34 @@ export function FaqAndFinalCta() {
           <div>
             <SectionHead n="09" title="Dołącz teraz" right="finał" />
             <div
+              data-cta-card
               className="relative rounded-2xl border-[2.5px] border-ink bg-gradient-to-br from-brand-soft via-white to-brand-soft/40 shadow-[6px_6px_0_0_hsl(266_51%_16%)] p-7 md:p-8"
             >
               {/* Decorative scribble */}
               <span
+                data-cta-scribble
                 className="absolute -top-7 -right-5 font-scribble scribble-sticker text-brand text-xl md:text-2xl z-10"
                 style={{ transform: "rotate(6deg)" }}
               >
                 ✦ od dziś
               </span>
 
-              <h3 className="text-[28px] md:text-[32px] font-semibold tracking-tight text-ink leading-tight">
+              <h3
+                data-cta-title
+                className="text-[28px] md:text-[32px] font-semibold tracking-tight text-ink leading-tight"
+              >
                 Zacznij budować{" "}
                 <span className="italic text-brand">system</span>.
               </h3>
-              <p className="mt-3 text-[15px] text-ink/75 leading-relaxed">
+              <p
+                data-cta-desc
+                className="mt-3 text-[15px] text-ink/75 leading-relaxed"
+              >
                 Kurs masz od zaraz. Aplikację — jako jeden z pierwszych, jeśli
                 wybierzesz lifetime.
               </p>
 
-              <div className="mt-7 flex flex-col gap-3">
+              <div data-cta-buttons className="mt-7 flex flex-col gap-3">
                 <Button
                   size="lg"
                   variant="primary"
@@ -87,7 +179,10 @@ export function FaqAndFinalCta() {
                 </Button>
               </div>
 
-              <div className="mt-5 flex items-start gap-2 text-[12px] text-muted">
+              <div
+                data-cta-footer
+                className="mt-5 flex items-start gap-2 text-[12px] text-muted"
+              >
                 <MessageCircle className="size-3.5 text-brand shrink-0 mt-1" />
                 <span className="font-hand text-[14px] leading-snug">
                   Discord polski-startup — otwarty dla wszystkich.

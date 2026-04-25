@@ -1,7 +1,10 @@
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
 import { Play, CheckCircle2, ArrowRight, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { SectionHead } from "@/components/ui/SectionHead";
+import { gsap, prefersReducedMotion } from "@/lib/gsap";
 
 const modules = [
   { n: "01", t: "Tożsamość twórcy", time: "27 min" },
@@ -12,8 +15,44 @@ const modules = [
 ];
 
 export function Course() {
+  const rootRef = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      if (prefersReducedMotion()) return;
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: rootRef.current,
+          start: "top 45%",
+          once: true,
+        },
+        defaults: { ease: "power2.out" },
+      });
+
+      tl.from("[data-course-pitch] > *", {
+        opacity: 0,
+        y: 18,
+        duration: 0.7,
+        stagger: 0.12,
+      })
+        .from(
+          "[data-course-thumb]",
+          { opacity: 0, scale: 0.95, y: 26, duration: 0.8 },
+          "-=0.7",
+        )
+        .from(
+          "[data-course-curriculum]",
+          { opacity: 0, y: 20, duration: 0.65 },
+          "-=0.4",
+        );
+    },
+    { scope: rootRef },
+  );
+
   return (
     <section
+      ref={rootRef}
       id="kurs"
       className="relative py-20 md:py-24 bg-gradient-to-b from-brand-soft/70 via-brand-soft/40 to-transparent border-y border-brand/20"
     >
@@ -26,7 +65,7 @@ export function Course() {
 
         <div className="grid md:grid-cols-[1fr_1.05fr] gap-10 md:gap-14 items-center">
           {/* Left — pitch */}
-          <div>
+          <div data-course-pitch>
             <Badge tone="brand" className="mb-4">
               <span className="w-1.5 h-1.5 rounded-full bg-brand" />
               10 lekcji · ok. 2h
@@ -73,6 +112,7 @@ export function Course() {
           <div className="relative">
             {/* Thumb */}
             <div
+              data-course-thumb
               className="relative rounded-2xl overflow-hidden border-[3px] border-ink shadow-[8px_8px_0_0_hsl(286_86%_57%)] aspect-video bg-gradient-to-br from-fuchsia-600 via-brand to-purple-800"
               style={{ transform: "rotate(-1deg)" }}
             >
@@ -110,6 +150,7 @@ export function Course() {
 
             {/* Curriculum peek */}
             <div
+              data-course-curriculum
               className="mt-6 glass rounded-xl p-4 max-w-[440px] mx-auto shadow-lg"
               style={{ transform: "rotate(0.5deg)" }}
             >

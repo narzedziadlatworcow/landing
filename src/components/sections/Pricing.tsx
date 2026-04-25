@@ -1,8 +1,11 @@
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
 import { Check, X, Zap, ArrowRight, Shield, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { SectionHead } from "@/components/ui/SectionHead";
 import { cn } from "@/lib/cn";
+import { gsap, prefersReducedMotion } from "@/lib/gsap";
 
 type PlanFeature = { t: string; off?: boolean };
 
@@ -54,8 +57,47 @@ const lifetimePlan = {
 };
 
 export function Pricing() {
+  const rootRef = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      if (prefersReducedMotion()) return;
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: rootRef.current,
+          start: "top 45%",
+          once: true,
+        },
+        defaults: { ease: "power2.out" },
+      });
+
+      tl.from("[data-pricing-headline]", {
+        opacity: 0,
+        y: 18,
+        duration: 0.7,
+      })
+        .from(
+          "[data-pricing-sub]",
+          { opacity: 0, y: 16, duration: 0.6 },
+          "-=0.4",
+        )
+        .from(
+          "[data-pricing-card]",
+          { opacity: 0, y: 30, duration: 0.75, stagger: 0.15 },
+          "-=0.3",
+        )
+        .from(
+          "[data-pricing-trust]",
+          { opacity: 0, y: 14, duration: 0.55 },
+          "-=0.25",
+        );
+    },
+    { scope: rootRef },
+  );
+
   return (
-    <section id="pricing" className="py-20 md:py-28 relative">
+    <section ref={rootRef} id="pricing" className="py-20 md:py-28 relative">
       <div className="relative mx-auto max-w-[1200px] px-6">
         <SectionHead
           n="07"
@@ -64,13 +106,19 @@ export function Pricing() {
         />
 
         <div className="text-center mb-10 md:mb-14">
-          <h2 className="font-semibold tracking-tight text-ink leading-[1.08] text-[36px] md:text-[48px]">
+          <h2
+            data-pricing-headline
+            className="font-semibold tracking-tight text-ink leading-[1.08] text-[36px] md:text-[48px]"
+          >
             Kurs masz dziś.{" "}
             <span className="italic text-brand">Aplikację</span> —
             <br className="hidden md:block" />
             {" "}jako jeden z pierwszych.
           </h2>
-          <p className="mt-4 text-ink/70 text-[16px] max-w-[620px] mx-auto">
+          <p
+            data-pricing-sub
+            className="mt-4 text-ink/70 text-[16px] max-w-[620px] mx-auto"
+          >
             Subskrypcja otworzy się po becie. Lifetime daje dostęp do środka
             już teraz — i cenę zamrożoną na zawsze.
           </p>
@@ -121,6 +169,7 @@ export function Pricing() {
           {/* PLAN 3 — Lifetime (Hormozi stack) */}
           <div
             id="lifetime"
+            data-pricing-card
             className="relative rounded-2xl p-6 md:p-7 bg-gradient-to-br from-white via-brand-soft/30 to-white border-[2.5px] border-ink shadow-[6px_6px_0_0_hsl(286_86%_57%)] flex flex-col"
           >
             {/* Top badges */}
@@ -186,7 +235,10 @@ export function Pricing() {
         </div>
 
         {/* Social proof row */}
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-[13px] text-muted">
+        <div
+          data-pricing-trust
+          className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-[13px] text-muted"
+        >
           <span className="inline-flex items-center gap-2">
             <Sparkles className="size-3.5 text-brand" /> 540+ twórców w społeczności
           </span>
@@ -223,6 +275,7 @@ function PlanCard({
 }) {
   return (
     <div
+      data-pricing-card
       className={cn(
         "relative rounded-2xl p-6 flex flex-col",
         peek

@@ -4,7 +4,7 @@ import { ArrowRight, Play } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { StrategyMockup } from "@/components/mockups/StrategyMockup";
 import { EditorMockup } from "@/components/mockups/EditorMockup";
-import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
+import { gsap, prefersReducedMotion } from "@/lib/gsap";
 
 function splitWords(text: string) {
   // Split preserving spaces. Each word is a nowrap container so chars don't break mid-word.
@@ -46,16 +46,9 @@ export function Hero() {
       if (reduced) {
         gsap.set("[data-char]", { opacity: 1 });
         gsap.set("[data-hero-scribble]", { strokeDashoffset: 0 });
-        gsap.set("[data-hero-editor]", { opacity: 1, x: 0, rotate: 1.5 });
-        gsap.set("[data-hero-strategy]", { opacity: 1, x: 0, rotate: -3 });
         return;
       }
 
-      // Editor starts hidden (Strategy is the visible one at top of hero)
-      gsap.set("[data-hero-editor]", { opacity: 0, x: 80, rotate: 8 });
-      gsap.set("[data-hero-strategy]", { opacity: 1, x: 0, rotate: -3 });
-
-      // Typewriter on mount
       const intro = gsap.timeline({ defaults: { ease: "none" } });
       intro
         .to("[data-char]", {
@@ -69,31 +62,6 @@ export function Hero() {
           { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" },
           ">+=0.1",
         );
-
-      // Scroll-pinned mockup swap
-      const swap = gsap.timeline();
-      swap
-        .to("[data-hero-strategy]", {
-          opacity: 0,
-          x: -90,
-          rotate: -18,
-          duration: 1,
-        })
-        .to(
-          "[data-hero-editor]",
-          { opacity: 1, x: 0, rotate: 1.5, duration: 1 },
-          0.3,
-        );
-
-      const isMobile = window.matchMedia("(max-width: 767px)").matches;
-      ScrollTrigger.create({
-        trigger: rootRef.current,
-        start: isMobile ? "top top-=40%" : "top top",
-        end: isMobile ? "+=40%" : "+=58%",
-        pin: true,
-        scrub: 1,
-        animation: swap,
-      });
     },
     { scope: rootRef },
   );
@@ -151,19 +119,6 @@ export function Hero() {
               </Button>
             </div>
 
-            {/* Trust row */}
-            <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-[13px] text-muted">
-              <span className="inline-flex items-center gap-1.5">
-                <span className="w-1 h-1 rounded-full bg-brand" /> natychmiastowy dostęp do kursu
-              </span>
-              <span className="inline-flex items-center gap-1.5">
-                <span className="w-1 h-1 rounded-full bg-brand" /> 14 dni gwarancji zwrotu
-              </span>
-              <span className="inline-flex items-center gap-1.5">
-                <span className="w-1 h-1 rounded-full bg-brand" /> 540+ twórców w społeczności
-              </span>
-            </div>
-
             {/* Author attribution */}
             <div className="mt-10 flex items-center gap-3.5">
               <img
@@ -182,36 +137,35 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Mockup column */}
-          <div className="relative min-h-[460px] md:min-h-[520px]">
-            {/* Strategy — visible at start, swaps out on scroll */}
+          {/* Mockup column — editorial scrapbook stack */}
+          <div className="relative min-h-[480px] md:min-h-[560px]">
+            {/* Editor — peek z prawej-dolnej, za Strategy. Tylko desktop. */}
             <div
-              data-hero-strategy
-              className="absolute top-[70px] md:top-0 inset-x-0 bottom-0 flex items-center justify-center"
+              className="hidden md:block absolute bottom-[-12px] right-[-56px] w-[420px] z-0 pointer-events-none"
+              style={{ transform: "rotate(6deg)" }}
             >
-              <StrategyMockup className="w-[320px] md:w-[360px]" />
+              <EditorMockup className="w-full" />
             </div>
 
-            {/* Editor — hidden at start, swaps in on scroll */}
-            <div
-              data-hero-editor
-              className="absolute top-[70px] md:top-0 inset-x-0 bottom-0 flex items-center justify-center"
-            >
-              <EditorMockup className="w-full max-w-[320px] md:max-w-[480px]" />
+            {/* Strategy — z przodu, główna karta */}
+            <div className="absolute inset-x-0 top-[60px] md:top-[24px] flex justify-center md:justify-start z-10 pointer-events-none">
+              <div style={{ transform: "rotate(-3deg)" }}>
+                <StrategyMockup className="w-[320px] md:w-[360px]" />
+              </div>
             </div>
 
-            {/* Floating scribble anno — na mobile wewnątrz column, na desktop wystają */}
+            {/* Handwritten flow labels */}
             <span
-              className="absolute top-0 md:-top-8 left-[10px] font-scribble scribble-sticker text-brand text-xl md:text-2xl z-10 pointer-events-none"
+              className="absolute top-0 left-[10px] md:-top-4 md:-left-2 font-scribble scribble-sticker text-brand text-xl md:text-2xl z-20 pointer-events-none"
               style={{ transform: "rotate(-6deg)" }}
             >
-              ✦ 7 etapów, 1 strategia
+              ① strategia, którą rozumiesz
             </span>
             <span
-              className="absolute -bottom-5 md:-bottom-2 right-[6px] font-scribble scribble-sticker text-ink/80 text-base md:text-lg z-10 pointer-events-none"
+              className="hidden md:block absolute bottom-[-4px] right-[-8px] font-scribble scribble-sticker text-ink/85 text-xl z-20 pointer-events-none"
               style={{ transform: "rotate(4deg)" }}
             >
-              → pamięć Twojej marki
+              ② gotowe scenariusze →
             </span>
           </div>
         </div>
