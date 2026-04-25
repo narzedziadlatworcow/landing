@@ -9,7 +9,7 @@ import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
 const faqs = [
   {
     q: "Co dokładnie dostaję za 199 zł?",
-    a: `Pełny kurs Nikodema „Nadaj treściom kierunek" — 10 lekcji video w 5 sekcjach (ok. 2h), workbook strategii marki (PDF), szablony serii, tematów i kalendarza. Dostęp dożywotni z przyszłymi aktualizacjami. Aplikacja NDT dostępna w planie lifetime (399 zł) albo w subskrypcji 79 zł/mies po publicznym starcie.`,
+    a: `Pełny kurs Nikodema „Nadaj treściom kierunek" — 10 lekcji video w 5 sekcjach (ok. 2h), workbook strategii marki (PDF), szablony serii, tematów i kalendarza. Dostęp dożywotni z przyszłymi aktualizacjami. Dorzucam też 1 miesiąc aplikacji NDT w cenie — aktywuje się przy publicznym starcie (Q3 2026), żebyś mógł od razu przełożyć strategię na konkretne treści. Po miesiącu możesz przedłużyć subskrypcję (79 zł/mies). Jeśli chcesz wcześniej i z większą paczką wartości — sprawdź Pierwszą Trzydziestkę.`,
   },
   {
     q: "Czy potrzebuję doświadczenia w marketingu?",
@@ -17,11 +17,11 @@ const faqs = [
   },
   {
     q: "Kiedy ruszy pełna aplikacja?",
-    a: "Aktualnie jesteśmy w zamkniętej becie — dostęp dostają użytkownicy lifetime. Publiczny start subskrypcji planujemy w Q3 2026, po fazie stabilizacji i zebraniu feedbacku z bety.",
+    a: "Aktualnie jesteśmy w zamkniętej becie — dostęp dostają osoby z Pierwszej Trzydziestki. Publiczny start subskrypcji planujemy w Q3 2026, po fazie stabilizacji i zebraniu feedbacku z bety.",
   },
   {
-    q: "Czym różni się lifetime od subskrypcji?",
-    a: "Lifetime to jednorazowe 399 zł — dostajesz dostęp do bety od zaraz, wszystko z kursu, rok aplikacji w cenie i 20% rabatu na kolejne lata. Subskrypcja to 79 zł/mies, ale otworzy się dopiero po becie.",
+    q: "Co to jest Pierwsza Trzydziestka?",
+    a: "Limitowane wejście dla 30 osób które chcą wejść do NDT zanim ruszy publicznie. Za 599 zł dostajesz cały kurs, 1 rok aplikacji w cenie (po publicznym starcie), 1:1 onboarding (60 min), dostęp do zamkniętej grupy, realny wpływ na rozwój aplikacji oraz 20% promocji na zawsze. Pakt jest prosty: ty wchodzisz wcześniej i masz wpływ, my dostajemy realny feedback od osób które naprawdę używają NDT.",
   },
   {
     q: "Czy kurs jest po polsku?",
@@ -29,11 +29,11 @@ const faqs = [
   },
   {
     q: "Co jeśli nie będzie mi się podobać?",
-    a: "14 dni gwarancji zwrotu — bez pytań. Dotyczy zarówno kursu 199 zł, jak i lifetime 399 zł. Wystarczy mail na hello@ndt.pl.",
+    a: "14 dni gwarancji zwrotu — bez pytań. Dotyczy zarówno kursu 199 zł, jak i Pierwszej Trzydziestki 599 zł. Wystarczy mail na hello@ndt.pl.",
   },
   {
-    q: "Ile miejsc lifetime zostało?",
-    a: "Pula 30 miejsc — aktualny stan pokazujemy na stronie zakupu w czasie rzeczywistym. Gdy zamkniemy lifetime, zostanie tylko subskrypcja po becie.",
+    q: "Ile miejsc w Pierwszej Trzydziestce zostało?",
+    a: "Pula 30 miejsc — aktualny stan pokazujemy na stronie zakupu w czasie rzeczywistym. Gdy się skończą, zostanie tylko subskrypcja po publicznym starcie.",
   },
 ];
 
@@ -161,8 +161,8 @@ export function FaqAndFinalCta() {
                 data-cta-desc
                 className="mt-3 text-[15px] text-ink/75 leading-relaxed"
               >
-                Kurs masz od zaraz. Aplikację — jako jeden z pierwszych, jeśli
-                wybierzesz lifetime.
+                Kurs masz od zaraz. Aplikację — gdy ruszy publicznie. A jeśli
+                chcesz wcześniej, jest Pierwsza Trzydziestka.
               </p>
 
               <div data-cta-buttons className="mt-7 flex flex-col gap-3">
@@ -174,9 +174,11 @@ export function FaqAndFinalCta() {
                 >
                   Zacznij od 199 zł
                 </Button>
-                <Button size="lg" variant="secondary" className="w-full">
-                  Chcę lifetime (399 zł)
-                </Button>
+                <a href="#pierwsza-trzydziestka" className="block">
+                  <Button size="lg" variant="secondary" className="w-full">
+                    Pierwsza Trzydziestka — 599 zł
+                  </Button>
+                </a>
               </div>
 
               <div
@@ -187,7 +189,7 @@ export function FaqAndFinalCta() {
                 <span className="font-hand text-[14px] leading-snug">
                   Discord polski-startup — otwarty dla wszystkich.
                   <br />
-                  Zamknięta grupa NDT tylko dla lifetime.
+                  Zamknięte kanały NDT — tylko dla Pierwszej Trzydziestki.
                 </span>
               </div>
             </div>

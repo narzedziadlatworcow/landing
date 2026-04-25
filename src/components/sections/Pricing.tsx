@@ -1,6 +1,6 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
-import { Check, X, Zap, ArrowRight, Shield, Sparkles } from "lucide-react";
+import { Check, X, Zap, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { SectionHead } from "@/components/ui/SectionHead";
@@ -19,7 +19,7 @@ const coursePlan = {
     { t: "Workbook strategii marki (PDF)" },
     { t: "Eksport gotowej strategii: MD, docx, pdf" },
     { t: "Szablony: serii, tematów, kalendarza" },
-    { t: "Dostęp do aplikacji NDT", off: true },
+    { t: "Aplikacja NDT — 1 miesiąc w cenie (od publicznego startu, Q3 2026)" },
   ] as PlanFeature[],
   cta: "Kup kurs",
   ctaVariant: "outline" as const,
@@ -40,20 +40,22 @@ const subPlan = {
   ] as PlanFeature[],
 };
 
-const lifetimePlan = {
-  eyebrow: "Lifetime",
-  title: "Wszystko + wejście do bety",
-  subtitle: "Najlepszy deal, jeśli chcesz wejść teraz.",
+const pierwszaTrzydziestkaPlan = {
+  eyebrow: "Pierwsza Trzydziestka",
+  title: "Wczesny dostęp + 1 rok aplikacji",
+  subtitle: "Dla 30 osób które wchodzą zanim ruszy publicznie.",
   stack: [
     { t: "Kurs + Strategia", v: "199 zł" },
     { t: "1 rok aplikacji (79 zł × 12)", v: "948 zł" },
-    { t: "Zamknięta społeczność", v: "bezcenne" },
-    { t: "−20% na kolejne lata (na zawsze)", v: "∞" },
+    { t: "1:1 onboarding", v: "60 min" },
+    { t: "Dostęp do zamkniętej grupy", v: "bezcenne" },
+    { t: "Wpływ na rozwój aplikacji", v: "bezcenne" },
+    { t: "20% promocji na zawsze", v: "∞" },
   ],
   total: "1 147 zł+",
-  todayPrice: "399 zł",
-  payoff: "≈ 65% taniej od sumy wartości",
-  cta: "Chcę lifetime — wejdź do bety",
+  todayPrice: "599 zł",
+  payoff: "≈ 48% taniej + dostęp do bety od zaraz",
+  cta: "Dołącz do Pierwszej Trzydziestki",
 };
 
 export function Pricing() {
@@ -119,8 +121,8 @@ export function Pricing() {
             data-pricing-sub
             className="mt-4 text-ink/70 text-[16px] max-w-[620px] mx-auto"
           >
-            Subskrypcja otworzy się po becie. Lifetime daje dostęp do środka
-            już teraz — i cenę zamrożoną na zawsze.
+            Subskrypcja otworzy się po becie. Pierwsza Trzydziestka daje
+            dostęp już teraz — i lock 20% rabatu na każdy kolejny rok.
           </p>
         </div>
 
@@ -153,22 +155,12 @@ export function Pricing() {
             peek
           >
             <FeatureList items={subPlan.features} />
-            <div className="mt-auto rounded-lg bg-white/70 p-3 text-center">
-              <div className="font-hand text-[15px] text-ink/85">
-                Chcesz wejść teraz?
-              </div>
-              <a
-                href="#lifetime"
-                className="text-[13px] font-semibold text-brand hover:underline inline-flex items-center gap-1 mt-1"
-              >
-                → Lifetime daje dostęp do bety
-              </a>
-            </div>
+            <NewsletterForm />
           </PlanCard>
 
-          {/* PLAN 3 — Lifetime (Hormozi stack) */}
+          {/* PLAN 3 — Pierwsza Trzydziestka (Hormozi stack) */}
           <div
-            id="lifetime"
+            id="pierwsza-trzydziestka"
             data-pricing-card
             className="relative rounded-2xl p-6 md:p-7 bg-gradient-to-br from-white via-brand-soft/30 to-white border-[2.5px] border-ink shadow-[6px_6px_0_0_hsl(286_86%_57%)] flex flex-col"
           >
@@ -176,24 +168,26 @@ export function Pricing() {
             <div className="absolute -top-3.5 left-5 right-5 flex gap-1.5 flex-wrap">
               <Badge tone="brand">
                 <Zap className="size-3" />
-                Best value
+                Wczesny dostęp
               </Badge>
               <Badge tone="gold">
-                30 miejsc w becie
+                30 miejsc
               </Badge>
             </div>
 
             <div className="text-[11px] font-semibold tracking-[0.18em] uppercase text-brand mt-2">
-              {lifetimePlan.eyebrow}
+              {pierwszaTrzydziestkaPlan.eyebrow}
             </div>
             <h3 className="mt-1 text-[22px] font-semibold text-ink leading-tight">
-              {lifetimePlan.title}
+              {pierwszaTrzydziestkaPlan.title}
             </h3>
-            <p className="mt-1 text-[13px] text-muted">{lifetimePlan.subtitle}</p>
+            <p className="mt-1 text-[13px] text-muted">
+              {pierwszaTrzydziestkaPlan.subtitle}
+            </p>
 
             {/* Value stack */}
             <div className="mt-5 rounded-xl bg-white border-[1.5px] border-ink p-3.5 space-y-1.5">
-              {lifetimePlan.stack.map((s) => (
+              {pierwszaTrzydziestkaPlan.stack.map((s) => (
                 <div
                   key={s.t}
                   className="flex items-center justify-between text-[13px]"
@@ -206,7 +200,7 @@ export function Pricing() {
               <div className="flex items-center justify-between text-[12px]">
                 <span className="text-muted">Wartość razem</span>
                 <span className="line-through text-muted">
-                  {lifetimePlan.total}
+                  {pierwszaTrzydziestkaPlan.total}
                 </span>
               </div>
               <div className="flex items-end justify-between pt-1">
@@ -214,13 +208,13 @@ export function Pricing() {
                   Płacisz dziś
                 </span>
                 <span className="text-[28px] font-bold text-brand leading-none">
-                  {lifetimePlan.todayPrice}
+                  {pierwszaTrzydziestkaPlan.todayPrice}
                 </span>
               </div>
             </div>
 
             <p className="mt-3 font-hand text-[14px] text-muted leading-snug">
-              {lifetimePlan.payoff}
+              {pierwszaTrzydziestkaPlan.payoff}
             </p>
 
             <Button
@@ -229,28 +223,11 @@ export function Pricing() {
               className="w-full mt-5"
               rightIcon={<ArrowRight className="size-4" />}
             >
-              {lifetimePlan.cta}
+              {pierwszaTrzydziestkaPlan.cta}
             </Button>
           </div>
         </div>
 
-        {/* Social proof row */}
-        <div
-          data-pricing-trust
-          className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-[13px] text-muted"
-        >
-          <span className="inline-flex items-center gap-2">
-            <Sparkles className="size-3.5 text-brand" /> 540+ twórców w społeczności
-          </span>
-          <span className="text-border-soft">·</span>
-          <span className="inline-flex items-center gap-2">
-            <Shield className="size-3.5 text-brand" /> 14 dni gwarancji zwrotu
-          </span>
-          <span className="text-border-soft">·</span>
-          <span className="inline-flex items-center gap-2">
-            <Zap className="size-3.5 text-brand" /> Natychmiastowy dostęp do kursu
-          </span>
-        </div>
       </div>
     </section>
   );
@@ -315,6 +292,50 @@ function PlanCard({
         )}
       />
       {children}
+    </div>
+  );
+}
+
+function NewsletterForm() {
+  const [email, setEmail] = useState("");
+  const [state, setState] = useState<"idle" | "submitting" | "success">("idle");
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!email || state !== "idle") return;
+    setState("submitting");
+    // TODO: podłączyć Resend (audience contact create) — zamockowane
+    await new Promise((r) => setTimeout(r, 700));
+    setState("success");
+  }
+
+  return (
+    <div className="mt-auto rounded-lg bg-white/70 p-3">
+      <div className="font-hand text-[14px] text-ink/85 text-center mb-2">
+        {state === "success"
+          ? "✓ Dzięki — damy znać."
+          : "Powiadom mnie gdy startuje"}
+      </div>
+      {state !== "success" && (
+        <form onSubmit={handleSubmit} className="flex gap-1.5">
+          <input
+            type="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Twój e-mail"
+            className="flex-1 min-w-0 px-2.5 py-1.5 text-[13px] rounded-md border border-border-soft bg-white text-ink focus:outline-none focus:border-brand transition-colors"
+          />
+          <button
+            type="submit"
+            disabled={state === "submitting"}
+            aria-label="Zapisz na newsletter"
+            className="px-3 py-1.5 text-[13px] font-semibold text-white bg-brand rounded-md hover:opacity-90 disabled:opacity-60 transition-opacity"
+          >
+            {state === "submitting" ? "…" : "→"}
+          </button>
+        </form>
+      )}
     </div>
   );
 }
