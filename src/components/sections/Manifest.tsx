@@ -123,9 +123,9 @@ export function Manifest() {
           data-manifest-subcopy
           className="mx-auto max-w-[600px] text-center text-[17px] md:text-[19px] text-ink/70 mt-8 leading-relaxed"
         >
-          Zrobiłem to narzędzie, którego sam
+          NDT to nie kolejny „AI writer”.
           <br />
-          potrzebowałem przez ostatnie 5 lat.
+          To system: strategia → research → produkcja.
         </p>
       </div>
     </section>

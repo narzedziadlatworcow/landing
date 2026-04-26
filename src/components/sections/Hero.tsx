@@ -101,9 +101,8 @@ export function Hero() {
               {splitWords(".")}
             </h1>
 
-            <p className="mt-6 text-ink/75 text-[16px] leading-relaxed max-w-[520px]">
-              Od strategii do gotowych scenariuszy — w jednej sesji. Dla twórców,
-              którzy chcą wreszcie wiedzieć, co publikować.
+            <p className="mt-6 text-ink/75 text-[17px] leading-relaxed max-w-[480px]">
+              Od strategii do gotowego scenariusza — w jednej sesji.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">

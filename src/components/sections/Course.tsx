@@ -74,8 +74,17 @@ export function Course() {
             <h2 className="text-[36px] md:text-[44px] font-semibold tracking-tight text-ink leading-[1.05]">
               Nikodem Rudziński
             </h2>
-            <div className="font-hand text-[20px] text-muted mt-1.5">
-              @Szhakal · 631K na TikToku · 151K Instagram
+            <div className="mt-3 inline-flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[15px]">
+              <span className="font-semibold text-brand">@Szhakal</span>
+              <span className="inline-flex items-baseline gap-1.5">
+                <span className="font-bold text-ink tabular-nums">631K</span>
+                <span className="text-muted text-[13px]">TikTok</span>
+              </span>
+              <span className="text-muted/40">·</span>
+              <span className="inline-flex items-baseline gap-1.5">
+                <span className="font-bold text-ink tabular-nums">151K</span>
+                <span className="text-muted text-[13px]">Instagram</span>
+              </span>
             </div>
 
             <p className="mt-6 text-[16px] text-ink/80 leading-relaxed max-w-[480px]">

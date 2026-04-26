@@ -112,8 +112,7 @@ export function Pricing() {
             data-pricing-headline
             className="font-semibold tracking-tight text-ink leading-[1.08] text-[36px] md:text-[48px]"
           >
-            Kurs masz dziś.{" "}
-            <span className="italic text-brand">Aplikację</span> —
+            Kurs masz dziś. Aplikację —
             <br className="hidden md:block" />
             {" "}jako jeden z pierwszych.
           </h2>
@@ -256,28 +255,39 @@ function PlanCard({
       className={cn(
         "relative rounded-2xl p-6 flex flex-col",
         peek
-          ? "bg-brand-soft/50 border-2 border-dashed border-brand/40"
+          ? "bg-brand-soft/30 border border-dashed border-brand/30 opacity-95"
           : "bg-white/90 border border-border-soft shadow-[0_10px_30px_-12px_hsl(266_51%_16%_/_0.15)]",
       )}
-      style={peek ? { transform: "rotate(0.5deg)" } : undefined}
     >
       {peek && (
         <div className="absolute -top-3 right-5">
-          <Badge tone="brand">Wkrótce</Badge>
+          <Badge tone="muted">Wkrótce</Badge>
         </div>
       )}
 
       <div
         className={cn(
           "text-[11px] font-semibold tracking-[0.18em] uppercase",
-          peek ? "text-brand" : "text-muted",
+          peek ? "text-muted" : "text-muted",
         )}
       >
         {eyebrow}
       </div>
-      <h3 className="mt-1 text-[20px] font-semibold text-ink">{title}</h3>
+      <h3
+        className={cn(
+          "mt-1 font-semibold text-ink",
+          peek ? "text-[18px]" : "text-[20px]",
+        )}
+      >
+        {title}
+      </h3>
       <div className="mt-4 flex items-baseline gap-1">
-        <span className="text-[36px] font-bold leading-none tracking-tight text-ink">
+        <span
+          className={cn(
+            "font-bold leading-none tracking-tight",
+            peek ? "text-[28px] text-ink/80" : "text-[36px] text-ink",
+          )}
+        >
           {price}
         </span>
         {priceUnit && (
@@ -288,7 +298,7 @@ function PlanCard({
       <div
         className={cn(
           "my-5 h-px",
-          peek ? "bg-brand/20" : "bg-border-soft",
+          peek ? "bg-muted/15" : "bg-border-soft",
         )}
       />
       {children}
@@ -310,8 +320,8 @@ function NewsletterForm() {
   }
 
   return (
-    <div className="mt-auto rounded-lg bg-white/70 p-3">
-      <div className="font-hand text-[14px] text-ink/85 text-center mb-2">
+    <div className="mt-auto">
+      <div className="text-[13px] text-muted text-center mb-2">
         {state === "success"
           ? "✓ Dzięki — damy znać."
           : "Powiadom mnie gdy startuje"}
@@ -324,13 +334,13 @@ function NewsletterForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Twój e-mail"
-            className="flex-1 min-w-0 px-2.5 py-1.5 text-[13px] rounded-md border border-border-soft bg-white text-ink focus:outline-none focus:border-brand transition-colors"
+            className="flex-1 min-w-0 px-2.5 py-1.5 text-[13px] rounded-md border border-border-soft bg-white/80 text-ink focus:outline-none focus:border-brand/60 transition-colors"
           />
           <button
             type="submit"
             disabled={state === "submitting"}
             aria-label="Zapisz na newsletter"
-            className="px-3 py-1.5 text-[13px] font-semibold text-white bg-brand rounded-md hover:opacity-90 disabled:opacity-60 transition-opacity"
+            className="px-3 py-1.5 text-[13px] font-semibold text-brand bg-transparent border border-brand/40 rounded-md hover:bg-brand-soft transition-colors disabled:opacity-60"
           >
             {state === "submitting" ? "…" : "→"}
           </button>

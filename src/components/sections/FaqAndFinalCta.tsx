@@ -144,8 +144,7 @@ export function FaqAndFinalCta() {
                 data-cta-title
                 className="text-[28px] md:text-[32px] font-semibold tracking-tight text-ink leading-tight"
               >
-                Zacznij budować{" "}
-                <span className="italic text-brand">system</span>.
+                Zacznij budować system.
               </h3>
               <p
                 data-cta-desc
