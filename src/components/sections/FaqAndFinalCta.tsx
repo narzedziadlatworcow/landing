@@ -4,7 +4,7 @@ import { Plus, ArrowRight, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { SectionHead } from "@/components/ui/SectionHead";
 import { cn } from "@/lib/cn";
-import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
+import { gsap, prefersReducedMotion } from "@/lib/gsap";
 
 const faqs = [
   {
@@ -44,20 +44,18 @@ export function FaqAndFinalCta() {
     () => {
       if (prefersReducedMotion()) return;
 
-      // FAQ — każdy item animuje się gdy SAM wchodzi w viewport (batch).
-      // Zapobiega temu że dolne items animują się zanim user do nich dotrze.
+      // FAQ — cała lista pojawia się jednocześnie gdy nagłówek FAQ wjedzie w viewport.
       gsap.set("[data-faq-item]", { opacity: 0, y: 18 });
-      ScrollTrigger.batch("[data-faq-item]", {
-        start: "top 80%",
-        onEnter: (batch) =>
-          gsap.to(batch, {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            ease: "power2.out",
-            stagger: 0.1,
-          }),
-        once: true,
+      gsap.to("[data-faq-item]", {
+        opacity: 1,
+        y: 0,
+        duration: 0.55,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: "[data-faq-list]",
+          start: "top 80%",
+          once: true,
+        },
       });
 
       // Final CTA — peak-end emphasis: karta z lekkim overshoot, potem content
@@ -141,14 +139,6 @@ export function FaqAndFinalCta() {
               data-cta-card
               className="relative rounded-2xl border-[2.5px] border-ink bg-gradient-to-br from-brand-soft via-white to-brand-soft/40 shadow-[6px_6px_0_0_hsl(266_51%_16%)] p-7 md:p-8"
             >
-              {/* Decorative scribble */}
-              <span
-                data-cta-scribble
-                className="absolute -top-7 -right-5 font-scribble scribble-sticker text-brand text-xl md:text-2xl z-10"
-                style={{ transform: "rotate(6deg)" }}
-              >
-                ✦ od dziś
-              </span>
 
               <h3
                 data-cta-title
@@ -223,7 +213,7 @@ function FaqItem({
         onClick={() => setOpen((v) => !v)}
         className="w-full text-left px-5 py-3.5 flex items-center justify-between gap-4"
       >
-        <span className="font-hand text-[17px] md:text-[18px] text-ink">
+        <span className="font-semibold text-[15px] md:text-[16px] text-ink leading-snug">
           {question}
         </span>
         <Plus

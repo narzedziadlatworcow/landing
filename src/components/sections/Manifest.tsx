@@ -121,11 +121,11 @@ export function Manifest() {
 
         <p
           data-manifest-subcopy
-          className="mx-auto max-w-[600px] text-center text-[17px] text-ink/70 mt-6 leading-relaxed"
+          className="mx-auto max-w-[600px] text-center text-[17px] md:text-[19px] text-ink/70 mt-8 leading-relaxed"
         >
-          NDT to nie kolejny „AI writer”.
+          Zrobiłem to narzędzie, którego sam
           <br />
-          To system: strategia → research → produkcja.
+          potrzebowałem przez ostatnie 5 lat.
         </p>
       </div>
     </section>
