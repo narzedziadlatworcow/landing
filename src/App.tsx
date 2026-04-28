@@ -8,6 +8,7 @@ import { HowItWorks } from "./components/sections/HowItWorks";
 import { Course } from "./components/sections/Course";
 import { Pricing } from "./components/sections/Pricing";
 import { FaqAndFinalCta } from "./components/sections/FaqAndFinalCta";
+import { ConsentBanner } from "./components/ConsentBanner";
 
 export function App() {
   return (
@@ -24,6 +25,7 @@ export function App() {
         <FaqAndFinalCta />
       </main>
       <Footer />
+      <ConsentBanner />
     </div>
   );
 }
