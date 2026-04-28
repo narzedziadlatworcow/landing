@@ -34,11 +34,11 @@ export function ConsentBanner() {
           className="absolute -top-2.5 left-7 h-5 w-14 rotate-[-3deg] rounded-[2px] bg-[hsl(52_97%_86%_/_0.85)] border border-[hsl(50_60%_56%_/_0.45)]"
         />
         <h3 className="mb-1.5 text-base font-semibold text-ink">
-          Zerknij zanim klikniesz dalej
+          Pliki cookies
         </h3>
         <p className="mb-4 text-sm leading-relaxed text-muted">
-          Używam ciasteczek, żeby zobaczyć które części tej strony rzeczywiście pomagają twórcom.
-          Bez zgody strona działa tak samo, ale ja będę musiał zgadywać.
+          Używamy Google Analytics i Microsoft Clarity, żeby ulepszać tę stronę.
+          Bez zgody działa tak samo.
         </p>
         <div className="flex flex-col-reverse gap-2 sm:flex-row">
           <Button variant="ghost" size="md" onClick={deny} className="sm:flex-1">
