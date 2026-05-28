@@ -1,0 +1,25 @@
+---
+import Base from "@/layouts/Base.astro";
+import Button from "@/components/ui/Button.astro";
+import SectionHead from "@/components/ui/SectionHead.astro";
+import { Icon } from "astro-icon/components";
+---
+
+<Base
+  title="NDT — Narzędzia dla Twórców · Nadaj treściom kierunek"
+  description="Strategia marki, inspiracje i produkcja treści w jednym miejscu. Kurs Nikodema Rudzińskiego (@Szhakal) + aplikacja NDT."
+>
+  <main class="mx-auto max-w-[1200px] px-6 py-20">
+    <SectionHead n="00" title="Smoke test" right="fundament" />
+    <h1 data-reveal class="text-4xl font-semibold tracking-tight">
+      Fundament Astro działa.
+    </h1>
+    <div class="mt-6 flex gap-3">
+      <Button variant="primary" size="lg" href="#">
+        Zacznij od 199 zł
+        <Icon name="lucide:arrow-right" class="size-4" slot="right" />
+      </Button>
+      <Button variant="outline" size="lg">Zobacz</Button>
+    </div>
+  </main>
+</Base>

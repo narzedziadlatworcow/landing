@@ -1,0 +1,30 @@
+---
+/**
+ * Dzieli tekst na znaki opakowane w <span data-split-char> (bakowane w build).
+ * Ukrywanie/animację robi CSS (`html.js [data-split-char]`) + animations.ts.
+ * Słowa nie łamią się w środku (nowrap container), spacje zachowane.
+ */
+interface Props {
+  text: string;
+  italic?: boolean;
+}
+
+const { text, italic = false } = Astro.props;
+const tokens = text.split(/(\s+)/); // zachowuje białe znaki jako tokeny
+---
+
+{
+  tokens.map((token) =>
+    /^\s+$/.test(token) ? (
+      <span data-split-char style="white-space: pre;">{token}</span>
+    ) : (
+      <span
+        style={`display: inline-block; white-space: nowrap;${italic ? " font-style: italic;" : ""}`}
+      >
+        {Array.from(token).map((ch) => (
+          <span data-split-char style="display: inline-block;">{ch}</span>
+        ))}
+      </span>
+    )
+  )
+}

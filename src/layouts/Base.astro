@@ -1,0 +1,54 @@
+---
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/600.css";
+import "@fontsource/inter/700.css";
+import "@fontsource/caveat/400.css";
+import "@fontsource/caveat/500.css";
+import "@fontsource/caveat/600.css";
+import "@fontsource/caveat/700.css";
+import "@fontsource/shadows-into-light/400.css";
+import "@/styles/global.css";
+import Seo from "@/components/seo/Seo.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  type?: "website" | "article";
+  canonical?: string;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  noindex?: boolean;
+}
+
+const props = Astro.props;
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Klasa `js` natychmiast → CSS może ukryć elementy reveal tylko gdy JS żyje -->
+    <script is:inline>
+      document.documentElement.classList.add("js");
+    </script>
+    <Seo {...props} />
+  </head>
+  <body class="min-h-screen text-ink font-sans">
+    <slot />
+
+    <!-- Animacje GSAP (wspólny vanilla skrypt — kontrakt data-*) -->
+    <script>
+      import { initAnimations } from "@/lib/animations";
+      initAnimations();
+    </script>
+
+    <!-- Consent Mode v2 + analytics (prod-only) -->
+    <script>
+      import { initConsentMode } from "@/lib/consent";
+      if (import.meta.env.PROD) initConsentMode();
+    </script>
+  </body>
+</html>
