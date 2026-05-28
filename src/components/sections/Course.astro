@@ -21,6 +21,7 @@ const bullets = [
 ---
 
 <section
+  data-anim-course
   id="kurs"
   class="relative py-20 md:py-24 bg-gradient-to-b from-brand-soft/70 via-brand-soft/40 to-transparent border-y border-brand/20"
 >
@@ -33,7 +34,7 @@ const bullets = [
 
     <div class="grid md:grid-cols-[1fr_1.05fr] gap-10 md:gap-14 items-center">
       {/* Left — pitch */}
-      <div data-reveal>
+      <div data-course-pitch>
         <Badge tone="brand" class="mb-4">
           <span class="w-1.5 h-1.5 rounded-full bg-brand" />
           10 lekcji · ok. 2h
@@ -95,7 +96,7 @@ const bullets = [
       <div class="relative">
         {/* Thumb */}
         <div
-          data-reveal
+          data-course-thumb
           class="relative rounded-2xl overflow-hidden border-[3px] border-ink shadow-[8px_8px_0_0_hsl(286_86%_57%)] aspect-video bg-gradient-to-br from-fuchsia-600 via-brand to-purple-800"
           style="transform: rotate(-1deg)"
         >
@@ -147,7 +148,7 @@ const bullets = [
 
         {/* Curriculum peek */}
         <div
-          data-reveal
+          data-course-curriculum
           class="mt-6 glass rounded-xl p-4 max-w-[440px] mx-auto shadow-lg"
           style="transform: rotate(0.5deg)"
         >

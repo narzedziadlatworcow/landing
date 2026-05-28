@@ -50,19 +50,15 @@ const tapeStyle = (tape: Tape) => {
 };
 ---
 
-<section id="produkt" class="relative py-16 md:py-20">
+<section data-anim-problem id="produkt" class="relative py-16 md:py-20">
   <div class="mx-auto max-w-[1200px] px-6">
     <SectionHead n="02" title="Znasz to uczucie?" right="lekki problem" />
 
-    <div
-      data-reveal-group
-      data-reveal-start="top 65%"
-      class="relative mt-8 md:mt-10 min-h-[520px] md:min-h-[440px]"
-    >
+    <div class="relative mt-8 md:mt-10 min-h-[520px] md:min-h-[440px]">
       {
         quotes.map((q) => (
           <div
-            data-reveal-item
+            data-quote
             class={`absolute w-full max-w-[320px] md:max-w-[400px] ${q.pos}`}
             style={`transform: rotate(${q.rotate}deg)`}
           >
