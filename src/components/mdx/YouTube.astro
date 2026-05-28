@@ -1,0 +1,77 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  /** ID filmu z YouTube (np. "dQw4w9WgXcQ") */
+  id: string;
+  /** Tytuł filmu (a11y + nagłówek miniatury) */
+  title: string;
+}
+
+const { id, title } = Astro.props;
+
+// hqdefault.jpg jest zawsze dostępne (maxres bywa puste dla starszych filmów)
+const thumb = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+---
+
+{/*
+  FACADE: domyślnie renderujemy TYLKO klikalną miniaturę.
+  Iframe YouTube dociąga się dopiero po kliknięciu (minimalny inline script).
+  To eliminuje setki KB JS-u YouTube z początkowego ładowania → Lighthouse.
+*/}
+<div class="my-8 not-prose">
+  <button
+    type="button"
+    class="group relative block aspect-video w-full overflow-hidden rounded-xl border-2 border-ink bg-ink shadow-[4px_4px_0_0_hsl(266_51%_16%)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-ring focus-visible:ring-offset-2"
+    data-yt-facade
+    data-yt-id={id}
+    aria-label={`Odtwórz: ${title}`}
+  >
+    <img
+      src={thumb}
+      alt={title}
+      width="1280"
+      height="720"
+      loading="lazy"
+      decoding="async"
+      class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+    />
+    <span
+      class="absolute inset-0 bg-ink/15 transition-colors duration-300 group-hover:bg-ink/5"
+      aria-hidden="true"></span>
+    <span
+      class="absolute left-1/2 top-1/2 inline-flex size-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-brand text-white shadow-[0_6px_20px_-2px_hsl(286_86%_57%_/_0.6)] transition-transform duration-300 group-hover:scale-110"
+      aria-hidden="true"
+    >
+      <Icon name="lucide:play" class="size-7 translate-x-0.5 fill-current" />
+    </span>
+    <span
+      class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/80 to-transparent px-4 pb-3 pt-8 text-left text-sm font-medium text-white"
+    >
+      {title}
+    </span>
+  </button>
+</div>
+
+<script>
+  // Facade → iframe: dociąga player dopiero na klik (jedyny dozwolony lokalny skrypt).
+  document.querySelectorAll<HTMLButtonElement>("[data-yt-facade]").forEach((el) => {
+    el.addEventListener(
+      "click",
+      () => {
+        const id = el.getAttribute("data-yt-id");
+        if (!id) return;
+        const iframe = document.createElement("iframe");
+        iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
+        iframe.title = el.getAttribute("aria-label") ?? "YouTube";
+        iframe.allow =
+          "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+        iframe.allowFullscreen = true;
+        iframe.className = "absolute inset-0 h-full w-full border-0";
+        el.replaceChildren(iframe);
+        el.removeAttribute("data-yt-facade");
+      },
+      { once: true },
+    );
+  });
+</script>

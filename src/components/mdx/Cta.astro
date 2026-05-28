@@ -1,0 +1,36 @@
+---
+import Box from "@/components/ui/Box.astro";
+import Button from "@/components/ui/Button.astro";
+import ScribbleAnno from "@/components/ui/ScribbleAnno.astro";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  href?: string;
+  label?: string;
+  note?: string;
+}
+
+const {
+  href = "https://app.narzedziadlatworcow.pl",
+  label = "Zacznij od 199 zł",
+  note,
+} = Astro.props;
+---
+
+<div class="relative my-10 not-prose">
+  <Box variant="accent" class="relative p-6 sm:p-8 text-center">
+    <span class="tape" style="top: -10px; left: 50%; transform: translateX(-50%) rotate(-3deg);" aria-hidden="true"></span>
+
+    <ScribbleAnno rotate={-3} size="md" class="block mb-3">
+      gotów na konkret?
+    </ScribbleAnno>
+
+    <div class="flex flex-col items-center gap-4">
+      <Button variant="primary" size="lg" href={href}>
+        {label}
+        <Icon name="lucide:arrow-right" class="size-4" slot="right" />
+      </Button>
+      {note && <p class="text-sm text-muted max-w-md">{note}</p>}
+    </div>
+  </Box>
+</div>

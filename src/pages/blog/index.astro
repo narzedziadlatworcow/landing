@@ -1,0 +1,132 @@
+---
+import Base from "@/layouts/Base.astro";
+import SectionHead from "@/components/ui/SectionHead.astro";
+import Badge from "@/components/ui/Badge.astro";
+import ScribbleAnno from "@/components/ui/ScribbleAnno.astro";
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog"))
+  .filter((p) => !(import.meta.env.PROD && p.data.draft))
+  .sort(
+    (a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime(),
+  );
+
+const dateFmt = new Intl.DateTimeFormat("pl-PL", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
+
+// Lekkie, naprzemienne rotacje kart — scrapbook bez pixel-perfect symetrii.
+const rotations = ["-1.2deg", "1deg", "-0.6deg", "1.4deg", "-1.6deg", "0.8deg"];
+---
+
+<Base
+  title="Blog · Narzędzia dla Twórców"
+  description="Strategia, kierunek i konkretne wskazówki dla twórców YouTube, TikToka i Instagrama. Bez korpo-bełkotu — po ludzku."
+>
+  <main class="mx-auto max-w-[1100px] px-6 py-16 sm:py-20">
+    <SectionHead n="01" title="Blog" right="notatnik twórcy" />
+
+    <header data-reveal class="mb-12 max-w-2xl">
+      <h1 class="text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
+        Pomysły, które
+        <span class="relative whitespace-nowrap">
+          <span class="scribble-circle">nadają kierunek</span>
+        </span>
+      </h1>
+      <p class="mt-5 text-lg text-muted">
+        Piszę tu o tym, z czym faktycznie mierzysz się jako twórca — jak ułożyć
+        treści w strategię, znaleźć swój głos i przestać strzelać w ciemno.
+      </p>
+    </header>
+
+    {
+      posts.length === 0 ? (
+        <p class="font-hand text-2xl text-brand">
+          Pierwszy wpis już się pisze. Zajrzyj za chwilę.
+        </p>
+      ) : (
+        <ul class="grid gap-8 sm:grid-cols-2" role="list">
+          {posts.map((post, i) => (
+            <li
+              data-reveal-item
+              class="group"
+              style={`transform: rotate(${rotations[i % rotations.length]});`}
+            >
+              <a
+                href={`/blog/${post.id}`}
+                class="relative block h-full overflow-hidden rounded-xl border-2 border-ink bg-white shadow-[4px_4px_0_0_hsl(266_51%_16%)] transition-transform duration-200 group-hover:-translate-y-1 group-hover:rotate-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-ring focus-visible:ring-offset-2"
+              >
+                <span
+                  class="tape"
+                  style="top: -9px; left: 50%; transform: translateX(-50%) rotate(-3deg); z-index: 1;"
+                  aria-hidden="true"
+                />
+
+                {post.data.cover && (
+                  <div class="aspect-[16/9] overflow-hidden border-b-2 border-ink">
+                    <Image
+                      src={post.data.cover}
+                      alt={post.data.title}
+                      width={640}
+                      height={360}
+                      loading="lazy"
+                      class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
+                )}
+
+                <div class="p-6">
+                  {post.data.tags.length > 0 && (
+                    <div class="mb-3 flex flex-wrap gap-1.5">
+                      {post.data.tags.slice(0, 3).map((tag) => (
+                        <Badge tone="brand">{tag}</Badge>
+                      ))}
+                    </div>
+                  )}
+
+                  <h2 class="text-xl font-semibold leading-snug text-ink transition-colors group-hover:text-brand">
+                    {post.data.title}
+                  </h2>
+
+                  <p class="mt-2 line-clamp-3 text-[15px] leading-relaxed text-muted">
+                    {post.data.description}
+                  </p>
+
+                  <div class="mt-4 flex items-center justify-between text-sm text-muted">
+                    <time datetime={post.data.publishDate.toISOString()}>
+                      {dateFmt.format(post.data.publishDate)}
+                    </time>
+                    <span class="inline-flex items-center gap-1 font-medium text-brand">
+                      Czytaj
+                      <Icon
+                        name="lucide:arrow-right"
+                        class="size-4 transition-transform group-hover:translate-x-0.5"
+                      />
+                    </span>
+                  </div>
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    <div class="mt-14 flex items-center gap-3">
+      <Icon name="lucide:rss" class="size-4 text-muted" />
+      <a
+        href="/rss.xml"
+        class="text-sm font-medium text-muted underline-offset-4 hover:text-brand hover:underline"
+      >
+        Czytnik RSS
+      </a>
+      <ScribbleAnno rotate={-4} size="sm" class="ml-1">
+        dla starej szkoły
+      </ScribbleAnno>
+    </div>
+  </main>
+</Base>

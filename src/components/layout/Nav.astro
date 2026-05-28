@@ -1,0 +1,97 @@
+---
+import { Icon } from "astro-icon/components";
+import Button from "@/components/ui/Button.astro";
+import { navLinks } from "@/data/nav";
+---
+
+<header
+  class="sticky top-0 z-40 backdrop-blur-md bg-white/60 border-b border-border-soft/50"
+>
+  <div
+    class="mx-auto max-w-[1200px] px-6 h-16 flex items-center justify-between"
+  >
+    <a href="#top" class="flex items-center gap-2.5">
+      <img src="/logo.png" alt="NDT" class="h-7 w-auto" />
+      <span
+        class="font-semibold text-ink text-[15px] tracking-tight sr-only"
+      >NDT</span>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-7 text-sm text-ink/80">
+      {
+        navLinks.map((l) => (
+          <a href={l.href} class="hover:text-brand transition-colors">
+            {l.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <Button size="md" href="#pricing">
+        Zacznij od 199 zł
+        <Icon name="lucide:arrow-right" class="size-4" slot="right" />
+      </Button>
+      <button
+        type="button"
+        data-nav-toggle
+        aria-label="Otwórz menu"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        class="md:hidden inline-flex items-center justify-center size-10 rounded-lg text-ink hover:bg-brand-soft transition-colors"
+      >
+        <Icon name="lucide:menu" class="size-5" data-nav-icon-open />
+        <Icon name="lucide:x" class="size-5 hidden" data-nav-icon-close />
+      </button>
+    </div>
+  </div>
+
+  <div
+    id="mobile-nav"
+    data-nav-panel
+    style="grid-template-rows: 0fr"
+    class="md:hidden grid transition-[grid-template-rows] duration-300 ease-out"
+  >
+    <div class="overflow-hidden">
+      <nav
+        class="px-6 pb-4 pt-1 flex flex-col border-t border-border-soft/50 bg-white/85 backdrop-blur-md"
+      >
+        {
+          navLinks.map((l) => (
+            <a
+              href={l.href}
+              data-nav-link
+              class="py-3 text-[15px] text-ink/85 hover:text-brand border-b border-border-soft/40 last:border-0"
+            >
+              {l.label}
+            </a>
+          ))
+        }
+      </nav>
+    </div>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>("[data-nav-toggle]");
+  const panel = document.querySelector<HTMLElement>("[data-nav-panel]");
+  const iconOpen = document.querySelector<HTMLElement>("[data-nav-icon-open]");
+  const iconClose = document.querySelector<HTMLElement>("[data-nav-icon-close]");
+  const links = document.querySelectorAll<HTMLAnchorElement>("[data-nav-link]");
+
+  let open = false;
+  const setOpen = (v: boolean) => {
+    open = v;
+    if (panel) panel.style.gridTemplateRows = v ? "1fr" : "0fr";
+    toggle?.setAttribute("aria-expanded", String(v));
+    toggle?.setAttribute("aria-label", v ? "Zamknij menu" : "Otwórz menu");
+    iconOpen?.classList.toggle("hidden", v);
+    iconClose?.classList.toggle("hidden", !v);
+  };
+
+  toggle?.addEventListener("click", () => setOpen(!open));
+  links.forEach((l) => l.addEventListener("click", () => setOpen(false)));
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && open) setOpen(false);
+  });
+</script>

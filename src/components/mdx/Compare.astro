@@ -1,0 +1,77 @@
+---
+interface Props {
+  /** Nagłówki kolumn */
+  headers: string[];
+  /**
+   * Wiersze: albo tablica tablic (kolejność = headers),
+   * albo tablica obiektów (klucze = headers).
+   */
+  rows: (string | number)[][] | Record<string, string | number>[];
+  /** Podpis pod tabelą (opcjonalny) */
+  caption?: string;
+}
+
+const { headers, rows, caption } = Astro.props;
+
+const isObjectRows = (
+  r: Props["rows"],
+): r is Record<string, string | number>[] =>
+  r.length > 0 && !Array.isArray(r[0]);
+
+const normalizedRows: (string | number)[][] = isObjectRows(rows)
+  ? rows.map((row) => headers.map((h) => (row as Record<string, string | number>)[h] ?? ""))
+  : (rows as (string | number)[][]);
+---
+
+<figure class="my-8 not-prose">
+  <div class="overflow-x-auto rounded-xl border border-border-soft bg-white/80 shadow-[0_8px_24px_-12px_hsl(286_86%_57%_/_0.25)]">
+    <table class="w-full border-collapse text-left text-[15px]">
+      <thead>
+        <tr class="bg-brand-soft">
+          {
+            headers.map((h, i) => (
+              <th
+                scope="col"
+                class:list={[
+                  "px-4 py-3 font-semibold text-accent-strong align-bottom",
+                  i === 0 ? "" : "text-center",
+                  i < headers.length - 1 && "border-r border-border-soft",
+                ]}
+              >
+                {h}
+              </th>
+            ))
+          }
+        </tr>
+      </thead>
+      <tbody>
+        {
+          normalizedRows.map((row, ri) => (
+            <tr class:list={[ri % 2 === 1 && "bg-subtle/50"]}>
+              {row.map((cell, ci) => (
+                <td
+                  class:list={[
+                    "px-4 py-3 align-top border-t border-border-soft",
+                    ci === 0
+                      ? "font-medium text-ink"
+                      : "text-center text-ink/85",
+                    ci < row.length - 1 && "border-r border-border-soft",
+                  ]}
+                >
+                  {cell}
+                </td>
+              ))}
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+  {
+    caption && (
+      <figcaption class="mt-2 text-center font-hand text-base text-brand">
+        {caption}
+      </figcaption>
+    )
+  }
+</figure>
