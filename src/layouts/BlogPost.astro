@@ -1,5 +1,6 @@
 ---
 import Base from "@/layouts/Base.astro";
+import Nav from "@/components/layout/Nav.astro";
 import Badge from "@/components/ui/Badge.astro";
 import ScribbleAnno from "@/components/ui/ScribbleAnno.astro";
 import { Icon } from "astro-icon/components";
@@ -58,6 +59,7 @@ const jsonLd = {
   image={coverImg.src}
   jsonLd={jsonLd}
 >
+  <Nav />
   <main class="mx-auto max-w-[760px] px-6 py-16 sm:py-20">
     <a
       href="/blog"

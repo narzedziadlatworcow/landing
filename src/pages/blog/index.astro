@@ -1,5 +1,6 @@
 ---
 import Base from "@/layouts/Base.astro";
+import Nav from "@/components/layout/Nav.astro";
 import SectionHead from "@/components/ui/SectionHead.astro";
 import Badge from "@/components/ui/Badge.astro";
 import ScribbleAnno from "@/components/ui/ScribbleAnno.astro";
@@ -28,6 +29,7 @@ const rotations = ["-1.2deg", "1deg", "-0.6deg", "1.4deg", "-1.6deg", "0.8deg"];
   title="Blog · Narzędzia dla Twórców"
   description="Strategia, kierunek i konkretne wskazówki dla twórców YouTube, TikToka i Instagrama. Bez korpo-bełkotu — po ludzku."
 >
+  <Nav />
   <main class="mx-auto max-w-[1100px] px-6 py-16 sm:py-20">
     <SectionHead n="01" title="Blog" right="notatnik twórcy" />
 

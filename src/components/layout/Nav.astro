@@ -10,11 +10,19 @@ import { navLinks } from "@/data/nav";
   <div
     class="mx-auto max-w-[1200px] px-6 h-16 flex items-center justify-between"
   >
-    <a href="#top" class="flex items-center gap-2.5">
-      <img src="/logo.webp" alt="NDT" width="28" height="28" class="h-7 w-auto" />
+    <a href="/" class="flex items-center gap-2.5">
+      <img
+        src="/logo.webp"
+        alt="Narzędzia dla Twórców"
+        width="28"
+        height="28"
+        class="h-7 w-auto"
+      />
       <span
-        class="font-semibold text-ink text-[15px] tracking-tight sr-only"
-      >NDT</span>
+        class="hidden sm:inline font-semibold text-ink text-[15px] tracking-tight"
+      >
+        Narzędzia <span class="text-brand">dla Twórców</span>
+      </span>
     </a>
 
     <nav class="hidden md:flex items-center gap-7 text-sm text-ink/80">
@@ -28,7 +36,7 @@ import { navLinks } from "@/data/nav";
     </nav>
 
     <div class="flex items-center gap-2">
-      <Button size="md" href="#pricing">
+      <Button size="md" href="/#pricing">
         Zacznij od 199 zł
         <Icon name="lucide:arrow-right" class="size-4" slot="right" />
       </Button>

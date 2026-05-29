@@ -47,8 +47,13 @@
   color-scheme: light;
 }
 
-html, body {
+html {
   height: 100%;
+}
+/* body rośnie z treścią (min-height, nie height) — inaczej sztywne 100vh
+   łamie position:sticky nawigacji: containing block ma tylko wysokość ekranu. */
+body {
+  min-height: 100%;
 }
 
 body {

@@ -2,15 +2,29 @@
 const cols = [
   {
     title: "Produkt",
-    links: ["Strategia", "Content", "Inspiracje", "Cennik"],
+    links: [
+      { label: "Strategia", href: "/#produkt" },
+      { label: "Content", href: "/#produkt" },
+      { label: "Inspiracje", href: "/#produkt" },
+      { label: "Cennik", href: "/#pricing" },
+    ],
   },
   {
     title: "Społeczność",
-    links: ["Discord", "Newsletter", "Kurs", "Blog"],
+    links: [
+      { label: "Discord", href: "#" },
+      { label: "Newsletter", href: "/#pricing" },
+      { label: "Kurs", href: "/#kurs" },
+      { label: "Blog", href: "/blog" },
+    ],
   },
   {
     title: "Kontakt",
-    links: ["hello@ndt.pl", "Regulamin", "Polityka prywatności"],
+    links: [
+      { label: "hello@ndt.pl", href: "mailto:hello@ndt.pl" },
+      { label: "Regulamin", href: "#" },
+      { label: "Polityka prywatności", href: "#" },
+    ],
   },
 ];
 
@@ -44,10 +58,10 @@ const year = new Date().getFullYear();
               {col.links.map((l) => (
                 <li>
                   <a
-                    href="#"
+                    href={l.href}
                     class="text-[13px] text-white/75 hover:text-white transition-colors"
                   >
-                    {l}
+                    {l.label}
                   </a>
                 </li>
               ))}
