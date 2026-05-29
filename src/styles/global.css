@@ -1,0 +1,195 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* ─── Design tokens (z NDT theme.css) ──────────────────────────── */
+
+@theme inline {
+  /* Fonts */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-hand: "Caveat", cursive;
+  --font-scribble: "Shadows Into Light", cursive;
+
+  /* Purple palette — NDT primary */
+  --color-brand: hsl(286 86% 57%);
+  --color-brand-soft: hsl(289 100% 97%);
+  --color-brand-ring: hsl(277 90% 61%);
+
+  /* Ink / surfaces */
+  --color-ink: hsl(266 51% 16%);
+  --color-muted: hsl(271 22% 48%);
+  --color-subtle: hsl(285 100% 97%);
+  --color-border-soft: hsl(283 68% 88%);
+
+  /* Backgrounds */
+  --color-bg: hsl(0 0% 100%);
+  --color-surface: hsl(0 0% 100%);
+
+  /* Accents */
+  --color-accent: hsl(276 100% 96%);
+  --color-accent-strong: hsl(270 60% 30%);
+
+  /* Highlight (for pricing limited badge) */
+  --color-gold-bg: hsl(52 97% 86%);
+  --color-gold-border: hsl(50 60% 56%);
+  --color-gold-ink: hsl(40 69% 21%);
+
+  /* Radii */
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+}
+
+/* ─── Base ─────────────────────────────────────────────────────── */
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  height: 100%;
+}
+/* body rośnie z treścią (min-height, nie height) — inaczej sztywne 100vh
+   łamie position:sticky nawigacji: containing block ma tylko wysokość ekranu. */
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: #ffffff;
+  background-image:
+    url("/ndtbg.svg"),
+    linear-gradient(135deg, #dbeafe 0%, #ffffff 50%, #f3e8ff 100%);
+  background-size: 140%, cover;
+  background-position: 30% 30%, center;
+  background-repeat: no-repeat, no-repeat;
+  background-attachment: fixed;
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-brand) 30%, transparent);
+  color: var(--color-ink);
+}
+
+/* ─── Typography helpers ───────────────────────────────────────── */
+
+.font-hand {
+  font-family: var(--font-hand);
+}
+
+.font-scribble {
+  font-family: var(--font-scribble);
+}
+
+/* Biały „halo" outline — gdy scribble nachodzi na mockup / ramkę i słabo go widać */
+.scribble-sticker {
+  text-shadow:
+    0 0 3px #fff,
+    0 0 6px #fff,
+    0 0 10px #fff,
+    0 0 14px #fff;
+}
+
+/* ─── Glass — z aplikacji NDT ───────────────────────────────────── */
+
+.glass {
+  background: hsl(0 0% 100% / 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid hsl(283 68% 88% / 0.4);
+  box-shadow:
+    0 4px 6px -1px hsl(283 68% 88% / 0.1),
+    0 10px 15px -3px hsl(283 68% 88% / 0.15);
+}
+
+.glass-strong {
+  background: hsl(0 0% 100% / 0.82);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid hsl(283 68% 88% / 0.5);
+  box-shadow:
+    0 6px 10px -2px hsl(266 51% 16% / 0.08),
+    0 18px 30px -8px hsl(286 86% 57% / 0.15);
+}
+
+/* ─── Editorial "scrapbook" helpers ────────────────────────────── */
+
+.tape {
+  position: absolute;
+  background: hsl(52 97% 86% / 0.85);
+  width: 60px;
+  height: 18px;
+  box-shadow: 0 1px 3px hsl(266 51% 16% / 0.12);
+  border-radius: 1px;
+}
+
+.underline-brand {
+  background-image: linear-gradient(180deg, transparent 62%, hsl(286 86% 57% / 0.35) 62%, hsl(286 86% 57% / 0.35) 92%, transparent 92%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.scribble-circle {
+  position: relative;
+}
+.scribble-circle::before {
+  content: "";
+  position: absolute;
+  inset: -8px -14px;
+  border: 2px solid hsl(286 86% 57%);
+  border-radius: 60% 40% 55% 45% / 50% 45% 55% 50%;
+  transform: rotate(-2deg);
+  pointer-events: none;
+}
+
+/* ─── Float animation ──────────────────────────────────────────── */
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
+  50%      { transform: translateY(-6px) rotate(var(--rot, 0deg)); }
+}
+
+.float-slow {
+  animation: float-slow 7s ease-in-out infinite;
+}
+
+/* ─── Animation reveal contract ────────────────────────────────────
+   Elementy startują ukryte TYLKO gdy JS jest aktywny (html.js) i
+   użytkownik nie wymusił redukcji ruchu. Bez JS / z reduced-motion
+   treść jest od razu widoczna → SEO, Lighthouse, brak FOUC.
+   animations.ts (initAnimations) animuje te hooki do stanu widocznego.
+   ─────────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js [data-reveal] {
+    opacity: 0;
+    transform: translateY(20px);
+    will-change: opacity, transform;
+  }
+  html.js [data-reveal-item] {
+    opacity: 0;
+    transform: translateY(18px);
+    will-change: opacity, transform;
+  }
+  html.js [data-split-char] {
+    opacity: 0;
+  }
+  html.js [data-manifest-subcopy] {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+/* prefers-reduced-motion: wszystko widoczne, scribble dorysowane */
+@media (prefers-reduced-motion: reduce) {
+  [data-hero-scribble],
+  [data-manifest-strike] {
+    stroke-dashoffset: 0 !important;
+  }
+}

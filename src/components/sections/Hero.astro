@@ -1,0 +1,114 @@
+---
+import { Icon } from "astro-icon/components";
+import Button from "@/components/ui/Button.astro";
+import SplitText from "@/components/ui/SplitText.astro";
+import StrategyMockup from "@/components/mockups/StrategyMockup.astro";
+import EditorMockup from "@/components/mockups/EditorMockup.astro";
+---
+
+<section
+  data-hero
+  id="top"
+  class="relative overflow-hidden min-h-screen flex items-center pt-20 pb-16"
+>
+  <div class="mx-auto max-w-[1200px] w-full px-6">
+    <div class="grid md:grid-cols-[1.15fr_1fr] gap-10 md:gap-14 items-center">
+      {/* Copy column */}
+      <div>
+        <h1
+          class="font-semibold tracking-tight text-ink leading-[1.02] text-[44px] sm:text-[56px] md:text-[64px]"
+        >
+          <SplitText text="Nadaj treściom " />
+          <span class="relative italic text-brand">
+            <SplitText text="kierunek" />
+            <svg
+              viewBox="0 0 220 12"
+              class="absolute left-0 -bottom-2 w-full h-3"
+              aria-hidden="true"
+            >
+              <path
+                data-hero-scribble
+                d="M2 8 Q 55 2, 110 6 T 218 5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-dasharray="240"
+                stroke-dashoffset="240"
+              />
+            </svg>
+          </span>
+          <SplitText text="." />
+        </h1>
+
+        <p class="mt-6 text-ink/75 text-[17px] leading-relaxed max-w-[480px]">
+          Od strategii do gotowego scenariusza — w jednej sesji.
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <Button size="lg" variant="primary">
+            Zacznij od 199 zł
+            <Icon name="lucide:arrow-right" class="size-4" slot="right" />
+          </Button>
+          <Button size="lg" variant="outline">
+            <Icon name="lucide:play" class="size-4" slot="left" />
+            Zobacz, co dostajesz
+          </Button>
+        </div>
+
+        {/* Author attribution */}
+        <div class="mt-10 flex items-center gap-3.5">
+          <img
+            src="/nikodem.webp"
+            alt="Nikodem Rudziński"
+            width="56"
+            height="56"
+            class="size-14 rounded-full object-cover border-2 border-white shadow-[0_6px_14px_-2px_hsl(266_51%_16%_/_0.25)]"
+          />
+          <div class="leading-tight">
+            <div class="font-hand text-[20px] text-ink">
+              Od <b>@Szhakal</b> — twórcy, który przeszedł tę drogę.
+            </div>
+            <div class="text-[12.5px] text-muted mt-1">
+              631K na TikToku · 151K na Instagramie
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Mockup column — editorial scrapbook stack */}
+      <div class="relative min-h-[480px] md:min-h-[560px]">
+        {/* Editor — peek z prawej-dolnej, za Strategy. Tylko desktop. */}
+        <div
+          class="hidden md:block absolute bottom-[-12px] right-[-56px] w-[420px] z-0 pointer-events-none"
+          style="transform: rotate(6deg)"
+        >
+          <EditorMockup class="w-full" />
+        </div>
+
+        {/* Strategy — z przodu, główna karta */}
+        <div
+          class="absolute inset-x-0 top-[60px] md:top-[24px] flex justify-center md:justify-start z-10 pointer-events-none"
+        >
+          <div style="transform: rotate(-3deg)">
+            <StrategyMockup class="w-[320px] md:w-[360px]" />
+          </div>
+        </div>
+
+        {/* Handwritten flow labels */}
+        <span
+          class="absolute top-0 left-[10px] md:-top-4 md:-left-2 font-scribble scribble-sticker text-brand text-xl md:text-2xl z-20 pointer-events-none"
+          style="transform: rotate(-6deg)"
+        >
+          ① strategia, którą rozumiesz
+        </span>
+        <span
+          class="hidden md:block absolute bottom-[-4px] right-[-8px] font-scribble scribble-sticker text-ink/85 text-xl z-20 pointer-events-none"
+          style="transform: rotate(4deg)"
+        >
+          ② gotowe scenariusze →
+        </span>
+      </div>
+    </div>
+  </div>
+</section>

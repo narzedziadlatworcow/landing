@@ -1,0 +1,81 @@
+---
+import SectionHead from "@/components/ui/SectionHead.astro";
+
+interface Tape {
+  rotate: number;
+  top: number;
+  left?: number | string;
+  right?: number | string;
+}
+
+interface Quote {
+  text: string;
+  rotate: number;
+  tape: Tape;
+  pos: string;
+}
+
+const quotes: Quote[] = [
+  {
+    text: "Otwierasz Notion. Pustka.",
+    rotate: -2,
+    tape: { rotate: -8, top: -10, left: 24 },
+    pos: "top-0 left-0 md:left-[2%]",
+  },
+  {
+    text: "ChatGPT pisze „ładnie”, ale nie Twoim głosem.",
+    rotate: 1.2,
+    tape: { rotate: 6, top: -9, right: 28 },
+    pos: "top-[36%] md:top-1/2 md:-translate-y-1/2 right-0 md:right-[3%]",
+  },
+  {
+    text: "Masz 40 pomysłów i 0 wykonanych.",
+    rotate: -1.5,
+    tape: { rotate: -4, top: -10, left: "50%" },
+    pos: "bottom-0 left-0 md:left-[18%]",
+  },
+];
+
+const cssLen = (v: number | string | undefined) =>
+  v === undefined ? undefined : typeof v === "number" ? `${v}px` : v;
+
+const tapeStyle = (tape: Tape) => {
+  const parts: string[] = [];
+  if (tape.top !== undefined) parts.push(`top: ${cssLen(tape.top)}`);
+  if (tape.left !== undefined) parts.push(`left: ${cssLen(tape.left)}`);
+  if (tape.right !== undefined) parts.push(`right: ${cssLen(tape.right)}`);
+  const tx = tape.left === "50%" ? "-50%" : "0";
+  parts.push(`transform: rotate(${tape.rotate}deg) translateX(${tx})`);
+  return parts.join("; ");
+};
+---
+
+<section data-anim-problem id="produkt" class="relative py-16 md:py-20">
+  <div class="mx-auto max-w-[1200px] px-6">
+    <SectionHead n="02" title="Znasz to uczucie?" right="lekki problem" />
+
+    <div class="relative mt-8 md:mt-10 min-h-[520px] md:min-h-[440px]">
+      {
+        quotes.map((q) => (
+          <div
+            data-quote
+            class={`absolute w-full max-w-[320px] md:max-w-[400px] ${q.pos}`}
+            style={`transform: rotate(${q.rotate}deg)`}
+          >
+            <div class="relative">
+              <span
+                class="absolute bg-gold-bg w-14 h-4 rounded-sm shadow-[0_1px_3px_hsl(266_51%_16%_/_0.12)]"
+                style={tapeStyle(q.tape)}
+              />
+              <div class="bg-white border border-border-soft rounded-xl shadow-[0_10px_30px_-12px_hsl(266_51%_16%_/_0.18)] p-6 md:p-8 min-h-[130px] md:min-h-[150px] flex items-center">
+                <p class="font-hand text-[20px] md:text-[26px] text-ink/90 leading-snug">
+                  „{q.text}”
+                </p>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

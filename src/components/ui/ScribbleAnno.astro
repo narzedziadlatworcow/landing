@@ -1,0 +1,26 @@
+---
+interface Props {
+  rotate?: number;
+  size?: "sm" | "md" | "lg" | "xl";
+  class?: string;
+  style?: string;
+}
+
+const { rotate = -2, size = "md", class: className, style } = Astro.props;
+
+const sizes = { sm: "text-base", md: "text-lg", lg: "text-xl", xl: "text-2xl" };
+
+const cls = [
+  "inline-block font-hand text-brand leading-snug",
+  sizes[size],
+  className,
+]
+  .filter(Boolean)
+  .join(" ");
+
+const inlineStyle = `transform: rotate(${rotate}deg);${style ? " " + style : ""}`;
+---
+
+<span class={cls} style={inlineStyle}>
+  <slot />
+</span>

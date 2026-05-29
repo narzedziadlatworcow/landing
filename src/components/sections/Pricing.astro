@@ -1,0 +1,261 @@
+---
+import { Icon } from "astro-icon/components";
+import Button from "@/components/ui/Button.astro";
+import Badge from "@/components/ui/Badge.astro";
+import SectionHead from "@/components/ui/SectionHead.astro";
+
+type PlanFeature = { t: string; off?: boolean };
+
+const coursePlan = {
+  eyebrow: "Start",
+  title: "Kurs + Strategia",
+  price: "199 zł",
+  priceNote: "jednorazowo · dostęp dożywotni",
+  features: [
+    { t: "Pełny kurs „Nadaj treściom kierunek”" },
+    { t: "Workbook strategii marki (PDF)" },
+    { t: "Eksport gotowej strategii: MD, docx, pdf" },
+    { t: "Szablony: serii, tematów, kalendarza" },
+    {
+      t: "Aplikacja NDT — 1 miesiąc w cenie (od publicznego startu, Q3 2026)",
+    },
+  ] as PlanFeature[],
+  cta: "Kup kurs",
+};
+
+const subPlan = {
+  eyebrow: "Zajawka",
+  title: "Aplikacja NDT",
+  price: "79 zł",
+  priceUnit: "/ mies",
+  priceNote: "startuje Q3 2026 · 1 workspace",
+  features: [
+    { t: "Wszystko z kursu" },
+    { t: "Aplikacja: research, pisanie, eksport" },
+    { t: "Inspiracje + biblioteka marki" },
+    { t: "1 workspace, 3 000 tokenów AI/mies" },
+    { t: "Bez limitu na strategii i edytorze" },
+  ] as PlanFeature[],
+};
+
+const pierwszaTrzydziestkaPlan = {
+  eyebrow: "Pierwsza Trzydziestka",
+  title: "Wczesny dostęp + 1 rok aplikacji",
+  subtitle: "Dla 30 osób które wchodzą zanim ruszy publicznie.",
+  stack: [
+    { t: "Kurs + Strategia", v: "199 zł" },
+    { t: "1 rok aplikacji (79 zł × 12)", v: "948 zł" },
+    { t: "1:1 onboarding", v: "60 min" },
+    { t: "Dostęp do zamkniętej grupy", v: "bezcenne" },
+    { t: "Wpływ na rozwój aplikacji", v: "bezcenne" },
+    { t: "20% promocji na zawsze", v: "∞" },
+  ],
+  total: "1 147 zł+",
+  todayPrice: "599 zł",
+  payoff: "≈ 48% taniej + dostęp do bety od zaraz",
+  cta: "Dołącz do Pierwszej Trzydziestki",
+};
+---
+
+<section data-anim-pricing id="pricing" class="py-20 md:py-28 relative">
+  <div class="relative mx-auto max-w-[1200px] px-6">
+    <SectionHead n="07" title="Cennik — wybierz wejście" right="moment decyzji" />
+
+    <div class="text-center mb-10 md:mb-14">
+      <h2
+        data-pricing-headline
+        class="font-semibold tracking-tight text-ink leading-[1.08] text-[36px] md:text-[48px]"
+      >
+        Kurs masz dziś. Aplikację —
+        <br class="hidden md:block" />
+        {" "}jako jeden z pierwszych.
+      </h2>
+      <p
+        data-pricing-sub
+        class="mt-4 text-ink/70 text-[16px] max-w-[620px] mx-auto"
+      >
+        Subskrypcja otworzy się po becie. Pierwsza Trzydziestka daje dostęp już
+        teraz — i lock 20% rabatu na każdy kolejny rok.
+      </p>
+    </div>
+
+    <div
+      class="grid md:grid-cols-[1fr_1fr_1.2fr] gap-5 md:gap-6 items-stretch"
+    >
+      {/* PLAN 1 — Course + Strategy */}
+      <div
+        data-pricing-card
+        class="relative rounded-2xl p-6 flex flex-col bg-white/90 border border-border-soft shadow-[0_10px_30px_-12px_hsl(266_51%_16%_/_0.15)]"
+      >
+        <div
+          class="text-[11px] font-semibold tracking-[0.18em] uppercase text-muted"
+        >
+          {coursePlan.eyebrow}
+        </div>
+        <h3 class="mt-1 font-semibold text-ink text-[20px]">
+          {coursePlan.title}
+        </h3>
+        <div class="mt-4 flex items-baseline gap-1">
+          <span
+            class="font-bold leading-none tracking-tight text-[36px] text-ink"
+          >
+            {coursePlan.price}
+          </span>
+        </div>
+        <div class="mt-1.5 text-[12px] text-muted">{coursePlan.priceNote}</div>
+        <div class="my-5 h-px bg-border-soft"></div>
+
+        <ul class="space-y-2 mb-5 flex-1">
+          {
+            coursePlan.features.map((f) => (
+              <li class="flex items-start gap-2 text-[13.5px] leading-snug text-ink/85">
+                <Icon
+                  name="lucide:check"
+                  class="size-4 text-brand shrink-0 mt-0.5"
+                />
+                {f.t}
+              </li>
+            ))
+          }
+        </ul>
+        <Button variant="outline" size="lg" class="w-full mt-auto">
+          {coursePlan.cta}
+          <Icon name="lucide:arrow-right" class="size-4" slot="right" />
+        </Button>
+      </div>
+
+      {/* PLAN 2 — Subscription (peek) */}
+      <div
+        data-pricing-card
+        class="relative rounded-2xl p-6 flex flex-col bg-brand-soft/30 border border-dashed border-brand/30 opacity-95"
+      >
+        <div class="absolute -top-3 right-5">
+          <Badge tone="muted">Wkrótce</Badge>
+        </div>
+
+        <div
+          class="text-[11px] font-semibold tracking-[0.18em] uppercase text-muted"
+        >
+          {subPlan.eyebrow}
+        </div>
+        <h3 class="mt-1 font-semibold text-ink text-[18px]">
+          {subPlan.title}
+        </h3>
+        <div class="mt-4 flex items-baseline gap-1">
+          <span
+            class="font-bold leading-none tracking-tight text-[28px] text-ink/80"
+          >
+            {subPlan.price}
+          </span>
+          <span class="text-[14px] text-muted font-normal">
+            {subPlan.priceUnit}
+          </span>
+        </div>
+        <div class="mt-1.5 text-[12px] text-muted">{subPlan.priceNote}</div>
+        <div class="my-5 h-px bg-muted/15"></div>
+
+        <ul class="space-y-2 mb-5 flex-1">
+          {
+            subPlan.features.map((f) => (
+              <li class="flex items-start gap-2 text-[13.5px] leading-snug text-ink/85">
+                <Icon
+                  name="lucide:check"
+                  class="size-4 text-brand shrink-0 mt-0.5"
+                />
+                {f.t}
+              </li>
+            ))
+          }
+        </ul>
+
+        {/* Newsletter form */}
+        <div class="mt-auto">
+          <div class="text-[13px] text-muted text-center mb-2">
+            Powiadom mnie gdy startuje
+          </div>
+          <form class="flex gap-1.5">
+            <input
+              type="email"
+              required
+              placeholder="Twój e-mail"
+              class="flex-1 min-w-0 px-2.5 py-1.5 text-[13px] rounded-md border border-border-soft bg-white/80 text-ink focus:outline-none focus:border-brand/60 transition-colors"
+            />
+            <button
+              type="submit"
+              aria-label="Zapisz na newsletter"
+              class="px-3 py-1.5 text-[13px] font-semibold text-brand bg-transparent border border-brand/40 rounded-md hover:bg-brand-soft transition-colors disabled:opacity-60"
+            >
+              →
+            </button>
+          </form>
+        </div>
+      </div>
+
+      {/* PLAN 3 — Pierwsza Trzydziestka (Hormozi stack) */}
+      <div
+        id="pierwsza-trzydziestka"
+        data-pricing-card
+        class="relative rounded-2xl p-6 md:p-7 bg-gradient-to-br from-white via-brand-soft/30 to-white border-[2.5px] border-ink shadow-[6px_6px_0_0_hsl(286_86%_57%)] flex flex-col"
+      >
+        {/* Top badges */}
+        <div class="absolute -top-3.5 left-5 right-5 flex gap-1.5 flex-wrap">
+          <Badge tone="brand">
+            <Icon name="lucide:zap" class="size-3" slot="icon" />
+            Wczesny dostęp
+          </Badge>
+          <Badge tone="gold"> 30 miejsc </Badge>
+        </div>
+
+        <div
+          class="text-[11px] font-semibold tracking-[0.18em] uppercase text-brand mt-2"
+        >
+          {pierwszaTrzydziestkaPlan.eyebrow}
+        </div>
+        <h3 class="mt-1 text-[22px] font-semibold text-ink leading-tight">
+          {pierwszaTrzydziestkaPlan.title}
+        </h3>
+        <p class="mt-1 text-[13px] text-muted">
+          {pierwszaTrzydziestkaPlan.subtitle}
+        </p>
+
+        {/* Value stack */}
+        <div
+          class="mt-5 rounded-xl bg-white border-[1.5px] border-ink p-3.5 space-y-1.5"
+        >
+          {
+            pierwszaTrzydziestkaPlan.stack.map((s) => (
+              <div class="flex items-center justify-between text-[13px]">
+                <span class="text-ink/85">{s.t}</span>
+                <span class="font-hand text-[16px] text-ink">{s.v}</span>
+              </div>
+            ))
+          }
+          <div class="h-px bg-ink/80 my-2"></div>
+          <div class="flex items-center justify-between text-[12px]">
+            <span class="text-muted">Wartość razem</span>
+            <span class="line-through text-muted">
+              {pierwszaTrzydziestkaPlan.total}
+            </span>
+          </div>
+          <div class="flex items-end justify-between pt-1">
+            <span class="text-[14px] font-semibold text-ink">
+              Płacisz dziś
+            </span>
+            <span class="text-[28px] font-bold text-brand leading-none">
+              {pierwszaTrzydziestkaPlan.todayPrice}
+            </span>
+          </div>
+        </div>
+
+        <p class="mt-3 font-hand text-[14px] text-muted leading-snug">
+          {pierwszaTrzydziestkaPlan.payoff}
+        </p>
+
+        <Button variant="primary" size="lg" class="w-full mt-5">
+          {pierwszaTrzydziestkaPlan.cta}
+          <Icon name="lucide:arrow-right" class="size-4" slot="right" />
+        </Button>
+      </div>
+    </div>
+  </div>
+</section>

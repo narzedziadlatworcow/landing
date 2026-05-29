@@ -1,0 +1,59 @@
+---
+const headline = "Bez strategii każdy post to";
+const words = headline.split(" ");
+---
+
+<section
+  data-anim-darkpain
+  class="relative overflow-hidden"
+  style="background: hsl(270 30% 8%)"
+>
+  <div
+    class="relative mx-auto max-w-[1200px] px-6 py-9 md:py-10"
+    style="color: hsl(280 20% 92%)"
+  >
+    <div class="flex items-center gap-5 md:gap-8 flex-wrap">
+      <span
+        data-darkpain-label
+        class="text-[11px] font-semibold tracking-[0.2em] uppercase shrink-0 inline-block"
+        style="color: hsl(271 15% 55%)"
+      >
+        03 — punkt bólu
+      </span>
+      <h2
+        class="flex-1 min-w-[280px] font-semibold tracking-tight leading-[1.15] text-[26px] md:text-[32px]"
+      >
+        {
+          words.map((w) => (
+            <span
+              data-darkpain-word
+              class="inline-block"
+              style="white-space: nowrap; margin-right: 0.25em"
+            >
+              {w}
+            </span>
+          ))
+        }
+        <span data-darkpain-zgadywanka class="relative inline-block">
+          zgadywanka
+          <svg
+            viewBox="0 0 220 12"
+            class="absolute left-0 -bottom-1.5 w-full h-2.5 text-brand"
+            aria-hidden="true"
+          >
+            <path
+              data-darkpain-scribble
+              d="M2 8 Q 55 2, 110 6 T 218 5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-dasharray="240"
+              stroke-dashoffset="240"
+            />
+          </svg>
+        </span>.
+      </h2>
+    </div>
+  </div>
+</section>

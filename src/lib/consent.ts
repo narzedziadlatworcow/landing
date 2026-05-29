@@ -54,13 +54,31 @@ export function initConsentMode() {
   gtag("js", new Date());
   gtag("config", GA_ID);
 
-  // gtag.js leci zawsze — w trybie denied wysyła tylko cookieless pings
-  const gaTag = document.createElement("script");
-  gaTag.async = true;
-  gaTag.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
-  document.head.appendChild(gaTag);
+  // gtag.js (158KB) leci zawsze, ale odraczamy SAMO POBRANIE do bezczynności
+  // po pełnym załadowaniu strony — consent default + config są już w dataLayer,
+  // więc gtag.js odczyta poprawny stan zgody, gdy się doładuje. Zdejmuje 158KB
+  // ze ścieżki krytycznej (LCP/FCP), nie psując Consent Mode v2.
+  whenIdle(() => {
+    const gaTag = document.createElement("script");
+    gaTag.async = true;
+    gaTag.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+    document.head.appendChild(gaTag);
+  });
 
   if (granted) loadClarity();
+}
+
+// Odpala callback gdy przeglądarka jest bezczynna, najwcześniej po `load`.
+function whenIdle(cb: () => void) {
+  const schedule = () => {
+    const ric = (window as unknown as {
+      requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => void;
+    }).requestIdleCallback;
+    if (ric) ric(cb, { timeout: 3000 });
+    else setTimeout(cb, 1200);
+  };
+  if (document.readyState === "complete") schedule();
+  else window.addEventListener("load", schedule, { once: true });
 }
 
 function loadClarity() {

@@ -1,0 +1,116 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+
+const items = [
+  {
+    kind: "yt" as const,
+    channel: "Ali Abdaal",
+    title: "The 6-Book Framework I Use to Learn Anything",
+    time: "2h temu",
+    score: 94,
+    saved: false,
+    thumb: "from-orange-300 to-rose-400",
+  },
+  {
+    kind: "rss" as const,
+    channel: "Every.to",
+    title: "The New AI Creator Economy — why niches win",
+    time: "5h temu",
+    score: 88,
+    saved: false,
+    thumb: "from-blue-300 to-indigo-400",
+  },
+  {
+    kind: "yt" as const,
+    channel: "Szhakal",
+    title: "Dlaczego Twój content nie dociera — case study",
+    time: "1d temu",
+    score: 76,
+    saved: true,
+    thumb: "from-fuchsia-400 to-purple-500",
+  },
+];
+
+const cls = [
+  "glass-strong rounded-2xl overflow-hidden text-ink select-none",
+  className,
+]
+  .filter(Boolean)
+  .join(" ");
+---
+
+<div class={cls}>
+  {/* Header */}
+  <div
+    class="px-4 pt-3.5 pb-2.5 border-b border-border-soft/40 bg-white/40 flex items-center justify-between"
+  >
+    <div>
+      <div
+        class="text-[10px] font-semibold tracking-widest uppercase text-muted"
+      >
+        Inspiracje
+      </div>
+      <div class="text-[13px] font-semibold text-ink">Feed · Dzisiaj</div>
+    </div>
+    <div class="flex items-center gap-2">
+      <span
+        class="text-[10px] px-2 py-1 rounded-full bg-brand-soft text-accent-strong border border-brand/25 font-medium"
+      >
+        12 nowych
+      </span>
+    </div>
+  </div>
+
+  {/* Items */}
+  <div class="divide-y divide-border-soft/40 bg-white/60">
+    {
+      items.map((it) => {
+        const thumbCls = [
+          "w-16 h-10 rounded-md bg-gradient-to-br shrink-0 relative overflow-hidden",
+          it.thumb,
+        ].join(" ");
+        const bookmarkCls = [
+          "size-3.5",
+          it.saved ? "fill-brand text-brand" : "text-muted",
+        ].join(" ");
+        return (
+          <div class="flex items-center gap-3 p-3">
+            <div class={thumbCls}>
+              <div class="absolute inset-0 grid place-items-center text-white/90">
+                {it.kind === "yt" ? (
+                  <Icon name="lucide:youtube" class="size-4" />
+                ) : (
+                  <Icon name="lucide:rss" class="size-3.5" />
+                )}
+              </div>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-1.5 mb-0.5">
+                <span class="text-[10px] font-medium text-muted">
+                  {it.channel}
+                </span>
+                <span class="text-[10px] text-muted/60">·</span>
+                <span class="text-[10px] text-muted/80">{it.time}</span>
+              </div>
+              <div class="text-[12px] text-ink leading-tight line-clamp-1">
+                {it.title}
+              </div>
+            </div>
+            <div class="flex flex-col items-end gap-1 shrink-0">
+              <div class="flex items-center gap-0.5 text-[10px] font-semibold text-brand">
+                <Icon name="lucide:trending-up" class="size-3" />
+                {it.score}
+              </div>
+              <Icon name="lucide:bookmark" class={bookmarkCls} />
+            </div>
+          </div>
+        );
+      })
+    }
+  </div>
+</div>

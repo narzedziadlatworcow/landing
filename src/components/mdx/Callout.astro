@@ -1,0 +1,79 @@
+---
+import { Icon } from "astro-icon/components";
+
+type CalloutType = "info" | "tip" | "warning";
+
+interface Props {
+  type?: CalloutType;
+  title?: string;
+}
+
+const { type = "info", title } = Astro.props;
+
+const config: Record<
+  CalloutType,
+  { icon: string; tape: string; border: string; bg: string; accent: string; label: string }
+> = {
+  info: {
+    icon: "lucide:info",
+    tape: "hsl(286 86% 57% / 0.22)",
+    border: "border-brand/35",
+    bg: "bg-brand-soft",
+    accent: "text-accent-strong",
+    label: "Warto wiedzieć",
+  },
+  tip: {
+    icon: "lucide:lightbulb",
+    tape: "hsl(52 97% 86% / 0.9)",
+    border: "border-gold-border/60",
+    bg: "bg-gold-bg/60",
+    accent: "text-gold-ink",
+    label: "Wskazówka",
+  },
+  warning: {
+    icon: "lucide:triangle-alert",
+    tape: "hsl(40 69% 21% / 0.18)",
+    border: "border-gold-border/70",
+    bg: "bg-gold-bg/40",
+    accent: "text-gold-ink",
+    label: "Uważaj",
+  },
+};
+
+const c = config[type];
+const heading = title ?? c.label;
+---
+
+<div
+  class:list={[
+    "relative my-8 rounded-xl border-2 px-5 py-4 not-prose",
+    c.border,
+    c.bg,
+  ]}
+  style={`box-shadow: 3px 3px 0 0 hsl(266 51% 16% / 0.08); transform: rotate(-0.4deg);`}
+>
+  <span
+    class="tape"
+    style={`top: -9px; left: 22px; transform: rotate(-4deg); background: ${c.tape};`}
+    aria-hidden="true"></span>
+
+  <div class="flex items-start gap-3">
+    <span
+      class:list={[
+        "mt-0.5 inline-flex size-7 shrink-0 items-center justify-center rounded-full bg-white/80 border",
+        c.border,
+        c.accent,
+      ]}
+    >
+      <Icon name={c.icon} class="size-4" />
+    </span>
+    <div class="min-w-0 flex-1">
+      <p class:list={["font-hand text-lg leading-none mb-1.5", c.accent]}>
+        {heading}
+      </p>
+      <div class="text-[15px] leading-relaxed text-ink/90 [&>p]:my-1 [&>p:last-child]:mb-0">
+        <slot />
+      </div>
+    </div>
+  </div>
+</div>
