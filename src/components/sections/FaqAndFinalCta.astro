@@ -3,6 +3,14 @@ import { Icon } from "astro-icon/components";
 import Button from "@/components/ui/Button.astro";
 import SectionHead from "@/components/ui/SectionHead.astro";
 import { faqs } from "@/data/faq";
+import {
+  LAUNCHED,
+  CTA_LABEL,
+  CTA_HREF,
+  PRICE,
+  PRICE_FIRST,
+  LAUNCH_DATE,
+} from "@/data/offer";
 ---
 
 <section id="faq" class="py-20 md:py-24">
@@ -52,26 +60,33 @@ import { faqs } from "@/data/faq";
             data-cta-title
             class="text-[28px] md:text-[32px] font-semibold tracking-tight text-ink leading-tight"
           >
-            Zacznij budować system.
+            Daj swoim treściom kierunek.
           </h3>
           <p
             data-cta-desc
             class="mt-3 text-[15px] text-ink/75 leading-relaxed"
           >
-            Kurs masz od zaraz. Aplikację — gdy ruszy publicznie. A jeśli chcesz
-            wcześniej, jest Pierwsza Trzydziestka.
+            {
+              LAUNCHED ? (
+                <>
+                  Kurs, strategia i aplikacja w jednej subskrypcji — {PRICE}/mies.
+                  Pełen dostęp od pierwszego dnia, anuluj kiedy chcesz.
+                </>
+              ) : (
+                <>
+                  Kurs, strategia i aplikacja w jednej subskrypcji. Start{" "}
+                  {LAUNCH_DATE} — zapisz się teraz i pierwszy miesiąc zapłać{" "}
+                  {PRICE_FIRST} zamiast {PRICE}.
+                </>
+              )
+            }
           </p>
 
           <div data-cta-buttons class="mt-7 flex flex-col gap-3">
-            <Button size="lg" variant="primary" class="w-full">
-              Zacznij od 199 zł
+            <Button size="lg" variant="primary" href={CTA_HREF} class="w-full">
+              {CTA_LABEL}
               <Icon name="lucide:arrow-right" class="size-4" slot="right" />
             </Button>
-            <a href="#pierwsza-trzydziestka" class="block">
-              <Button size="lg" variant="secondary" class="w-full">
-                Pierwsza Trzydziestka — 599 zł
-              </Button>
-            </a>
           </div>
 
           <div
@@ -83,9 +98,7 @@ import { faqs } from "@/data/faq";
               class="size-3.5 text-brand shrink-0 mt-1"
             />
             <span class="font-hand text-[14px] leading-snug">
-              Discord polski-startup — otwarty dla wszystkich.
-              <br />
-              Zamknięte kanały NDT — tylko dla Pierwszej Trzydziestki.
+              Discord polski-startup — otwarty dla wszystkich twórców.
             </span>
           </div>
         </div>

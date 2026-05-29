@@ -5,18 +5,18 @@ import Badge from "@/components/ui/Badge.astro";
 import SectionHead from "@/components/ui/SectionHead.astro";
 
 const modules = [
-  { n: "01", t: "Tożsamość twórcy", time: "27 min" },
-  { n: "02", t: "Cele twórcy", time: "24 min" },
-  { n: "03", t: "Odbiorcy", time: "24 min" },
-  { n: "04", t: "Styl komunikacji", time: "22 min" },
-  { n: "05", t: "Format treści", time: "23 min" },
+  { n: "01", t: "Tożsamość twórcy", time: "8 min" },
+  { n: "02", t: "Cele twórcy", time: "7 min" },
+  { n: "03", t: "Odbiorcy", time: "7 min" },
+  { n: "04", t: "Styl komunikacji", time: "6 min" },
+  { n: "05", t: "Format treści", time: "7 min" },
 ];
 
 const bullets = [
-  "10 lekcji video (ok. 2h) z Nikodemem, w 5 sekcjach",
+  "5–6 modułów video z Nikodemem — krótko, konkretnie, do rzeczy",
   "Workbook strategii marki (PDF)",
   "Szablony: serii, tematów, kalendarza",
-  "Dożywotni dostęp + przyszłe aktualizacje",
+  "Dostęp tak długo, jak trwa subskrypcja — z bieżącymi aktualizacjami",
 ];
 ---
 
@@ -37,7 +37,7 @@ const bullets = [
       <div data-course-pitch>
         <Badge tone="brand" class="mb-4">
           <span class="w-1.5 h-1.5 rounded-full bg-brand" />
-          10 lekcji · ok. 2h
+          5–6 modułów · ok. 30–40 min
         </Badge>
 
         <h2
@@ -61,9 +61,13 @@ const bullets = [
         </div>
 
         <p class="mt-6 text-[16px] text-ink/80 leading-relaxed max-w-[480px]">
-          Kurs, który jest jednocześnie mapą produktu. Robisz ćwiczenia,
-          wypełniasz strategię w aplikacji — kończysz z marką, a nie notesem
-          notatek.
+          Krótki, konkretny kurs, który robisz z aplikacją otwartą obok.
+          Oglądasz moduł, od razu wypełniasz strategię — wychodzisz z gotową
+          marką, a nie z notesem notatek.
+        </p>
+
+        <p class="mt-3 font-hand text-[17px] text-brand leading-snug max-w-[480px]">
+          Kurs jest częścią subskrypcji NDT — nie kupujesz go osobno.
         </p>
 
         <ul class="mt-6 space-y-2.5 max-w-[480px]">
@@ -81,9 +85,9 @@ const bullets = [
         </ul>
 
         <div class="mt-8 flex flex-wrap gap-3 items-center">
-          <Button size="lg" variant="primary">
-            Program kursu
-            <Icon name="lucide:arrow-right" class="size-4" slot="right" />
+          <Button size="lg" variant="primary" href="#pricing">
+            Zobacz, co dostajesz
+            <Icon name="lucide:arrow-down" class="size-4" slot="right" />
           </Button>
           <Badge tone="muted">
             <Icon name="lucide:message-circle" class="size-3" slot="icon" />
@@ -172,7 +176,7 @@ const bullets = [
               ))
             }
             <li class="text-[11px] text-muted italic text-center pt-1">
-              Każda sekcja = 2 lekcje video krok po kroku
+              Każdy moduł prowadzi cię krok po kroku
             </li>
           </ul>
         </div>

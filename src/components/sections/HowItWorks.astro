@@ -3,39 +3,32 @@ import SectionHead from "@/components/ui/SectionHead.astro";
 import StrategyMockup from "@/components/mockups/StrategyMockup.astro";
 import InspirationMockup from "@/components/mockups/InspirationMockup.astro";
 import EditorMockup from "@/components/mockups/EditorMockup.astro";
-import ExportMockup from "@/components/mockups/ExportMockup.astro";
 
 const steps = [
   {
     t: "Strategia",
-    d: "7 etapów: Kanały, Tożsamość, Cele, Odbiorcy, Styl, Oferta, Serie treści. AI prowadzi za rękę.",
+    d: "7 etapów — Kanały, Tożsamość, Cele, Odbiorcy, Styl, Oferta, Serie treści. AI prowadzi cię za rękę, ty podejmujesz decyzje.",
     meta: "~75 min · jednorazowo",
     Mockup: StrategyMockup,
   },
   {
     t: "Research",
-    d: "Feedy YouTube i RSS, search, zapisane. Inspiracje z AI scoringiem dopasowanym do niszy.",
+    d: "Feedy z YouTube i RSS w jednym miejscu, a AI podpowiada, które tematy naprawdę pasują do twojej niszy.",
     meta: "RSS · YouTube · zapisane",
     Mockup: InspirationMockup,
   },
   {
     t: "Pisanie",
-    d: "Edytor z pamięcią marki. Każdy paragraf ma adnotacje: b-roll, grafiki, CTA, referencje.",
+    d: "Edytor pamięta twoją markę. Przy każdym akapicie zapisujesz, co pokażesz: b-roll, grafikę, CTA, źródło.",
     meta: "31 formatów · AI w kontekście",
     Mockup: EditorMockup,
-  },
-  {
-    t: "Eksport",
-    d: "Markdown, docx, pdf. Kurs + strategia to kompletny dokument, który zabierasz ze sobą.",
-    meta: ".md · .docx · .pdf",
-    Mockup: ExportMockup,
   },
 ];
 ---
 
 <section class="relative">
   <div class="mx-auto max-w-[1200px] px-6 pt-14 md:pt-20">
-    <SectionHead n="05" title="Jak to działa" right="4 kroki, jeden flow" />
+    <SectionHead n="05" title="Jak to działa" right="trzy kroki, jeden flow" />
   </div>
 
   <div class="pb-12">

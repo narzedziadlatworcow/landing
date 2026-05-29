@@ -4,6 +4,7 @@ import Button from "@/components/ui/Button.astro";
 import SplitText from "@/components/ui/SplitText.astro";
 import StrategyMockup from "@/components/mockups/StrategyMockup.astro";
 import EditorMockup from "@/components/mockups/EditorMockup.astro";
+import { CTA_LABEL, CTA_HREF } from "@/data/offer";
 ---
 
 <section
@@ -42,12 +43,13 @@ import EditorMockup from "@/components/mockups/EditorMockup.astro";
         </h1>
 
         <p class="mt-6 text-ink/75 text-[17px] leading-relaxed max-w-[480px]">
-          Od strategii do gotowego scenariusza — w jednej sesji.
+          Pokażę ci, jak przejść od „nie wiem, o czym nagrywać" do gotowego
+          scenariusza — strategia i treść w jednym miejscu.
         </p>
 
         <div class="mt-8 flex flex-wrap gap-3">
-          <Button size="lg" variant="primary">
-            Zacznij od 199 zł
+          <Button size="lg" variant="primary" href={CTA_HREF}>
+            {CTA_LABEL}
             <Icon name="lucide:arrow-right" class="size-4" slot="right" />
           </Button>
           <Button size="lg" variant="outline">

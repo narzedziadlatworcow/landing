@@ -2,6 +2,7 @@
 import { Icon } from "astro-icon/components";
 import Button from "@/components/ui/Button.astro";
 import { navLinks } from "@/data/nav";
+import { CTA_LABEL, CTA_HREF } from "@/data/offer";
 ---
 
 <header
@@ -36,8 +37,8 @@ import { navLinks } from "@/data/nav";
     </nav>
 
     <div class="flex items-center gap-2">
-      <Button size="md" href="/#pricing">
-        Zacznij od 199 zł
+      <Button size="md" href={CTA_HREF}>
+        {CTA_LABEL}
         <Icon name="lucide:arrow-right" class="size-4" slot="right" />
       </Button>
       <button

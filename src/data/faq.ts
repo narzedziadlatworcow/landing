@@ -1,3 +1,11 @@
+import {
+  LAUNCHED,
+  PRICE,
+  PRICE_UNIT,
+  PRICE_FIRST,
+  LAUNCH_DATE,
+} from "@/data/offer";
+
 export interface Faq {
   q: string;
   a: string;
@@ -5,31 +13,35 @@ export interface Faq {
 
 export const faqs: Faq[] = [
   {
-    q: "Co dokładnie dostaję za 199 zł?",
-    a: `Pełny kurs Nikodema „Nadaj treściom kierunek" — 10 lekcji video w 5 sekcjach (ok. 2h), workbook strategii marki (PDF), szablony serii, tematów i kalendarza. Dostęp dożywotni z przyszłymi aktualizacjami. Dorzucam też 1 miesiąc aplikacji NDT w cenie — aktywuje się przy publicznym starcie (Q3 2026), żebyś mógł od razu przełożyć strategię na konkretne treści. Po miesiącu możesz przedłużyć subskrypcję (79 zł/mies). Jeśli chcesz wcześniej i z większą paczką wartości — sprawdź Pierwszą Trzydziestkę.`,
+    q: "Co dokładnie dostaję w subskrypcji?",
+    a: `Wszystko w jednym miejscu: pełny kurs Nikodema „Nadaj treściom kierunek" (5–6 modułów video, ok. 30–40 min), workbook strategii marki (PDF) i szablony, oraz aplikację NDT — strategię w 7 etapach, research (feedy YouTube i RSS + inspiracje z AI scoringiem), edytor z pamięcią marki i 3 000 tokenów AI miesięcznie. Pełen dostęp od pierwszego dnia, za ${PRICE}${PRICE_UNIT}.`,
   },
+  {
+    q: "Czy mogę zrezygnować w każdej chwili?",
+    a: `Tak — anuluj kiedy chcesz, bez zobowiązań i bez tłumaczenia się. Płacisz miesiąc z góry, rezygnujesz przed kolejnym i tyle. Nie wiążemy Cię umową ani okresem minimalnym.`,
+  },
+  {
+    q: "Kiedy startujecie?",
+    a: `Publiczny start to ${LAUNCH_DATE} — kurs, strategia i aplikacja ruszają naraz.${
+      LAUNCHED
+        ? ""
+        : ` Do tego czasu zostaw maila przez formularz, a w dniu startu dostaniesz kupon na pierwszy miesiąc w cenie ${PRICE_FIRST} zamiast ${PRICE}.`
+    }`,
+  },
+  ...(LAUNCHED
+    ? []
+    : [
+        {
+          q: `Na czym polega pierwszy miesiąc za ${PRICE_FIRST}?`,
+          a: `Jeśli zapiszesz się przed startem (${LAUNCH_DATE}), dostaniesz jednorazowy kupon −20 zł na pierwszy miesiąc — zapłacisz ${PRICE_FIRST} zamiast ${PRICE}. To zniżka tylko na pierwszy miesiąc; od kolejnego subskrypcja kosztuje ${PRICE}${PRICE_UNIT}. Płatność dopiero w dniu startu — teraz zostawiasz wyłącznie adres e-mail.`,
+        },
+      ]),
   {
     q: "Czy potrzebuję doświadczenia w marketingu?",
     a: `Nie. Kurs jest zaprojektowany od zera — zakładam tylko, że masz pomysł na siebie, a brakuje ci struktury. Prowadzę krok po kroku od „kim jestem jako twórca" do „co publikuję w przyszłym tygodniu". Żadnego korpo-marketingu, żadnych funnel-hacków — pracujesz na swojej marce.`,
   },
   {
-    q: "Kiedy ruszy pełna aplikacja?",
-    a: "Aktualnie jesteśmy w zamkniętej becie — dostęp dostają osoby z Pierwszej Trzydziestki. Publiczny start subskrypcji planujemy w Q3 2026, po fazie stabilizacji i zebraniu feedbacku z bety.",
-  },
-  {
-    q: "Co to jest Pierwsza Trzydziestka?",
-    a: "Limitowane wejście dla 30 osób które chcą wejść do NDT zanim ruszy publicznie. Za 599 zł dostajesz cały kurs, 1 rok aplikacji w cenie (po publicznym starcie), 1:1 onboarding (60 min), dostęp do zamkniętej grupy, realny wpływ na rozwój aplikacji oraz 20% promocji na zawsze. Pakt jest prosty: ty wchodzisz wcześniej i masz wpływ, my dostajemy realny feedback od osób które naprawdę używają NDT.",
-  },
-  {
-    q: "Czy kurs jest po polsku?",
-    a: "Tak — cały kurs Nikodema (10 lekcji, ok. 2h) jest po polsku. Aplikacja też. Obsługuje treści pisane w dowolnym języku, ale interfejs i kurs — tylko PL (EN w planach post-MVP).",
-  },
-  {
-    q: "Co jeśli nie będzie mi się podobać?",
-    a: "14 dni gwarancji zwrotu — bez pytań. Dotyczy zarówno kursu 199 zł, jak i Pierwszej Trzydziestki 599 zł. Wystarczy mail na hello@ndt.pl.",
-  },
-  {
-    q: "Ile miejsc w Pierwszej Trzydziestce zostało?",
-    a: "Pula 30 miejsc — aktualny stan pokazujemy na stronie zakupu w czasie rzeczywistym. Gdy się skończą, zostanie tylko subskrypcja po publicznym starcie.",
+    q: "Czy wszystko jest po polsku?",
+    a: `Tak — kurs Nikodema (5–6 modułów, ok. 30–40 min) i interfejs aplikacji są po polsku. Aplikacja obsługuje treści pisane w dowolnym języku, ale interfejs i kurs na ten moment są tylko PL (EN w planach).`,
   },
 ];

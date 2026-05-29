@@ -3,6 +3,7 @@ import Box from "@/components/ui/Box.astro";
 import Button from "@/components/ui/Button.astro";
 import ScribbleAnno from "@/components/ui/ScribbleAnno.astro";
 import { Icon } from "astro-icon/components";
+import { CTA_LABEL, CTA_HREF } from "@/data/offer";
 
 interface Props {
   href?: string;
@@ -11,8 +12,8 @@ interface Props {
 }
 
 const {
-  href = "https://app.narzedziadlatworcow.pl",
-  label = "Zacznij od 199 zł",
+  href = CTA_HREF,
+  label = CTA_LABEL,
   note,
 } = Astro.props;
 ---
