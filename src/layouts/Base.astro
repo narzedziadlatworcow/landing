@@ -1,15 +1,28 @@
 ---
-import "@fontsource/inter/400.css";
-import "@fontsource/inter/500.css";
-import "@fontsource/inter/600.css";
-import "@fontsource/inter/700.css";
-import "@fontsource/caveat/400.css";
-import "@fontsource/caveat/500.css";
-import "@fontsource/caveat/600.css";
-import "@fontsource/caveat/700.css";
-import "@fontsource/shadows-into-light/400.css";
+// Tylko subsety latin + latin-ext (polskie znaki: ą ć ę ł ń ś ź ż).
+// Pomijamy cyrillic/greek/vietnamese — oszczędność ~600KB woff2.
+import "@fontsource/inter/latin-400.css";
+import "@fontsource/inter/latin-500.css";
+import "@fontsource/inter/latin-600.css";
+import "@fontsource/inter/latin-700.css";
+import "@fontsource/inter/latin-ext-400.css";
+import "@fontsource/inter/latin-ext-500.css";
+import "@fontsource/inter/latin-ext-600.css";
+import "@fontsource/inter/latin-ext-700.css";
+// Caveat tylko w 400 — `font-hand` nie używa nigdzie cięższej wagi.
+import "@fontsource/caveat/latin-400.css";
+import "@fontsource/caveat/latin-ext-400.css";
+import "@fontsource/shadows-into-light/latin-400.css";
+import "@fontsource/shadows-into-light/latin-ext-400.css";
 import "@/styles/global.css";
 import Seo from "@/components/seo/Seo.astro";
+
+// Preload krytycznych fontów above-the-fold (Polski → latin-ext):
+// nagłówek H1 = Inter 600 (element LCP), treść = Inter 400.
+// `?url` resoluje do tego samego zahashowanego assetu co @font-face (Vite dedupuje),
+// więc preload trafia dokładnie w plik z CSS — bez duplikatów.
+import interExtBold from "@fontsource/inter/files/inter-latin-ext-600-normal.woff2?url";
+import interExtRegular from "@fontsource/inter/files/inter-latin-ext-400-normal.woff2?url";
 
 interface Props {
   title: string;
@@ -30,6 +43,20 @@ const props = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="preload"
+      href={interExtBold}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href={interExtRegular}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <!-- Klasa `js` natychmiast → CSS może ukryć elementy reveal tylko gdy JS żyje -->
     <script is:inline>
       document.documentElement.classList.add("js");
