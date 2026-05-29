@@ -4,6 +4,7 @@ import Badge from "@/components/ui/Badge.astro";
 import ScribbleAnno from "@/components/ui/ScribbleAnno.astro";
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
+import defaultCover from "@/assets/blog-cover-default.png";
 
 interface Frontmatter {
   title: string;
@@ -33,7 +34,9 @@ const updatedLabel = updatedDate ? dateFmt.format(updatedDate) : null;
 
 const site = Astro.site ?? new URL("https://narzedziadlatworcow.pl");
 const canonical = new URL(Astro.url.pathname, site).href;
-const imageAbs = cover ? new URL(cover, site).href : new URL("/logo.png", site).href;
+// Fallback na domyślny cover, gdy wpis nie ma własnego — spójne hero + OG.
+const coverImg = cover ?? defaultCover;
+const imageAbs = new URL(coverImg.src, site).href;
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -52,7 +55,7 @@ const jsonLd = {
   title={`${title} · Blog NDT`}
   description={description}
   type="article"
-  image={cover}
+  image={coverImg.src}
   jsonLd={jsonLd}
 >
   <main class="mx-auto max-w-[760px] px-6 py-16 sm:py-20">
@@ -99,30 +102,26 @@ const jsonLd = {
       </div>
     </header>
 
-    {
-      cover && (
-        <figure data-reveal class="relative mb-10 -rotate-1">
-          <span
-            class="tape"
-            style="top: -10px; left: 32px; transform: rotate(-5deg);"
-            aria-hidden="true"
-          />
-          <span
-            class="tape"
-            style="top: -10px; right: 32px; transform: rotate(4deg);"
-            aria-hidden="true"
-          />
-          <Image
-            src={cover}
-            alt={title}
-            width={1200}
-            height={675}
-            loading="eager"
-            class="w-full rounded-xl border-2 border-ink object-cover shadow-[4px_4px_0_0_hsl(266_51%_16%)]"
-          />
-        </figure>
-      )
-    }
+    <figure data-reveal class="relative mb-10 -rotate-1">
+      <span
+        class="tape"
+        style="top: -10px; left: 32px; transform: rotate(-5deg);"
+        aria-hidden="true"
+      />
+      <span
+        class="tape"
+        style="top: -10px; right: 32px; transform: rotate(4deg);"
+        aria-hidden="true"
+      />
+      <Image
+        src={coverImg}
+        alt={title}
+        width={1200}
+        height={675}
+        loading="eager"
+        class="w-full rounded-xl border-2 border-ink object-cover shadow-[4px_4px_0_0_hsl(266_51%_16%)]"
+      />
+    </figure>
 
     <article data-reveal class="post-body">
       <slot />
@@ -173,14 +172,16 @@ const jsonLd = {
   .post-body :global(p) {
     margin-block: 1.1rem;
   }
-  .post-body :global(a) {
+  /* Tylko linki z treści (markdown = <a> bez klasy). Przyciski/komponenty
+     mają własne klasy → :not([class]) chroni je przed kolorem prozy. */
+  .post-body :global(a:not([class])) {
     color: var(--color-brand);
     font-weight: 500;
     text-underline-offset: 3px;
     text-decoration-thickness: 1px;
     text-decoration-color: hsl(286 86% 57% / 0.4);
   }
-  .post-body :global(a:hover) {
+  .post-body :global(a:not([class]):hover) {
     text-decoration-color: var(--color-brand);
   }
   .post-body :global(strong) {
