@@ -44,3 +44,6 @@ lerna-debug.log*
 
 # Unlighthouse scan output
 .unlighthouse
+
+# Claude Code (lokalne narzędzia podglądu)
+.claude/

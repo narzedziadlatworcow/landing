@@ -1,0 +1,136 @@
+---
+import { Icon } from "astro-icon/components";
+import SectionHead from "@/components/ui/SectionHead.astro";
+import { Image } from "astro:assets";
+import nikodemPhoto from "@/assets/nikodem.jpg";
+
+// Sekcja autorytetu — „kto cię prowadzi". Fakty, nie ogólniki.
+// ⚠️ Liczby się ruszają — zweryfikować przed launchem (zwłaszcza TikTok).
+// Red Bull Basement: Global Expert na światowym finale 2026 (San Francisco) —
+//    potwierdzone przez Nikodema. (Wcześniej też juror krajowego finału @ Koźmiński —
+//    do dodania jako osobny punkt, jeśli chcemy oba.)
+
+const stats = [
+  { value: "631 tys.", label: "TikTok, największy o technologii w Polsce" },
+  { value: "151 tys.", label: "Instagram" },
+  { value: "5 lat", label: "tworzę i uczę" },
+];
+
+const credentials = [
+  {
+    icon: "lucide:graduation-cap",
+    text: "Wykładowca akademicki, uczę o technologii i AI",
+  },
+  {
+    icon: "lucide:award",
+    text: "Global Expert na światowym finale Red Bull Basement 2026 (San Francisco)",
+  },
+  {
+    icon: "lucide:wrench",
+    text: "Buduję narzędzia AI, nie tylko o nich mówię (m.in. KAIET)",
+  },
+  {
+    icon: "lucide:users",
+    text: "540+ twórców w społeczności wokół NDT",
+  },
+];
+---
+
+<section id="tworca" class="relative py-20 md:py-24">
+  <div class="mx-auto max-w-[1200px] px-6">
+    <SectionHead n="06" title="Kto cię prowadzi" right="bez ściemy" />
+
+    <div
+      data-reveal-group
+      class="grid md:grid-cols-[0.82fr_1.18fr] gap-10 md:gap-16 items-center"
+    >
+      {/* LEFT — przyklejony „polaroid" */}
+      <div data-reveal-item class="relative mx-auto md:mx-0 w-full max-w-[300px]">
+        {/* taśma */}
+        <span
+          class="absolute -top-3 left-1/2 z-10 bg-gold-bg w-24 h-5 rounded-sm shadow-[0_1px_3px_hsl(266_51%_16%_/_0.15)]"
+          style="transform: translateX(-50%) rotate(-3deg)"
+          aria-hidden="true"
+        ></span>
+
+        <figure
+          class="bg-white p-3 pb-5 rounded-lg border border-border-soft shadow-[0_20px_44px_-18px_hsl(266_51%_16%_/_0.32)]"
+          style="transform: rotate(-2.5deg)"
+        >
+          <Image
+            src={nikodemPhoto}
+            alt="Nikodem Rudziński (@Szhakal)"
+            width={600}
+            height={600}
+            quality={85}
+            class="w-full aspect-[4/5] object-cover rounded-md"
+          />
+          <figcaption class="mt-3.5 text-center">
+            <div class="font-semibold text-ink text-[17px] leading-tight">
+              Nikodem Rudziński
+            </div>
+            <div class="text-brand font-semibold text-[14px]">@Szhakal</div>
+            <div class="font-hand text-muted text-[16px] mt-1 leading-snug">
+              twórca, nie marketer
+            </div>
+          </figcaption>
+        </figure>
+      </div>
+
+      {/* RIGHT — historia + dowody */}
+      <div>
+        <h2
+          data-reveal-item
+          class="text-[30px] md:text-[40px] font-semibold tracking-tight text-ink leading-[1.1]"
+        >
+          Nie uczę teorii z internetu. <br class="hidden sm:block" />Po prostu
+          <span class="underline-brand">przeszedłem tę drogę</span>.
+        </h2>
+
+        <p
+          data-reveal-item
+          class="mt-5 text-[16px] md:text-[17px] text-ink/80 leading-relaxed max-w-[560px]"
+        >
+          Zaczynałem od zera. Dziś technologię, którą pokazuję, śledzi
+          <b class="text-ink">ponad 780 tysięcy osób</b>. Po drodze sam budowałem
+          narzędzia, których mi brakowało.
+          <b class="text-ink">NDT to jedno z nich</b>. Robię je dla twórców
+          takich jak ty, nie dla korporacji.
+        </p>
+
+        {/* pasek liczb — inline, nie „karty siatki" */}
+        <div data-reveal-item class="mt-7 flex flex-wrap gap-x-8 gap-y-4">
+          {
+            stats.map((s) => (
+              <div class="max-w-[180px]">
+                <div class="text-[26px] md:text-[30px] font-bold text-ink tracking-tight tabular-nums leading-none">
+                  {s.value}
+                </div>
+                <div class="text-[12.5px] text-muted mt-1.5 leading-snug">
+                  {s.label}
+                </div>
+              </div>
+            ))
+          }
+        </div>
+
+        {/* poświadczenia */}
+        <ul
+          data-reveal-item
+          class="mt-8 grid sm:grid-cols-2 gap-x-6 gap-y-3.5 max-w-[620px]"
+        >
+          {
+            credentials.map((c) => (
+              <li class="flex items-start gap-3 text-[14.5px] text-ink/85 leading-snug">
+                <span class="shrink-0 mt-0.5 grid place-items-center size-7 rounded-lg bg-brand-soft border border-brand/20">
+                  <Icon name={c.icon} class="size-4 text-brand" />
+                </span>
+                <span>{c.text}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

@@ -5,6 +5,8 @@ import SplitText from "@/components/ui/SplitText.astro";
 import StrategyMockup from "@/components/mockups/StrategyMockup.astro";
 import EditorMockup from "@/components/mockups/EditorMockup.astro";
 import { CTA_LABEL, CTA_HREF } from "@/data/offer";
+import { Image } from "astro:assets";
+import nikodemPhoto from "@/assets/nikodem.jpg";
 ---
 
 <section
@@ -43,8 +45,9 @@ import { CTA_LABEL, CTA_HREF } from "@/data/offer";
         </h1>
 
         <p class="mt-6 text-ink/75 text-[17px] leading-relaxed max-w-[480px]">
-          Pokażę ci, jak przejść od „nie wiem, o czym nagrywać" do gotowego
-          scenariusza — strategia i treść w jednym miejscu.
+          Pokażę ci, jak przejść od „nie wiem, o czym nagrywać i co
+          publikować" do gotowych treści na każdą platformę. Strategia i
+          produkcja w jednym miejscu.
         </p>
 
         <div class="mt-8 flex flex-wrap gap-3">
@@ -52,7 +55,7 @@ import { CTA_LABEL, CTA_HREF } from "@/data/offer";
             {CTA_LABEL}
             <Icon name="lucide:arrow-right" class="size-4" slot="right" />
           </Button>
-          <Button size="lg" variant="outline">
+          <Button size="lg" variant="outline" href="#pricing">
             <Icon name="lucide:play" class="size-4" slot="left" />
             Zobacz, co dostajesz
           </Button>
@@ -60,16 +63,18 @@ import { CTA_LABEL, CTA_HREF } from "@/data/offer";
 
         {/* Author attribution */}
         <div class="mt-10 flex items-center gap-3.5">
-          <img
-            src="/nikodem.webp"
+          <Image
+            src={nikodemPhoto}
             alt="Nikodem Rudziński"
-            width="56"
-            height="56"
+            width={120}
+            height={120}
+            quality={85}
+            loading="eager"
             class="size-14 rounded-full object-cover border-2 border-white shadow-[0_6px_14px_-2px_hsl(266_51%_16%_/_0.25)]"
           />
           <div class="leading-tight">
             <div class="font-hand text-[20px] text-ink">
-              Od <b>@Szhakal</b> — twórcy, który przeszedł tę drogę.
+              Od <b>@Szhakal</b>, który przeszedł tę drogę.
             </div>
             <div class="text-[12.5px] text-muted mt-1">
               631K na TikToku · 151K na Instagramie
@@ -108,7 +113,7 @@ import { CTA_LABEL, CTA_HREF } from "@/data/offer";
           class="hidden md:block absolute bottom-[-4px] right-[-8px] font-scribble scribble-sticker text-ink/85 text-xl z-20 pointer-events-none"
           style="transform: rotate(4deg)"
         >
-          ② gotowe scenariusze →
+          ② gotowe treści →
         </span>
       </div>
     </div>

@@ -12,7 +12,7 @@ export async function GET(context: APIContext) {
   return rss({
     title: "Blog · Narzędzia dla Twórców",
     description:
-      "Strategia, kierunek i konkretne wskazówki dla twórców YouTube, TikToka i Instagrama. Bez korpo-bełkotu — po ludzku.",
+      "Strategia, kierunek i konkretne wskazówki dla twórców YouTube, TikToka i Instagrama. Bez korpo-bełkotu, po ludzku.",
     site: context.site ?? "https://narzedziadlatworcow.pl",
     items: posts.map((post) => ({
       title: post.data.title,

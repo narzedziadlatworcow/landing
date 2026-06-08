@@ -20,7 +20,7 @@ import {
     >
       {/* FAQ */}
       <div>
-        <SectionHead n="08" title="FAQ" right="ostatnie wątpliwości" />
+        <SectionHead n="09" title="FAQ" right="ostatnie wątpliwości" />
         <div data-reveal-group class="space-y-2.5">
           {
             faqs.map((f, i) => (
@@ -39,9 +39,29 @@ import {
                   />
                 </summary>
                 <div class="overflow-hidden">
-                  <p class="px-5 pb-4 text-[14px] text-ink/75 leading-relaxed">
-                    {f.a}
-                  </p>
+                  <div class="px-5 pb-4 space-y-2">
+                    {f.lead && (
+                      <p class="text-[14px] text-ink/75 leading-relaxed">
+                        {f.lead}
+                      </p>
+                    )}
+                    {f.bullets && (
+                      <ul class="space-y-1.5">
+                        {f.bullets.map((b) => (
+                          <li class="flex items-start gap-2 text-[14px] text-ink/75 leading-relaxed">
+                            <Icon
+                              name="lucide:check"
+                              class="size-3.5 text-brand shrink-0 mt-1"
+                            />
+                            <span>{b}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                    {f.a && (
+                      <p class="text-[14px] text-ink/75 leading-relaxed">{f.a}</p>
+                    )}
+                  </div>
                 </div>
               </details>
             ))
@@ -51,7 +71,7 @@ import {
 
       {/* Final CTA */}
       <div>
-        <SectionHead n="09" title="Dołącz teraz" right="finał" />
+        <SectionHead n="10" title="Dołącz teraz" right="finał" />
         <div
           data-cta-card
           class="relative rounded-2xl border-[2.5px] border-ink bg-gradient-to-br from-brand-soft via-white to-brand-soft/40 shadow-[6px_6px_0_0_hsl(266_51%_16%)] p-7 md:p-8"
@@ -69,13 +89,13 @@ import {
             {
               LAUNCHED ? (
                 <>
-                  Kurs, strategia i aplikacja w jednej subskrypcji — {PRICE}/mies.
+                  Kurs, strategia i aplikacja w jednej subskrypcji, {PRICE}/mies.
                   Pełen dostęp od pierwszego dnia, anuluj kiedy chcesz.
                 </>
               ) : (
                 <>
                   Kurs, strategia i aplikacja w jednej subskrypcji. Start{" "}
-                  {LAUNCH_DATE} — zapisz się teraz i pierwszy miesiąc zapłać{" "}
+                  {LAUNCH_DATE}. Zapisz się teraz i pierwszy miesiąc zapłać{" "}
                   {PRICE_FIRST} zamiast {PRICE}.
                 </>
               )
@@ -98,7 +118,7 @@ import {
               class="size-3.5 text-brand shrink-0 mt-1"
             />
             <span class="font-hand text-[14px] leading-snug">
-              Discord polski-startup — otwarty dla wszystkich twórców.
+              Discord polski-startup, otwarty dla wszystkich twórców.
             </span>
           </div>
         </div>
