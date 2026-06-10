@@ -140,28 +140,106 @@ const reassurance = [
               </Button>
             ) : (
               <>
-                <div class="text-[13px] text-ink/70 text-center mb-2.5 leading-snug">
-                  Zapisz się, a 15.06 dostaniesz kupon na{" "}
-                  <b class="text-ink">pierwszy miesiąc {PRICE_FIRST}</b>.
-                </div>
-                <form class="flex gap-1.5">
-                  <input
-                    type="email"
-                    required
-                    placeholder="Twój e-mail"
-                    class="flex-1 min-w-0 px-3 py-2.5 text-[14px] rounded-lg border border-border-soft bg-white/80 text-ink focus:outline-none focus:border-brand/60 transition-colors"
-                  />
-                  <button
-                    type="submit"
-                    aria-label="Zapisz się i odbierz kupon"
-                    class="px-4 py-2.5 text-[14px] font-semibold text-white bg-brand rounded-lg shadow-[0_4px_14px_-2px_hsl(286_86%_57%_/_0.45)] hover:bg-brand/90 transition-colors disabled:opacity-60"
+                <div id="signup-area">
+                  <div class="text-[13px] text-ink/70 text-center mb-2.5 leading-snug">
+                    Zapisz się, a 15.06 dostaniesz kupon na{" "}
+                    <b class="text-ink">pierwszy miesiąc {PRICE_FIRST}</b>.
+                  </div>
+                  <form id="signup-form" class="flex flex-col gap-1.5">
+                    <div class="flex gap-1.5">
+                      <input
+                        type="email"
+                        name="email"
+                        required
+                        placeholder="Twój e-mail"
+                        class="flex-1 min-w-0 px-3 py-2.5 text-[14px] rounded-lg border border-border-soft bg-white/80 text-ink focus:outline-none focus:border-brand/60 transition-colors"
+                      />
+                      <button
+                        type="submit"
+                        aria-label="Zapisz się i odbierz kupon"
+                        class="px-4 py-2.5 text-[14px] font-semibold text-white bg-brand rounded-lg shadow-[0_4px_14px_-2px_hsl(286_86%_57%_/_0.45)] hover:bg-brand/90 transition-colors disabled:opacity-60"
+                      >
+                        →
+                      </button>
+                    </div>
+                    {/* honeypot: ukryte przed ludźmi, boty wypełniają */}
+                    <input
+                      type="text"
+                      name="website"
+                      tabindex="-1"
+                      autocomplete="off"
+                      class="hidden"
+                      aria-hidden="true"
+                    />
+                  </form>
+                  <p class="text-[11px] text-muted text-center mt-2 leading-snug">
+                    Zapisując się, zgadzasz się na otrzymanie maila z kuponem i
+                    okazjonalnych wiadomości. Wypisz się w każdej chwili.{" "}
+                    <a href="/polityka-prywatnosci" class="underline">
+                      Polityka prywatności
+                    </a>.
+                  </p>
+                  <p
+                    id="signup-msg"
+                    class="hidden text-[13px] text-center mt-2 font-semibold text-red-600"
                   >
-                    →
-                  </button>
-                </form>
-                <p class="text-[11px] text-muted text-center mt-2">
-                  Kupon jednorazowy, na pierwszy miesiąc. Bez spamu.
-                </p>
+                  </p>
+                </div>
+
+                {/* Stan po zapisie — wyraźny, zastępuje formularz */}
+                <div
+                  id="signup-success"
+                  class="hidden rounded-xl border border-brand/30 bg-brand-soft px-5 py-5 text-center"
+                >
+                  <div class="text-[32px] leading-none mb-2">✉️</div>
+                  <div class="text-[17px] font-semibold text-ink">
+                    Prawie gotowe — sprawdź skrzynkę!
+                  </div>
+                  <div class="text-[13px] text-ink/70 mt-1.5 leading-snug">
+                    Wysłaliśmy link potwierdzający na Twój e-mail. Kliknij go,
+                    żeby odebrać kupon na{" "}
+                    <b class="text-ink">pierwszy miesiąc {PRICE_FIRST}</b>.
+                  </div>
+                  <div class="text-[11px] text-muted mt-2">
+                    Nie widzisz wiadomości? Zajrzyj do spamu lub ofert.
+                  </div>
+                </div>
+
+                <script>
+                  const form = document.getElementById("signup-form");
+                  const area = document.getElementById("signup-area");
+                  const success = document.getElementById("signup-success");
+                  const msg = document.getElementById("signup-msg");
+                  const API = import.meta.env.PUBLIC_MAILING_API_URL;
+                  form?.addEventListener("submit", async (e) => {
+                    e.preventDefault();
+                    const btn = form.querySelector("button[type=submit]");
+                    const data = new FormData(form);
+                    btn.disabled = true;
+                    msg?.classList.add("hidden");
+                    try {
+                      // text/plain → request "prosty" (bez preflight OPTIONS).
+                      await fetch(`${API}/route/mailing/subscribe`, {
+                        method: "POST",
+                        headers: { "Content-Type": "text/plain" },
+                        body: JSON.stringify({
+                          email: data.get("email"),
+                          website: data.get("website"),
+                        }),
+                      });
+                      // Zamiana stanu: chowamy formularz, pokazujemy box sukcesu.
+                      area?.classList.add("hidden");
+                      success?.classList.remove("hidden");
+                      success?.scrollIntoView({ behavior: "smooth", block: "center" });
+                    } catch {
+                      if (msg) {
+                        msg.textContent = "Coś poszło nie tak. Spróbuj ponownie.";
+                        msg.classList.remove("hidden");
+                      }
+                      btn.disabled = false;
+                    }
+                  });
+                </script>
               </>
             )
           }

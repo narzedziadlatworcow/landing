@@ -1,0 +1,63 @@
+---
+import Base from "@/layouts/Base.astro";
+import Nav from "@/components/layout/Nav.astro";
+import Footer from "@/components/layout/Footer.astro";
+
+// SZKIELET — treść prawną uzupełnia właściciel (z istniejących regulaminów).
+const CONSENT_VERSION = "2026-06-09";
+---
+
+<Base
+  title="Polityka prywatności · Narzędzia dla Twórców"
+  description="Jak przetwarzamy dane osobowe zapisane na listę mailingową Narzędzi dla Twórców."
+  noindex={true}
+>
+  <Nav />
+  <main class="mx-auto max-w-2xl px-6 py-16 text-ink">
+    <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">
+      Polityka prywatności
+    </h1>
+    <p class="mt-2 text-sm text-muted">
+      Wersja: {CONSENT_VERSION} (szkielet — do uzupełnienia treścią).
+    </p>
+
+    <div class="mt-8 space-y-6 text-[15px] leading-relaxed text-ink/80">
+      <section>
+        <h2 class="text-lg font-semibold text-ink">1. Administrator danych</h2>
+        <p>[Nazwa podmiotu, adres, dane kontaktowe — UZUPEŁNIĆ]</p>
+      </section>
+      <section>
+        <h2 class="text-lg font-semibold text-ink">2. Jakie dane zbieramy</h2>
+        <p>
+          Adres e-mail, adres IP zapisu i potwierdzenia, znacznik czasu oraz
+          wersję wyrażonej zgody.
+        </p>
+      </section>
+      <section>
+        <h2 class="text-lg font-semibold text-ink">
+          3. Cel i podstawa prawna
+        </h2>
+        <p>
+          Wysyłka kuponu rabatowego oraz informacji o starcie usługi. Podstawa:
+          zgoda (art. 6 ust. 1 lit. a RODO), potwierdzona w modelu double opt-in.
+        </p>
+      </section>
+      <section>
+        <h2 class="text-lg font-semibold text-ink">4. Okres przechowywania</h2>
+        <p>[UZUPEŁNIĆ — np. do wycofania zgody lub przez czas trwania akcji.]</p>
+      </section>
+      <section>
+        <h2 class="text-lg font-semibold text-ink">5. Twoje prawa</h2>
+        <p>
+          Dostęp do danych, sprostowanie, usunięcie, ograniczenie przetwarzania
+          oraz wycofanie zgody w każdej chwili (link „wypisz się" w każdym mailu).
+        </p>
+      </section>
+      <section>
+        <h2 class="text-lg font-semibold text-ink">6. Kontakt</h2>
+        <p>[adres e-mail do kontaktu w sprawach danych — UZUPEŁNIĆ]</p>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</Base>
