@@ -1,0 +1,28 @@
+---
+type Variant = "glass" | "glass-strong" | "accent" | "thick" | "dashed" | "plain";
+
+interface Props {
+  variant?: Variant;
+  class?: string;
+  style?: string;
+}
+
+const { variant = "glass", class: className, style } = Astro.props;
+
+const variants: Record<Variant, string> = {
+  glass: "glass rounded-xl",
+  "glass-strong": "glass-strong rounded-xl",
+  accent:
+    "bg-brand-soft border-2 border-brand/40 rounded-xl shadow-[0_8px_24px_-8px_hsl(286_86%_57%_/_0.25)]",
+  thick:
+    "bg-white border-[2.5px] border-ink rounded-xl shadow-[4px_4px_0_0_hsl(266_51%_16%)]",
+  dashed: "bg-white/60 border-2 border-dashed border-muted/50 rounded-xl",
+  plain: "bg-white border border-border-soft rounded-xl",
+};
+
+const cls = [variants[variant], className].filter(Boolean).join(" ");
+---
+
+<div class={cls} style={style}>
+  <slot />
+</div>

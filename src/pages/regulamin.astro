@@ -1,0 +1,61 @@
+---
+import Base from "@/layouts/Base.astro";
+import Nav from "@/components/layout/Nav.astro";
+import Footer from "@/components/layout/Footer.astro";
+
+// SZKIELET — treść prawną uzupełnia właściciel (z istniejących regulaminów).
+const VERSION = "2026-06-09";
+---
+
+<Base
+  title="Regulamin · Narzędzia dla Twórców"
+  description="Regulamin korzystania z usługi Narzędzia dla Twórców."
+  noindex={true}
+>
+  <Nav />
+  <main class="mx-auto max-w-2xl px-6 py-16 text-ink">
+    <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">Regulamin</h1>
+    <p class="mt-2 text-sm text-muted">
+      Wersja: {VERSION} (szkielet — do uzupełnienia treścią).
+    </p>
+
+    <div class="mt-8 space-y-6 text-[15px] leading-relaxed text-ink/80">
+      <section>
+        <h2 class="text-lg font-semibold text-ink">
+          1. Postanowienia ogólne
+        </h2>
+        <p>[Definicje, dane usługodawcy — UZUPEŁNIĆ]</p>
+      </section>
+      <section>
+        <h2 class="text-lg font-semibold text-ink">2. Zakres usługi</h2>
+        <p>
+          Subskrypcja platformy: kurs, strategia i aplikacja w jednej cenie.
+          [Szczegóły — UZUPEŁNIĆ]
+        </p>
+      </section>
+      <section>
+        <h2 class="text-lg font-semibold text-ink">
+          3. Płatności i subskrypcja
+        </h2>
+        <p>
+          Cena subskrypcji, cykl rozliczeniowy, kupony rabatowe (jednorazowe,
+          z terminem ważności). [UZUPEŁNIĆ]
+        </p>
+      </section>
+      <section>
+        <h2 class="text-lg font-semibold text-ink">
+          4. Odstąpienie i reklamacje
+        </h2>
+        <p>
+          Prawo odstąpienia od umowy o świadczenie usług cyfrowych oraz tryb
+          reklamacji. [UZUPEŁNIĆ]
+        </p>
+      </section>
+      <section>
+        <h2 class="text-lg font-semibold text-ink">5. Kontakt</h2>
+        <p>[adres e-mail do kontaktu — UZUPEŁNIĆ]</p>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</Base>

@@ -76,7 +76,7 @@ Skondensowany brief projektu. Aktualizować w miarę decyzji. Dla pełnego brand
 - **Sentence-case** wszędzie. Wyjątek: 11 px eyebrow z `tracking-[0.18em] uppercase`
 - **ZERO emoji** — wszystkie role emoji bierze Lucide (`Zap`, `MessageCircle`, `ArrowRight`...)
 - **Unicode OK jako dekoracja scribble**: `✦`, `→`, `↓` — tylko w `font-scribble` / `font-hand`, jako glif ozdobny, nigdy jako „urgency-emoji"
-- **Em-dash `—`** jako miękki konektor (częsty)
+- **Bez myślników (—, –) w copy.** Naturalna interpunkcja: kropka, przecinek, dwukropek. Teksty mają brzmieć jak pisane przez człowieka do człowieka, nie przez AI.
 - **Polish quotes**: `„…"` dla cytatów (użyj **backticki `…`** w JSX zamiast double-quote string, bo mieszanka `„"` + `"` łamie parsowanie TS)
 - **Liczby PL**: `3 000 tokenów`, `199 zł` (zł po kwocie)
 - **Loanwords akceptowane**: `workspace`, `creator`, `content`, `priority`, `early access`, `tokens` — EN inside PL sentence, nie tłumaczone

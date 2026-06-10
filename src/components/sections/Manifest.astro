@@ -1,0 +1,51 @@
+---
+import SectionHead from "@/components/ui/SectionHead.astro";
+import SplitText from "@/components/ui/SplitText.astro";
+---
+
+<section data-manifest class="relative">
+  <div
+    class="mx-auto max-w-[1200px] px-6 min-h-screen flex flex-col justify-center py-20 md:py-28"
+  >
+    <SectionHead n="04" title="Manifest" align="center" />
+
+    <h2
+      class="mx-auto max-w-[820px] text-center tracking-tight text-ink leading-[1.12] text-[30px] sm:text-[36px] md:text-[52px]"
+    >
+      <SplitText text="Wierzę, że tworzenie " />
+      <SplitText text="zasługuje" italic={true} />
+      <br />
+      <SplitText text="na lepsze narzędzia niż " />
+      <span class="relative inline-block">
+        <SplitText text="15 zakładek" />
+        <svg
+          viewBox="0 0 220 20"
+          class="absolute left-[-4%] top-1/2 -translate-y-1/2 w-[108%] h-[0.55em] text-brand pointer-events-none"
+          aria-hidden="true"
+          preserveAspectRatio="none"
+        >
+          <path
+            data-manifest-strike
+            d="M2 12 Q 60 4, 110 11 T 218 8"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-dasharray="240"
+            stroke-dashoffset="240"
+          />
+        </svg>
+      </span>
+      <SplitText text="." />
+    </h2>
+
+    <p
+      data-manifest-subcopy
+      class="mx-auto max-w-[600px] text-center text-[17px] md:text-[19px] text-ink/70 mt-8 leading-relaxed"
+    >
+      NDT to nie kolejny generator treści z AI.
+      <br />
+      To jedno miejsce: od strategii, przez pomysły, po gotowy materiał.
+    </p>
+  </div>
+</section>

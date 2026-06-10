@@ -1,0 +1,63 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  /** Ścieżka lub absolutny URL obrazka OG (np. "/og/post.jpg") */
+  image?: string;
+  /** "website" (domyślnie) lub "article" */
+  type?: "website" | "article";
+  /** Kanoniczny URL — domyślnie bieżąca strona */
+  canonical?: string;
+  /** Dowolny obiekt JSON-LD (np. Article, FAQPage) doklejany do strony */
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  /** Wyłącz indeksowanie (np. trasy A/B testu) */
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  image = "/logo.png",
+  type = "website",
+  canonical,
+  jsonLd,
+  noindex = false,
+} = Astro.props;
+
+const site = Astro.site ?? new URL("https://narzedziadlatworcow.pl");
+const canonicalURL = canonical
+  ? new URL(canonical, site)
+  : new URL(Astro.url.pathname, site);
+const imageURL = new URL(image, site);
+
+const defaultJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Narzędzia dla Twórców",
+  url: site.href,
+};
+const ld = jsonLd ?? defaultJsonLd;
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalURL.href} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+<!-- Open Graph -->
+<meta property="og:type" content={type} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalURL.href} />
+<meta property="og:image" content={imageURL.href} />
+<meta property="og:site_name" content="Narzędzia dla Twórców" />
+<meta property="og:locale" content="pl_PL" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageURL.href} />
+
+<!-- JSON-LD -->
+<script type="application/ld+json" set:html={JSON.stringify(ld)} />

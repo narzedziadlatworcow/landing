@@ -8,6 +8,9 @@ dist
 dist-ssr
 *.local
 
+# Astro
+.astro
+
 # Editor / OS
 .DS_Store
 .idea
@@ -38,3 +41,9 @@ lerna-debug.log*
 .vite
 *.tsbuildinfo
 .vercel
+
+# Unlighthouse scan output
+.unlighthouse
+
+# Claude Code (lokalne narzędzia podglądu)
+.claude/

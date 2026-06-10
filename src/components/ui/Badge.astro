@@ -1,0 +1,32 @@
+---
+type Tone = "default" | "brand" | "gold" | "muted" | "dark";
+
+interface Props {
+  tone?: Tone;
+  class?: string;
+}
+
+const { tone = "default", class: className } = Astro.props;
+
+const tones: Record<Tone, string> = {
+  default: "bg-white/70 text-ink border-border-soft",
+  brand: "bg-brand-soft text-accent-strong border-brand/30",
+  gold: "bg-gold-bg text-gold-ink border-gold-border/70",
+  muted: "bg-subtle text-muted border-border-soft",
+  dark: "bg-ink text-white border-ink",
+};
+
+const cls = [
+  "inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full",
+  "text-[11px] font-medium tracking-wide uppercase border",
+  tones[tone],
+  className,
+]
+  .filter(Boolean)
+  .join(" ");
+---
+
+<span class={cls}>
+  <slot name="icon" />
+  <slot />
+</span>

@@ -1,0 +1,168 @@
+---
+import { Icon } from "astro-icon/components";
+import Button from "@/components/ui/Button.astro";
+import Badge from "@/components/ui/Badge.astro";
+import SectionHead from "@/components/ui/SectionHead.astro";
+
+const modules = [
+  { n: "01", t: "Tożsamość twórcy", time: "8 min" },
+  { n: "02", t: "Cele twórcy", time: "7 min" },
+  { n: "03", t: "Odbiorcy", time: "7 min" },
+  { n: "04", t: "Styl komunikacji", time: "6 min" },
+  { n: "05", t: "Format treści", time: "7 min" },
+];
+
+const bullets = [
+  "5-6 modułów video ze mną. Krótko, konkretnie, do rzeczy",
+  "Workbook strategii marki (PDF)",
+  "Szablony: serii, tematów, kalendarza",
+  "Dostęp tak długo, jak trwa subskrypcja, z bieżącymi aktualizacjami",
+];
+---
+
+<section
+  data-anim-course
+  id="kurs"
+  class="relative py-20 md:py-24 bg-gradient-to-b from-brand-soft/70 via-brand-soft/40 to-transparent border-y border-brand/20"
+>
+  <div class="mx-auto max-w-[1200px] px-6">
+    <SectionHead
+      n="07"
+      title="Kurs · Nadaj treściom kierunek"
+      right="prowadzi @Szhakal"
+    />
+
+    <div class="grid md:grid-cols-[1fr_1.05fr] gap-10 md:gap-14 items-center">
+      {/* Left — pitch */}
+      <div data-course-pitch>
+        <Badge tone="brand" class="mb-4">
+          <span class="w-1.5 h-1.5 rounded-full bg-brand" />
+          5-6 modułów · ok. 30-40 min
+        </Badge>
+
+        <h2
+          class="text-[36px] md:text-[44px] font-semibold tracking-tight text-ink leading-[1.05]"
+        >
+          Od pustej kartki do gotowej marki.
+        </h2>
+
+        <p class="mt-6 text-[16px] text-ink/80 leading-relaxed max-w-[480px]">
+          Krótki, konkretny kurs, który robisz z aplikacją otwartą obok.
+          Oglądasz moduł, od razu wypełniasz strategię i wychodzisz z gotową
+          marką, a nie z notesem notatek.
+        </p>
+
+        <p class="mt-3 font-hand text-[17px] text-brand leading-snug max-w-[480px]">
+          Kurs jest częścią subskrypcji NDT. Nie kupujesz go osobno.
+        </p>
+
+        <ul class="mt-6 space-y-2.5 max-w-[480px]">
+          {
+            bullets.map((x) => (
+              <li class="flex items-start gap-2.5 text-[15px] text-ink/85">
+                <Icon
+                  name="lucide:check-circle-2"
+                  class="size-5 text-brand shrink-0 mt-0.5"
+                />
+                {x}
+              </li>
+            ))
+          }
+        </ul>
+
+        <div class="mt-8 flex flex-wrap gap-3 items-center">
+          <Button size="lg" variant="primary" href="#pricing">
+            Zobacz, co dostajesz
+            <Icon name="lucide:arrow-down" class="size-4" slot="right" />
+          </Button>
+        </div>
+      </div>
+
+      {/* Right — thumb + curriculum */}
+      <div class="relative">
+        {/* Thumb */}
+        <div
+          data-course-thumb
+          class="relative rounded-2xl overflow-hidden border-[3px] border-ink shadow-[8px_8px_0_0_hsl(286_86%_57%)] aspect-video bg-gradient-to-br from-fuchsia-600 via-brand to-purple-800"
+          style="transform: rotate(-1deg)"
+        >
+          <img
+            src="/hqdefault.webp"
+            alt="Kurs Nikodem Rudziński"
+            class="w-full h-full object-cover opacity-90"
+            loading="lazy"
+          />
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent"
+          >
+          </div>
+          {/* Play button */}
+          <button
+            class="absolute inset-0 grid place-items-center group"
+            aria-label="Zobacz zwiastun"
+          >
+            <span
+              class="size-20 rounded-full bg-white/95 shadow-2xl grid place-items-center group-hover:scale-105 transition-transform"
+            >
+              <Icon
+                name="lucide:play"
+                class="size-8 text-brand fill-brand ml-1"
+              />
+            </span>
+          </button>
+          {/* Caption */}
+          <div
+            class="absolute bottom-3 left-4 right-4 flex items-end justify-between text-white"
+          >
+            <div>
+              <div
+                class="text-[11px] font-semibold tracking-widest uppercase opacity-80"
+              >
+                Zwiastun
+              </div>
+              <div class="text-[14px] font-semibold">
+                Nadaj treściom kierunek · 2 min
+              </div>
+            </div>
+            <span
+              class="text-[11px] px-2 py-0.5 rounded-full bg-white/20 backdrop-blur border border-white/30 font-medium"
+            >
+              HD
+            </span>
+          </div>
+        </div>
+
+        {/* Curriculum peek */}
+        <div
+          data-course-curriculum
+          class="mt-6 glass rounded-xl p-4 max-w-[440px] mx-auto shadow-lg"
+          style="transform: rotate(0.5deg)"
+        >
+          <div
+            class="text-[10px] font-semibold tracking-widest uppercase text-muted mb-2.5"
+          >
+            Program kursu
+          </div>
+          <ul class="space-y-1.5">
+            {
+              modules.map((m) => (
+                <li class="flex items-center gap-3 text-[13px] text-ink/85 hover:text-ink transition-colors">
+                  <span class="text-brand font-mono font-semibold text-[11px] w-6">
+                    {m.n}
+                  </span>
+                  <span class="flex-1 truncate">{m.t}</span>
+                  <span class="text-[11px] text-muted tabular-nums">
+                    {m.time}
+                  </span>
+                </li>
+              ))
+            }
+            <li class="text-[11px] text-muted italic text-center pt-1">
+              Każdy moduł prowadzi cię krok po kroku
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

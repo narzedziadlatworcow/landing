@@ -1,0 +1,81 @@
+---
+// Tylko subsety latin + latin-ext (polskie znaki: ą ć ę ł ń ś ź ż).
+// Pomijamy cyrillic/greek/vietnamese — oszczędność ~600KB woff2.
+import "@fontsource/inter/latin-400.css";
+import "@fontsource/inter/latin-500.css";
+import "@fontsource/inter/latin-600.css";
+import "@fontsource/inter/latin-700.css";
+import "@fontsource/inter/latin-ext-400.css";
+import "@fontsource/inter/latin-ext-500.css";
+import "@fontsource/inter/latin-ext-600.css";
+import "@fontsource/inter/latin-ext-700.css";
+// Caveat tylko w 400 — `font-hand` nie używa nigdzie cięższej wagi.
+import "@fontsource/caveat/latin-400.css";
+import "@fontsource/caveat/latin-ext-400.css";
+import "@fontsource/shadows-into-light/latin-400.css";
+import "@fontsource/shadows-into-light/latin-ext-400.css";
+import "@/styles/global.css";
+import Seo from "@/components/seo/Seo.astro";
+
+// Preload krytycznych fontów above-the-fold (Polski → latin-ext):
+// nagłówek H1 = Inter 600 (element LCP), treść = Inter 400.
+// `?url` resoluje do tego samego zahashowanego assetu co @font-face (Vite dedupuje),
+// więc preload trafia dokładnie w plik z CSS — bez duplikatów.
+import interExtBold from "@fontsource/inter/files/inter-latin-ext-600-normal.woff2?url";
+import interExtRegular from "@fontsource/inter/files/inter-latin-ext-400-normal.woff2?url";
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  type?: "website" | "article";
+  canonical?: string;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  noindex?: boolean;
+}
+
+const props = Astro.props;
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="preload"
+      href={interExtBold}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href={interExtRegular}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <!-- Klasa `js` natychmiast → CSS może ukryć elementy reveal tylko gdy JS żyje -->
+    <script is:inline>
+      document.documentElement.classList.add("js");
+    </script>
+    <Seo {...props} />
+  </head>
+  <body class="min-h-screen text-ink font-sans">
+    <slot />
+
+    <!-- Animacje GSAP (wspólny vanilla skrypt, kontrakt data-*) -->
+    <script>
+      import { initAnimations } from "@/lib/animations";
+      initAnimations();
+    </script>
+
+    <!-- Consent Mode v2 + analytics (prod-only) -->
+    <script>
+      import { initConsentMode } from "@/lib/consent";
+      if (import.meta.env.PROD) initConsentMode();
+    </script>
+  </body>
+</html>
