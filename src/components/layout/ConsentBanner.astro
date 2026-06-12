@@ -18,12 +18,49 @@ import Button from "@/components/ui/Button.astro";
     ></span>
     <h3 class="mb-1.5 text-base font-semibold text-ink">Pliki cookies</h3>
     <p class="mb-4 text-sm leading-relaxed text-muted">
-      Używam Google Analytics i Microsoft Clarity, żeby ulepszać tę stronę. Bez
-      zgody działa tak samo.
+      Za Twoją zgodą używamy cookies analitycznych (Google Analytics, Microsoft
+      Clarity) i marketingowych (Meta, Google Ads, LinkedIn), żeby ulepszać tę
+      stronę i nasze kampanie. Bez zgody strona działa tak samo. Szczegóły w
+      <a href="/polityka-prywatnosci" class="underline hover:text-ink"
+        >Polityce prywatności</a
+      >.
     </p>
+
+    {/* Panel granularny — domyślnie ukryty, rozwijany przyciskiem „Dostosuj" */}
+    <div data-consent-detail hidden class="mb-4 flex flex-col gap-2.5">
+      <label class="flex items-start gap-2.5 cursor-pointer text-sm text-ink">
+        <input
+          type="checkbox"
+          data-consent-analytics
+          class="mt-0.5 h-4 w-4 accent-brand"
+        />
+        <span>
+          <span class="font-semibold block">Analityczne</span>
+          <span class="text-muted">Jak korzystasz ze strony (GA4, Clarity).</span>
+        </span>
+      </label>
+      <label class="flex items-start gap-2.5 cursor-pointer text-sm text-ink">
+        <input
+          type="checkbox"
+          data-consent-marketing
+          class="mt-0.5 h-4 w-4 accent-brand"
+        />
+        <span>
+          <span class="font-semibold block">Marketingowe</span>
+          <span class="text-muted">Personalizacja reklam (Meta, Ads, LinkedIn).</span>
+        </span>
+      </label>
+      <Button variant="primary" size="md" class="mt-1 self-start" data-consent-save>
+        Zapisz wybór
+      </Button>
+    </div>
+
     <div class="flex flex-col-reverse gap-2 sm:flex-row">
       <Button variant="ghost" size="md" class="sm:flex-1" data-consent-deny>
         Tylko niezbędne
+      </Button>
+      <Button variant="outline" size="md" class="sm:flex-1" data-consent-customize>
+        Dostosuj
       </Button>
       <Button variant="primary" size="md" class="sm:flex-1" data-consent-accept>
         Akceptuję
@@ -33,25 +70,56 @@ import Button from "@/components/ui/Button.astro";
 </div>
 
 <script>
-  import { getStoredConsent, grantConsent, denyConsent } from "@/lib/consent";
+  import { getStoredConsent, setConsent } from "@/lib/consent";
 
   const banner = document.querySelector<HTMLElement>("[data-consent]");
+  const detail = banner?.querySelector<HTMLElement>("[data-consent-detail]");
+  const cbAnalytics = banner?.querySelector<HTMLInputElement>(
+    "[data-consent-analytics]"
+  );
+  const cbMarketing = banner?.querySelector<HTMLInputElement>(
+    "[data-consent-marketing]"
+  );
+
+  const hide = () => {
+    if (banner) banner.hidden = true;
+  };
+  const show = () => {
+    if (banner) banner.hidden = false;
+  };
+
+  // Pierwsza wizyta → pokaż banner po krótkiej zwłoce.
   if (banner && getStoredConsent() === null) {
-    setTimeout(() => {
-      banner.hidden = false;
-    }, 700);
+    setTimeout(show, 700);
   }
 
+  // Ponowne otwarcie (przycisk „Zmień zgodę" w stopce) — prefill z zapisu.
+  window.addEventListener("ndt:openConsent", () => {
+    const stored = getStoredConsent();
+    if (cbAnalytics) cbAnalytics.checked = !!stored?.analytics;
+    if (cbMarketing) cbMarketing.checked = !!stored?.marketing;
+    if (detail) detail.hidden = false;
+    show();
+  });
+
+  banner?.querySelector("[data-consent-accept]")?.addEventListener("click", () => {
+    setConsent({ analytics: true, marketing: true });
+    hide();
+  });
+  banner?.querySelector("[data-consent-deny]")?.addEventListener("click", () => {
+    setConsent({ analytics: false, marketing: false });
+    hide();
+  });
   banner
-    ?.querySelector("[data-consent-accept]")
+    ?.querySelector("[data-consent-customize]")
     ?.addEventListener("click", () => {
-      grantConsent();
-      if (banner) banner.hidden = true;
+      if (detail) detail.hidden = !detail.hidden;
     });
-  banner
-    ?.querySelector("[data-consent-deny]")
-    ?.addEventListener("click", () => {
-      denyConsent();
-      if (banner) banner.hidden = true;
+  banner?.querySelector("[data-consent-save]")?.addEventListener("click", () => {
+    setConsent({
+      analytics: !!cbAnalytics?.checked,
+      marketing: !!cbMarketing?.checked,
     });
+    hide();
+  });
 </script>

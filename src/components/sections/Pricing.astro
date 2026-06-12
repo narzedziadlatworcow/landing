@@ -173,10 +173,14 @@ const reassurance = [
                     />
                   </form>
                   <p class="text-[11px] text-muted text-center mt-2 leading-snug">
-                    Zapisując się, zgadzasz się na otrzymanie maila z kuponem i
-                    okazjonalnych wiadomości. Wypisz się w każdej chwili.{" "}
+                    Zapisując się, akceptujesz{" "}
+                    <a href="/regulamin" class="underline">
+                      Regulamin newslettera
+                    </a>{" "}
+                    i zgadzasz się na otrzymanie maila z kuponem oraz
+                    okazjonalnych wiadomości. Wypisz się w każdej chwili. Zobacz{" "}
                     <a href="/polityka-prywatnosci" class="underline">
-                      Polityka prywatności
+                      Politykę prywatności
                     </a>.
                   </p>
                   <p
@@ -226,6 +230,12 @@ const reassurance = [
                           email: data.get("email"),
                           website: data.get("website"),
                         }),
+                      });
+                      // Wspólny event konwersji — GTM odpala na nim GA4 / Meta / Ads / LinkedIn.
+                      (window as unknown as { dataLayer?: unknown[] }).dataLayer ||= [];
+                      (window as unknown as { dataLayer: unknown[] }).dataLayer.push({
+                        event: "generate_lead",
+                        form_location: "pricing",
                       });
                       // Zamiana stanu: chowamy formularz, pokazujemy box sukcesu.
                       area?.classList.add("hidden");

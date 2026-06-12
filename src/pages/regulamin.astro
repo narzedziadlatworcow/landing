@@ -3,57 +3,475 @@ import Base from "@/layouts/Base.astro";
 import Nav from "@/components/layout/Nav.astro";
 import Footer from "@/components/layout/Footer.astro";
 
-// SZKIELET — treść prawną uzupełnia właściciel (z istniejących regulaminów).
 const VERSION = "2026-06-09";
+const EFFECTIVE_DATE = "9 czerwca 2026 r.";
 ---
 
 <Base
-  title="Regulamin · Narzędzia dla Twórców"
-  description="Regulamin korzystania z usługi Narzędzia dla Twórców."
-  noindex={true}
+  title="Regulamin newslettera · Narzędzia dla Twórców"
+  description="Regulamin newslettera platformy Narzędzia dla Twórców — zasady zapisu, świadczenia usługi i rezygnacji."
+  noindex={false}
 >
   <Nav />
   <main class="mx-auto max-w-2xl px-6 py-16 text-ink">
-    <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">Regulamin</h1>
+    <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">
+      Regulamin newslettera platformy Narzędzia dla Twórców
+    </h1>
     <p class="mt-2 text-sm text-muted">
-      Wersja: {VERSION} (szkielet — do uzupełnienia treścią).
+      Wersja: {VERSION} · obowiązuje od {EFFECTIVE_DATE}
     </p>
 
-    <div class="mt-8 space-y-6 text-[15px] leading-relaxed text-ink/80">
+    <div
+      class="mt-8 space-y-8 text-[15px] leading-relaxed text-ink/80 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:space-y-1.5 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_a]:text-brand [&_a]:underline [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:text-ink [&_section]:space-y-2.5"
+    >
       <section>
-        <h2 class="text-lg font-semibold text-ink">
-          1. Postanowienia ogólne
-        </h2>
-        <p>[Definicje, dane usługodawcy — UZUPEŁNIĆ]</p>
+        <h2>§1. Definicje</h2>
+        <p>Pojęcia użyte w Regulaminie oznaczają:</p>
+        <ol>
+          <li>
+            <b>Administrator</b> – Polski Startup sp. z o.o. z siedzibą we
+            Wrocławiu, ul. Białoskórnicza 15-16, lok. 1, 50-134 Wrocław, wpisana
+            do rejestru przedsiębiorców prowadzonego przez Sąd Rejonowy dla
+            Wrocławia Fabrycznej we Wrocławiu, VI Wydział Gospodarczy Krajowego
+            Rejestru Sądowego pod numerem KRS: 0001218612, NIP: 8971965661,
+            REGON: 543820926, kapitał zakładowy: 10.000 zł;
+          </li>
+          <li>
+            <b>Formularz zapisu</b> – formularz elektroniczny dostępny w domenie
+            <a href="https://www.narzedziadlatworcow.pl"
+              >https://www.narzedziadlatworcow.pl</a
+            > służący do bezpośredniej realizacji Zamówienia i zawarcia Umowy;
+          </li>
+          <li>
+            <b>Konsument</b> – osobę fizyczną zawierającą Umowę niezwiązaną
+            bezpośrednio z jej działalnością gospodarczą;
+          </li>
+          <li>
+            <b>Newsletter</b> – usługę świadczoną na rzecz Subskrybenta,
+            polegającą na jednorazowym i/lub okresowym dostarczaniu Treści
+            cyfrowych i/lub Usług cyfrowych. Warunkiem otrzymywania Newslettera
+            bez konieczności dokonania zapłaty ceny w walucie pieniężnej jest
+            podanie danych osobowych oraz wyrażenie zgód wymienionych w treści
+            Regulaminu;
+          </li>
+          <li>
+            <b>Platforma Narzędzia dla Twórców</b> – serwis internetowy dostępny
+            pod adresem
+            <a href="https://app.narzedziadlatworcow.pl"
+              >https://app.narzedziadlatworcow.pl</a
+            >, stanowiący narzędzie online wspierające użytkowników w tworzeniu
+            strategii komunikacji, treści marketingowych oraz działań w mediach
+            społecznościowych, w tym z wykorzystaniem rozwiązań opartych o
+            sztuczną inteligencję, umożliwiający m.in. generowanie materiałów,
+            analizę działań oraz komunikację z użytkownikiem (w tym za
+            pośrednictwem Newslettera);
+          </li>
+          <li>
+            <b>Przedsiębiorca</b> – osobę fizyczną, osobę prawną lub jednostkę
+            organizacyjną niebędącą osobą prawną, której ustawa przyznaje
+            zdolność prawną, prowadzącą we własnym imieniu działalność
+            gospodarczą lub zawodową i dokonującą czynności prawnej związanej
+            bezpośrednio z jej działalnością gospodarczą lub zawodową;
+          </li>
+          <li>
+            <b>Przedsiębiorca na prawach konsumenta</b> – osobę fizyczną
+            zawierającą Umowę bezpośrednio związaną z jej działalnością
+            gospodarczą, gdy z treści Umowy wynika, że nie posiada ona dla niej
+            charakteru zawodowego, wynikającego w szczególności z przedmiotu
+            wykonywanej przez nią działalności gospodarczej;
+          </li>
+          <li><b>Regulamin</b> – niniejszy regulamin Newslettera;</li>
+          <li>
+            <b>RODO</b> – Rozporządzenie Parlamentu Europejskiego i Rady (UE)
+            2016/679 z dnia 27 kwietnia 2016 r. w sprawie ochrony osób fizycznych
+            w związku z przetwarzaniem danych osobowych i w sprawie swobodnego
+            przepływu takich danych oraz uchylenia dyrektywy 95/46/WE (Ogólne
+            Rozporządzenie o Ochronie Danych);
+          </li>
+          <li>
+            <b>Subskrybent</b> – osobę, która zawarła Umowę i jest zapisana do
+            Newslettera;
+          </li>
+          <li>
+            <b>Treść cyfrowa</b> – treści wytwarzane i dostarczane w postaci
+            cyfrowej, w szczególności treści dostarczane w ramach usługi
+            Newslettera, tj. treści wiadomości e-mail, e-booki, videobooki,
+            treści video, poradniki, materiały w wersji PDF;
+          </li>
+          <li>
+            <b>Trwały nośnik</b> – materiał lub narzędzie umożliwiające
+            Konsumentowi lub Przedsiębiorcy przechowywanie informacji kierowanych
+            osobiście do niego, w sposób umożliwiający dostęp do informacji w
+            przyszłości przez czas odpowiedni do celów, jakim te informacje
+            służą, i które pozwalają na odtworzenie przechowywanych informacji w
+            niezmienionej postaci;
+          </li>
+          <li>
+            <b>Umowa</b> – umowę zawieraną z wykorzystaniem środków
+            porozumiewania się na odległość i dotyczącą dostarczenia na Twoją
+            rzecz Usług cyfrowych lub Treści cyfrowych w ramach usługi
+            Newslettera;
+          </li>
+          <li>
+            <b>Usługa cyfrowa</b> – usługę pozwalającą Subskrybentowi na
+            wytwarzanie, przetwarzanie, przechowywanie lub dostęp do danych w
+            postaci cyfrowej lub usługę pozwalającą na wspólne korzystanie z
+            danych w postaci cyfrowej, które zostały przesłane lub wytworzone
+            przez Subskrybenta lub innych użytkowników tej usługi, lub inne formy
+            interakcji za pomocą takich danych;
+          </li>
+          <li>
+            <b>Zamówienie</b> – oświadczenie woli składane przez Subskrybenta za
+            pośrednictwem Formularza zapisu zmierzające bezpośrednio do zawarcia
+            Umowy.
+          </li>
+        </ol>
       </section>
+
       <section>
-        <h2 class="text-lg font-semibold text-ink">2. Zakres usługi</h2>
-        <p>
-          Subskrypcja platformy: kurs, strategia i aplikacja w jednej cenie.
-          [Szczegóły — UZUPEŁNIĆ]
-        </p>
+        <h2>§2. Postanowienia ogólne</h2>
+        <ol>
+          <li>
+            Korzystanie z usługi Newslettera połączonego z domeną
+            <a href="https://www.narzedziadlatworcow.pl"
+              >https://www.narzedziadlatworcow.pl</a
+            > oraz jej podstronami jest możliwe po uzupełnieniu Formularza zapisu
+            oraz po potwierdzeniu zapisu w wiadomości e-mail (tzw. double
+            opt-in).
+          </li>
+          <li>
+            W ramach Newslettera udostępniane są treści dotyczące platformy
+            Narzędzia dla Twórców, w szczególności: informacje o starcie i
+            rozwoju platformy, kupon rabatowy na pierwszy miesiąc subskrypcji,
+            materiały edukacyjne i poradniki dla twórców, a także informacje o
+            nowych funkcjach, wydarzeniach i ofertach Administratora.
+          </li>
+          <li>
+            We wszystkich kwestiach związanych z Newsletterem, także w przypadku
+            reklamacji, należy kontaktować się z Administratorem używając
+            poniższych danych kontaktowych:
+            <ul>
+              <li>
+                Adres e-mail: <a href="mailto:biuro@polskistartup.org.pl"
+                  >biuro@polskistartup.org.pl</a
+                >;
+              </li>
+              <li>
+                Pisemnie na adres: ul. Białoskórnicza 15-16, lok. 1, 50-134
+                Wrocław;
+              </li>
+              <li>Telefonicznie pod numerem: +48 692 904 917.</li>
+            </ul>
+          </li>
+          <li>
+            Treść Regulaminu zostaje udostępniona przed rozpoczęciem korzystania
+            z Newslettera. Zapoznanie się z Regulaminem jest możliwe poprzez
+            kliknięcie w link prowadzący do tego Regulaminu w Formularzu zapisu
+            na Newsletter oraz w stopce domeny
+            <a href="https://www.narzedziadlatworcow.pl"
+              >https://www.narzedziadlatworcow.pl</a
+            >.
+          </li>
+        </ol>
       </section>
+
       <section>
-        <h2 class="text-lg font-semibold text-ink">
-          3. Płatności i subskrypcja
-        </h2>
-        <p>
-          Cena subskrypcji, cykl rozliczeniowy, kupony rabatowe (jednorazowe,
-          z terminem ważności). [UZUPEŁNIĆ]
-        </p>
+        <h2>§3. Warunki techniczne</h2>
+        <ol>
+          <li>
+            Do korzystania z Newslettera, Treści cyfrowych i Usług cyfrowych
+            konieczny jest dostęp do:
+            <ul>
+              <li>
+                urządzenia elektronicznego wraz z systemem operacyjnym
+                pozwalającym na obsługę powszechnie dostępnych przeglądarek
+                internetowych;
+              </li>
+              <li>
+                aktualnej wersji przeglądarki internetowej wspieranej przez
+                producenta z dostępem do Internetu (np. Opera, Mozilla Firefox,
+                Google Chrome, Safari);
+              </li>
+              <li>aktywnego konta poczty elektronicznej;</li>
+              <li>
+                aktualnego narzędzia/programu obsługującego pliki elektroniczne w
+                formacie, w którym dostarczana jest treść cyfrowa (np. w formacie
+                *.zip, *.pdf, *.mobi, *.epub, *.doc, *.docx, *.xls);
+              </li>
+              <li>
+                konta na platformie społecznościowej, np. Meta (Facebook) w
+                przypadku, gdy z opisu treści cyfrowej wynika, iż będzie ona
+                udostępniona m.in. na dedykowanej grupie.
+              </li>
+            </ul>
+          </li>
+          <li>
+            Administrator stosuje odpowiednie środki techniczne i organizacyjne,
+            których celem jest ochrona danych osobowych przed nieuprawnionym
+            dostępem, pozyskaniem, modyfikacją, utratą lub zniszczeniem.
+            Zabezpieczenia te są dostosowane do poziomu ryzyka oraz rodzaju
+            przetwarzanych danych. W szczególności wykorzystywane są m.in.
+            certyfikat SSL, silne hasła oraz umowy powierzenia przetwarzania
+            danych zawierane z podmiotami zewnętrznymi, co zapewnia zgodność z
+            obowiązującymi przepisami o ochronie danych osobowych.
+          </li>
+          <li>
+            Publiczny charakter sieci Internet oraz korzystanie z usług
+            świadczonych drogą elektroniczną, w tym Newslettera, może wiązać się
+            z zagrożeniami takimi jak pozyskanie lub modyfikowanie danych przez
+            osoby nieuprawnione, spam, oprogramowanie szpiegujące, phishing czy
+            ataki hakerskie – pomimo stosowania odpowiednich zabezpieczeń. W celu
+            ograniczenia ryzyka zaleca się stosowanie właściwych środków
+            technicznych, w szczególności korzystanie z aktualnego oprogramowania
+            antywirusowego, unikanie otwierania podejrzanych załączników e-mail
+            oraz włączenie zapory sieciowej (firewall).
+          </li>
+        </ol>
       </section>
+
       <section>
-        <h2 class="text-lg font-semibold text-ink">
-          4. Odstąpienie i reklamacje
-        </h2>
-        <p>
-          Prawo odstąpienia od umowy o świadczenie usług cyfrowych oraz tryb
-          reklamacji. [UZUPEŁNIĆ]
-        </p>
+        <h2>§4. Zasady świadczenia usługi Newsletter</h2>
+        <ol>
+          <li>
+            W celu zapisania się do Newslettera należy:
+            <ul>
+              <li>
+                wypełnić Formularz zapisu znajdujący się w domenie
+                <a href="https://www.narzedziadlatworcow.pl"
+                  >https://www.narzedziadlatworcow.pl</a
+                >,
+              </li>
+              <li>
+                potwierdzić zapis i podany adres e-mail (tzw. double opt-in)
+                poprzez kliknięcie w link dostarczony w pierwszej wiadomości
+                e-mail po wypełnieniu Formularza zapisu.
+              </li>
+            </ul>
+          </li>
+          <li>
+            Usługa Newslettera oraz Treści cyfrowe i Usługi cyfrowe są nieodpłatne
+            w walucie pieniężnej, jednak do ich bezpłatnego otrzymywania konieczne
+            jest podanie danych osobowych w postaci adresu e-mail. Korzystanie z
+            Newslettera oraz otrzymanie Treści cyfrowych i Usług cyfrowych nie
+            jest możliwe anonimowo.
+          </li>
+          <li>
+            Do zawarcia Umowy konieczna jest również akceptacja treści Regulaminu
+            i wyrażenie zgody, poprzez zaznaczenie w Formularzu zapisu checkboxa,
+            na wysyłkę informacji handlowych i marketingowych za pomocą środków
+            komunikacji elektronicznej oraz zgody na wykorzystywanie przez
+            Administratora telekomunikacyjnych urządzeń końcowych w celu
+            marketingu bezpośredniego produktów i usług Administratora zgodnie z
+            ustawą – Prawo telekomunikacyjne z dnia 16 lipca 2004 r. Zgody mogą
+            zostać w każdej chwili wycofane, co spowoduje zaprzestanie świadczenia
+            usługi Newslettera oraz dostarczania Treści cyfrowych i Usług
+            cyfrowych na zasadach określonych w niniejszym Regulaminie.
+          </li>
+          <li>
+            Wymienione powyżej w pkt 3 zgody są dobrowolne, jednak konieczne w
+            celu korzystania z Newslettera, Treści cyfrowych i Usług cyfrowych.
+            Brak ich udzielenia powoduje, że usługi nie będą mogły być świadczone,
+            a treści dostarczane.
+          </li>
+          <li>
+            Umowa zostaje zawarta z chwilą wyświetlenia strony internetowej
+            potwierdzającej skuteczny zapis do Newslettera.
+          </li>
+          <li>
+            Treści w ramach Newslettera będą wysyłane w ramach założonej przez
+            Administratora częstotliwości na adres mailowy podany w Formularzu
+            zapisu. Administrator zastrzega jednak prawo do całkowitego lub
+            okresowego zaprzestania wysyłki tych Treści cyfrowych w wybranych
+            momentach bez informowania o tym Subskrybenta.
+          </li>
+          <li>
+            Usługa Newsletter i Usługi cyfrowe świadczone są przez czas
+            nieokreślony, od chwili zawarcia Umowy do czasu wycofania zgody przez
+            Subskrybenta – rezygnacji z usługi Newslettera lub Usługi cyfrowej –
+            lub zaprzestania świadczenia tej usługi przez Administratora.
+          </li>
+          <li>
+            Rezygnacja z usługi Newsletter polega na kliknięciu aktywnego linku z
+            informacją „Rezygnuję z newslettera”, który dostępny jest pod treścią
+            każdej wiadomości e-mail wysłanej w ramach Newslettera. Możliwy jest
+            również kontakt z Administratorem z prośbą o rezygnację z Newslettera
+            na adres e-mail: <a href="mailto:biuro@polskistartup.org.pl"
+              >biuro@polskistartup.org.pl</a
+            >, który skutkował będzie usunięciem z listy Subskrybentów. Pomimo
+            rezygnacji dane osobowe Subskrybenta mogą być przechowywane przez
+            okres niezbędny dla obrony przed roszczeniami na podstawie prawnie
+            uzasadnionego interesu Administratora.
+          </li>
+        </ol>
       </section>
+
       <section>
-        <h2 class="text-lg font-semibold text-ink">5. Kontakt</h2>
-        <p>[adres e-mail do kontaktu — UZUPEŁNIĆ]</p>
+        <h2>§5. Reklamacje</h2>
+        <ol>
+          <li>
+            Administrator podejmuje działania, aby Newsletter, Treści cyfrowe oraz
+            Usługi cyfrowe pozostawały zgodne z zawartą Umową i mogły być
+            wykorzystywane przez Subskrybenta zgodnie z jej postanowieniami. W
+            szczególności Regulamin udostępniany jest przed zawarciem Umowy, tak
+            aby Subskrybent miał możliwość zapoznania się z jego treścią.
+          </li>
+          <li>
+            W przypadku składania reklamacji Subskrybent będący Konsumentem lub
+            Przedsiębiorcą na prawach konsumenta zobowiązany jest do
+            współdziałania z Administratorem w rozsądnym zakresie oraz przy użyciu
+            możliwie najmniej uciążliwych środków technicznych (np. kontakt
+            e-mailowy, telefoniczny, przesyłanie zrzutów ekranu). Celem tej
+            współpracy jest ustalenie, czy ewentualna niezgodność usługi z Umową
+            wynika z parametrów środowiska cyfrowego Subskrybenta.
+          </li>
+          <li>
+            Administrator ponosi odpowiedzialność wobec Subskrybenta będącego
+            Konsumentem lub Przedsiębiorcą na prawach konsumenta za niezgodność
+            Newslettera, Treści cyfrowych lub Usług cyfrowych z Umową, jeżeli
+            istniała ona w chwili ich dostarczenia i została ujawniona w ciągu
+            dwóch lat od tego momentu, zgodnie z ustawą z dnia 30 maja 2014 r. o
+            prawach konsumenta.
+          </li>
+          <li>
+            Jeżeli Subskrybent uzna, że dostarczone usługi lub treści są niezgodne
+            z Umową, ma prawo żądać ich doprowadzenia do zgodności z jej
+            postanowieniami.
+          </li>
+          <li>
+            Administrator nie odpowiada za brak zgodności z Umową, jeśli wynika on
+            z niekompatybilności środowiska cyfrowego Subskrybenta z wymaganiami
+            technicznymi, o ile Subskrybent przed zawarciem Umowy został w sposób
+            jasny i zrozumiały poinformowany o tych wymaganiach oraz miał
+            możliwość zapoznania się z Regulaminem i opisem usług lub treści.
+          </li>
+          <li>
+            Administrator może być zwolniony z odpowiedzialności za brak zgodności
+            Treści cyfrowych lub Usług cyfrowych z Umową, jeżeli Subskrybent nie
+            współpracuje w wymaganym zakresie przy ustalaniu przyczyn tej
+            niezgodności, mimo wcześniejszego poinformowania o takim obowiązku w
+            sposób przejrzysty przed zawarciem Umowy.
+          </li>
+          <li>
+            Reklamacja dotycząca niezgodności Newslettera, Treści cyfrowych lub
+            Usług cyfrowych z Umową może zostać złożona przez Konsumenta lub
+            Przedsiębiorcę na prawach konsumenta w dowolnej formie, na adres
+            <a href="mailto:biuro@polskistartup.org.pl"
+              >biuro@polskistartup.org.pl</a
+            >. W zgłoszeniu należy podać w szczególności: imię i nazwisko, adres,
+            datę zawarcia Umowy, opis przedmiotu i przyczyny reklamacji, adres
+            e-mail użyty przy zawarciu Umowy oraz dane kontaktowe (np. adres
+            e-mail lub numer telefonu).
+          </li>
+          <li>
+            Administrator przekaże informację o sposobie rozpatrzenia reklamacji w
+            terminie 14 dni od dnia następującego po dniu jej otrzymania, na adres
+            e-mail wskazany przy zawarciu Umowy.
+          </li>
+          <li>
+            Dane osobowe Subskrybenta będą wykorzystywane w celu rozpatrzenia
+            reklamacji, zgodnie z postanowieniami
+            <a href="/polityka-prywatnosci"
+              >Polityki prywatności i plików cookies</a
+            >.
+          </li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>§6. Prawa autorskie i licencje</h2>
+        <ol>
+          <li>
+            Teksty, zdjęcia, grafiki, multimedia oraz znaki towarowe udostępniane
+            w ramach Newslettera są utworem w rozumieniu ustawy z dnia 4 lutego
+            1994 r. o prawie autorskim i prawach pokrewnych, podlegającym ochronie
+            prawnej.
+          </li>
+          <li>
+            Prawami autorskimi do ww. materiałów dysponuje Administrator bądź inny
+            podmiot, od którego Administrator uzyskał odpowiednią licencję.
+            Materiały mogą być też wykorzystywane przez Administratora w oparciu o
+            inną podstawę prawną.
+          </li>
+          <li>
+            Wszelkie materiały udostępniane przez Administratora mogą być
+            wykorzystywane wyłącznie na własny użytek, o ile nic innego nie wynika
+            z ustaleń Stron. Nieuprawnione jest dalsze rozpowszechnianie,
+            udostępnianie, zgrywanie i pobieranie w jakikolwiek sposób materiałów
+            poza zakresem dozwolonego użytku.
+          </li>
+          <li>
+            W przypadku naruszenia zakazu, o którym mowa w niniejszym paragrafie,
+            w tym naruszenia praw autorskich, Administrator ma prawo domagać się
+            od Subskrybenta odszkodowania i zadośćuczynienia. Subskrybent w ww.
+            zakresie może ponosić odpowiedzialność cywilną lub karną.
+          </li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>§7. Dane osobowe i pliki cookies</h2>
+        <ol>
+          <li>
+            Administratorem danych osobowych jest Polski Startup sp. z o.o. z
+            siedzibą we Wrocławiu, właściciel domeny
+            <a href="https://www.narzedziadlatworcow.pl"
+              >https://www.narzedziadlatworcow.pl</a
+            >.
+          </li>
+          <li>
+            Kontakt z Administratorem możliwy jest pod adresem poczty
+            elektronicznej: <a href="mailto:biuro@polskistartup.org.pl"
+              >biuro@polskistartup.org.pl</a
+            > oraz pisemnie przesyłając korespondencję na adres: ul. Białoskórnicza
+            15-16, lok. 1, 50-134 Wrocław.
+          </li>
+          <li>
+            Dane osobowe w ramach platformy Narzędzia dla Twórców przetwarzane są
+            zgodnie z Rozporządzeniem Parlamentu Europejskiego i Rady (UE)
+            2016/679 z dnia 27 kwietnia 2016 r. w sprawie ochrony osób fizycznych
+            w związku z przetwarzaniem danych osobowych i w sprawie swobodnego
+            przepływu takich danych oraz uchylenia dyrektywy 95/46/WE (RODO) oraz
+            ustawą z dnia 10 maja 2018 r. o ochronie danych osobowych.
+          </li>
+          <li>
+            Szczegółowe informacje dotyczące przetwarzania danych osobowych
+            pozyskanych w ramach usługi Newslettera dostępne są w
+            <a href="/polityka-prywatnosci"
+              >Polityce prywatności i plików cookies</a
+            >.
+          </li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>§8. Postanowienia końcowe</h2>
+        <ol>
+          <li>
+            W ramach korzystania z Newslettera, w tym z usługi lub treści
+            cyfrowej, zabrania się dostarczania informacji o charakterze
+            bezprawnym oraz działania w sposób sprzeczny z prawem, dobrymi
+            obyczajami lub naruszający dobra osobiste osób trzecich.
+          </li>
+          <li>
+            Administrator zastrzega sobie prawo zmiany Regulaminu. Zmiany wchodzą
+            w życie z chwilą umieszczenia treści zmienionego Regulaminu na stronie
+            internetowej
+            <a href="https://www.narzedziadlatworcow.pl"
+              >https://www.narzedziadlatworcow.pl</a
+            > w zakładce Regulamin newslettera.
+          </li>
+          <li>
+            W sprawach nieuregulowanych Regulaminem zastosowanie będą miały
+            właściwe przepisy prawa polskiego, w szczególności przepisy ustawy z
+            dnia 23 kwietnia 1964 roku – Kodeks cywilny, ustawy z dnia 18 lipca
+            2002 r. o świadczeniu usług drogą elektroniczną, ustawy z dnia 30 maja
+            2014 roku o prawach konsumenta, ustawy z dnia 10 maja 2018 roku o
+            ochronie danych osobowych, ustawy z dnia 4 lutego 1994 r. o prawie
+            autorskim i prawach pokrewnych oraz inne właściwe, a także przepisy
+            RODO.
+          </li>
+          <li>Regulamin wchodzi w życie z dniem {EFFECTIVE_DATE}</li>
+        </ol>
       </section>
     </div>
   </main>

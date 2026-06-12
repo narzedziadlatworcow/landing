@@ -3,59 +3,595 @@ import Base from "@/layouts/Base.astro";
 import Nav from "@/components/layout/Nav.astro";
 import Footer from "@/components/layout/Footer.astro";
 
-// SZKIELET — treść prawną uzupełnia właściciel (z istniejących regulaminów).
-const CONSENT_VERSION = "2026-06-09";
+// Wersja zgody — musi być spójna z CONSENT_VERSION w @ndt/mailing (zapisywana
+// w bazie przy zapisie na listę). Zmiana treści zgody = bump w obu miejscach.
+const VERSION = "2026-06-09";
+const EFFECTIVE_DATE = "9 czerwca 2026 r.";
 ---
 
 <Base
-  title="Polityka prywatności · Narzędzia dla Twórców"
-  description="Jak przetwarzamy dane osobowe zapisane na listę mailingową Narzędzi dla Twórców."
-  noindex={true}
+  title="Polityka prywatności i plików cookies · Narzędzia dla Twórców"
+  description="Jak przetwarzamy dane osobowe użytkowników serwisu Narzędzia dla Twórców, w tym zapisanych na listę mailingową."
+  noindex={false}
 >
   <Nav />
   <main class="mx-auto max-w-2xl px-6 py-16 text-ink">
     <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">
-      Polityka prywatności
+      Polityka prywatności i plików cookies
     </h1>
     <p class="mt-2 text-sm text-muted">
-      Wersja: {CONSENT_VERSION} (szkielet — do uzupełnienia treścią).
+      Wersja: {VERSION} · obowiązuje od {EFFECTIVE_DATE}
     </p>
 
-    <div class="mt-8 space-y-6 text-[15px] leading-relaxed text-ink/80">
+    <div
+      class="mt-8 space-y-8 text-[15px] leading-relaxed text-ink/80 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:space-y-1.5 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_a]:text-brand [&_a]:underline [&_a]:break-words [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:text-ink [&_section]:space-y-2.5"
+    >
       <section>
-        <h2 class="text-lg font-semibold text-ink">1. Administrator danych</h2>
-        <p>[Nazwa podmiotu, adres, dane kontaktowe — UZUPEŁNIĆ]</p>
+        <h2>§1. Definicje</h2>
+        <p>Pojęcia użyte w Polityce oznaczają:</p>
+        <ol>
+          <li>
+            <b>Administrator</b> – Polski Startup sp. z o.o. z siedzibą we
+            Wrocławiu, ul. Białoskórnicza 15-16, lok. 1, 50-134 Wrocław, wpisana
+            do rejestru przedsiębiorców prowadzonego przez Sąd Rejonowy dla
+            Wrocławia Fabrycznej we Wrocławiu, VI Wydział Gospodarczy Krajowego
+            Rejestru Sądowego pod numerem KRS: 0001218612, NIP: 8971965661,
+            REGON: 543820926, kapitał zakładowy: 10.000 zł, e-mail:
+            biuro@polskistartup.org.pl;
+          </li>
+          <li>
+            <b>Serwis, Strona</b> – serwis internetowy Narzędzia dla Twórców
+            dostępny w domenie narzedziadlatworcow.pl i jej podstronach (w tym
+            platforma dostępna pod adresem app.narzedziadlatworcow.pl);
+          </li>
+          <li>
+            <b>RODO</b> – Rozporządzenie Parlamentu Europejskiego i Rady (UE)
+            2016/679 z dnia 27 kwietnia 2016 r. w sprawie ochrony osób fizycznych
+            w związku z przetwarzaniem danych osobowych i w sprawie swobodnego
+            przepływu takich danych oraz uchylenia dyrektywy 95/46/WE;
+          </li>
+          <li>
+            <b>Użytkownik</b> – osoba, której dane są przetwarzane na zasadach
+            opisanych w tej Polityce;
+          </li>
+          <li><b>Polityka</b> – niniejsza Polityka prywatności i plików cookies.</li>
+        </ol>
       </section>
+
       <section>
-        <h2 class="text-lg font-semibold text-ink">2. Jakie dane zbieramy</h2>
+        <h2>§2. Postanowienia ogólne</h2>
+        <ol>
+          <li>
+            Polityka dotyczy zasad przetwarzania danych osobowych w ramach Serwisu
+            i usług świadczonych przez Administratora.
+          </li>
+          <li>
+            Administratorem danych osobowych Użytkowników jest Polski Startup sp.
+            z o.o. z siedzibą we Wrocławiu, ul. Białoskórnicza 15-16, lok. 1,
+            50-134 Wrocław, wpisana do rejestru przedsiębiorców prowadzonego przez
+            Sąd Rejonowy dla Wrocławia Fabrycznej we Wrocławiu, VI Wydział
+            Gospodarczy Krajowego Rejestru Sądowego pod numerem KRS: 0001218612,
+            NIP: 8971965661, REGON: 543820926, kapitał zakładowy: 10.000 zł,
+            e-mail: <a href="mailto:biuro@polskistartup.org.pl"
+              >biuro@polskistartup.org.pl</a
+            >, tel.: +48 692 904 917.
+          </li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>§3. Newsletter i lista mailingowa</h2>
+        <ol>
+          <li>
+            W ramach Serwisu Administrator umożliwia zapis na listę mailingową
+            (Newsletter) poprzez Formularz zapisu. Zapis odbywa się w modelu
+            double opt-in – po podaniu adresu e-mail Użytkownik otrzymuje
+            wiadomość z linkiem potwierdzającym, a subskrypcja staje się aktywna
+            dopiero po jego kliknięciu.
+          </li>
+          <li>
+            W związku z zapisem na Newsletter przetwarzane są następujące dane:
+            adres e-mail, adres IP zapisu i potwierdzenia, data i godzina zapisu
+            oraz potwierdzenia, a także wersja zaakceptowanej zgody.
+          </li>
+          <li>
+            Dane wskazane w ust. 2 przetwarzane są w celu wysyłki wiadomości
+            potwierdzającej zapis, kuponu rabatowego, informacji o starcie usługi
+            oraz okazjonalnych wiadomości handlowych i marketingowych, na
+            podstawie zgody Użytkownika – art. 6 ust. 1 lit. a RODO. Dane są
+            przetwarzane do czasu wycofania zgody (rezygnacji z Newslettera), a
+            następnie mogą być przechowywane przez okres niezbędny dla wykazania
+            faktu udzielenia i wycofania zgody na podstawie art. 6 ust. 1 lit. f
+            RODO (prawnie uzasadniony interes Administratora).
+          </li>
+          <li>
+            Użytkownik może w każdej chwili wycofać zgodę i zrezygnować z
+            Newslettera, klikając link „Rezygnuję z newslettera” dostępny w każdej
+            wiadomości, bądź kontaktując się z Administratorem. Wycofanie zgody nie
+            wpływa na zgodność z prawem przetwarzania dokonanego przed jej
+            wycofaniem.
+          </li>
+          <li>
+            Do obsługi wysyłki wiadomości Administrator korzysta z usługi Resend,
+            świadczonej przez Resend, Inc. (USA). Dane mogą być przekazywane poza
+            Europejski Obszar Gospodarczy, przy zastosowaniu odpowiednich
+            mechanizmów ochrony przewidzianych przez RODO. Szczegóły dostępne są
+            pod adresem: <a
+              href="https://resend.com/legal/privacy-policy"
+              rel="noopener"
+              target="_blank">https://resend.com/legal/privacy-policy</a
+            >.
+          </li>
+          <li>
+            Szczegółowe zasady świadczenia usługi Newslettera określa
+            <a href="/regulamin">Regulamin newslettera</a>.
+          </li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>§4. Zakres, cel i podstawa prawna przetwarzania danych osobowych</h2>
+        <ol>
+          <li>
+            Wszelkie dane osobowe Użytkownika przetwarzane są wyłącznie w celu, dla
+            jakiego zostały pozyskane, chyba że wyrażono odrębną zgodę na
+            przetwarzanie danych osobowych w innych celach.
+          </li>
+          <li>
+            W ramach odwiedzania Strony, korzystania z plików cookies oraz
+            technologii śledzących przetwarzane są następujące dane:
+            <ul>
+              <li>adres IP;</li>
+              <li>informacje zawarte w plikach cookies lub innych podobnych technologiach;</li>
+              <li>anonimowe dane przeglądarki internetowej i urządzenia;</li>
+              <li>anonimowe dane dotyczące ruchu na Stronie;</li>
+              <li>anonimowe dane dotyczące konwersji;</li>
+              <li>anonimowe przybliżone dane geolokalizacyjne;</li>
+              <li>anonimowe dane dotyczące zachowania Użytkownika na Stronie.</li>
+            </ul>
+          </li>
+          <li>
+            Dane wskazane w ust. 2 przetwarzane są w celu zapewnienia
+            funkcjonalności Strony, optymalizacji jej działania oraz w celu
+            marketingowym, analitycznym i statystycznym na podstawie art. 6 ust. 1
+            lit. f RODO, w zakresie prawnie uzasadnionego interesu Administratora,
+            którym jest utrzymanie strony internetowej i marketing bezpośredni, do
+            czasu skutecznego wniesienia sprzeciwu podmiotu, którego dane dotyczą,
+            lub osiągnięcia celu przetwarzania, lub do czasu zdezaktualizowania się
+            lub utraty przydatności.
+          </li>
+          <li>
+            Podczas odwiedzania Strony Administrator gromadzi anonimowe dane
+            analityczne i statystyczne dotyczące wyświetleń strony, przeglądanych
+            podstron, źródeł przejścia na Stronę czy urządzeń użytkowników. W tym
+            celu używane są narzędzia takie jak Google Analytics, Meta Pixel,
+            Google Tag Manager oraz Microsoft Clarity. W związku z tym dochodzi do
+            przetwarzania danych osobowych wskazanych w ust. 2. Jeśli Użytkownik
+            nie chce przekazywać takich danych, może przeglądać Stronę w
+            anonimowym trybie przeglądarki lub zablokować działanie technologii
+            śledzących za pomocą dedykowanych wtyczek.
+          </li>
+          <li>
+            Strona wykorzystuje pliki cookies. Przy pierwszym wejściu na Stronę
+            Użytkownik otrzymuje możliwość modyfikacji ustawień dotyczących plików
+            cookies. Istnieje także możliwość późniejszej zmiany tych ustawień.
+          </li>
+          <li>
+            Podanie danych jest dobrowolne, jednak w niektórych przypadkach jest to
+            konieczne dla prawidłowego funkcjonowania Strony.
+          </li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>§5. Pliki cookies</h2>
+        <ol>
+          <li>
+            Cookies (tzw. ciasteczka) to pliki pobierane na urządzenie Użytkownika
+            (komputer lub urządzenie mobilne) służące przechowywaniu danych, które
+            mogą następnie być aktualizowane i pobierane przez podmiot
+            odpowiedzialny za ich instalację.
+          </li>
+          <li>
+            Przy pierwszej wizycie na Stronie Użytkownik ma możliwość określenia
+            swoich preferencji dotyczących plików cookies. Możliwe jest również
+            takie ustawienie przeglądarki internetowej, które uniemożliwi
+            zapisywanie cookies na urządzeniu końcowym. Należy jednak pamiętać, że
+            ograniczenie lub wyłączenie tych plików może wpłynąć na prawidłowe
+            działanie Strony.
+          </li>
+          <li>
+            Cookies własne to pliki przypisane do odwiedzanej witryny, które mogą
+            być odczytywane przez Administratora. Administrator korzysta także z
+            usług podmiotów zewnętrznych, które w niektórych przypadkach mogą
+            uzyskiwać dostęp do wybranych plików cookies w celu usprawnienia
+            działania Strony, dopasowania treści lub personalizacji reklam.
+          </li>
+          <li>
+            Cookies sesyjne (tymczasowe) są przechowywane do momentu opuszczenia
+            strony lub zamknięcia przeglądarki, natomiast cookies stałe pozostają
+            na urządzeniu przez czas określony w ich ustawieniach.
+          </li>
+          <li>
+            Strona wykorzystuje cookies w celu zapewnienia jej prawidłowego
+            działania, optymalizacji funkcji, utrzymania sesji użytkownika, a także
+            do celów marketingowych i statystycznych.
+          </li>
+          <li>
+            Użytkownik ma możliwość samodzielnego usunięcia wszystkich lub
+            wybranych plików cookies. Szczegółowe informacje dotyczące zarządzania
+            cookies dostępne są na stronach pomocy poszczególnych przeglądarek
+            internetowych.
+          </li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>§6. Google Analytics</h2>
+        <ol>
+          <li>
+            Administrator korzysta z Google Analytics zapewnianego przez Google
+            LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA, w celach
+            analitycznych i statystycznych. Informacje zebrane w ramach działania
+            Google Analytics wskazują, w jaki sposób Użytkownik porusza się po
+            stronie, z jakiej przeglądarki i systemu operacyjnego korzysta, jaki
+            jest czas spędzony na stronie, a także informacje co do podstron
+            odwiedzanych przez Użytkownika oraz czy w trakcie korzystania wystąpiły
+            nieprawidłowości. Gromadzenie tych danych nie pozwala na identyfikację
+            konkretnych podmiotów.
+          </li>
+          <li>
+            Dane osobowe dla celów analitycznych i statystycznych pozyskiwane są w
+            sposób automatyczny przy odwiedzeniu Strony oraz przy poruszaniu się po
+            niej. Google Analytics wykorzystuje pliki cookies. Polityka cookies
+            Google Analytics: <a
+              href="https://policies.google.com/technologies/cookies?hl=pl"
+              rel="noopener"
+              target="_blank"
+              >https://policies.google.com/technologies/cookies</a
+            >.
+          </li>
+          <li>
+            Dane osobowe mogą być przekazywane i zapisywane na serwerach Google w
+            USA. Google deklaruje korzystanie z mechanizmów ochrony danych i
+            bezpieczeństwa przewidzianych przez przepisy europejskie. Szczegóły:
+            <a
+              href="https://policies.google.com/technologies/partner-sites"
+              rel="noopener"
+              target="_blank"
+              >https://policies.google.com/technologies/partner-sites</a
+            >.
+          </li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>§7. Meta Pixel</h2>
+        <ol>
+          <li>
+            Usługę Meta Pixel zapewnia Meta Platforms Ireland Limited, z siedzibą
+            przy 4 Grand Canal Square, Dublin 2, Irlandia.
+          </li>
+          <li>
+            Meta Pixel to fragment kodu umieszczony na Stronie umożliwiający
+            pomiar, optymalizację i tworzenie grup odbiorców kampanii reklamowych.
+            W trakcie ładowania Strony kod uruchamia się i wysyła informacje o
+            aktywności Użytkownika do serwerów znajdujących się także w USA.
+            Informacje te są anonimowe i mogą obejmować dane takie jak odwiedzone
+            strony, czas spędzony na stronie, akcje podejmowane przez Użytkownika
+            (np. kliknięcia).
+          </li>
+          <li>
+            Dzięki niemu, w oparciu o prawnie uzasadniony interes Administratora
+            jakim jest marketing własny, Administrator może monitorować zachowanie
+            Użytkowników na Stronie, analizować skuteczność kampanii reklamowych,
+            personalizować reklamy i optymalizować doświadczenie Użytkownika.
+          </li>
+          <li>
+            Szczegółowy opis działania Meta Pixel dostępny jest pod adresem: <a
+              href="https://www.facebook.com/business/tools/meta-pixel"
+              rel="noopener"
+              target="_blank">https://www.facebook.com/business/tools/meta-pixel</a
+            >.
+          </li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>§8. Google Tag Manager</h2>
+        <ol>
+          <li>
+            Administrator korzysta z narzędzia Google Tag Manager zapewnianego
+            przez Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043,
+            USA, które służy do zarządzania tagami i skryptami wykorzystywanymi na
+            Stronie.
+          </li>
+          <li>
+            Google Tag Manager sam w sobie nie zbiera danych osobowych, jednak
+            umożliwia wdrażanie i zarządzanie innymi narzędziami analitycznymi i
+            marketingowymi, które mogą takie dane przetwarzać.
+          </li>
+          <li>
+            W ramach korzystania z tego narzędzia może dochodzić do przekazywania
+            danych do serwerów zlokalizowanych poza Europejskim Obszarem
+            Gospodarczym, w tym w USA, przy zachowaniu odpowiednich mechanizmów
+            ochrony danych stosowanych przez Google.
+          </li>
+          <li>
+            Szczegółowe informacje dotyczące Google Tag Manager dostępne są pod
+            adresem: <a
+              href="https://policies.google.com/privacy"
+              rel="noopener"
+              target="_blank">https://policies.google.com/privacy</a
+            >.
+          </li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>§9. Microsoft Clarity</h2>
+        <ol>
+          <li>
+            Administrator korzysta również z narzędzia Microsoft Clarity
+            zapewnianego przez Microsoft Corporation, One Microsoft Way, Redmond,
+            WA 98052-6399, USA, w celach analitycznych i statystycznych,
+            polegających na analizie zachowania użytkowników na Stronie, w tym
+            poprzez rejestrowanie interakcji takich jak ruchy myszy, przewijanie
+            strony czy kliknięcia.
+          </li>
+          <li>
+            Dane te są wykorzystywane do poprawy funkcjonalności Strony, przy czym
+            informacje te mają charakter zbiorczy i co do zasady nie służą
+            bezpośredniej identyfikacji Użytkownika.
+          </li>
+          <li>
+            Dane zbierane są automatycznie, w szczególności z wykorzystaniem plików
+            cookies, i mogą być przekazywane na serwery zlokalizowane poza
+            Europejskim Obszarem Gospodarczym, w tym w USA, przy zastosowaniu
+            odpowiednich zabezpieczeń przewidzianych przez Microsoft.
+          </li>
+          <li>
+            Szczegółowe informacje dotyczące Microsoft Clarity dostępne są pod
+            adresem: <a
+              href="https://privacy.microsoft.com/pl-pl/privacystatement"
+              rel="noopener"
+              target="_blank"
+              >https://privacy.microsoft.com/pl-pl/privacystatement</a
+            >.
+          </li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>§10. Logi serwera</h2>
+        <ol>
+          <li>
+            Korzystanie ze Strony wiąże się z przesyłaniem zapytań do serwera, na
+            którym jest ona hostowana. Każde takie żądanie może być zapisywane w
+            tzw. logach serwera, czyli plikach rejestrujących zdarzenia i działania
+            zachodzące w systemie.
+          </li>
+          <li>
+            Dane gromadzone w logach mają charakter anonimowy i mogą obejmować w
+            szczególności datę oraz godzinę żądania, jego treść i status (np. adres
+            URL wraz z parametrami), adres IP urządzenia użytkownika, identyfikatory
+            sesji, ilość przesłanych danych, a także nagłówki HTTP zawierające
+            informacje o przeglądarce, systemie operacyjnym, języku czy stronie, z
+            której nastąpiło przekierowanie.
+          </li>
+          <li>
+            Informacje te wykorzystywane są w celu monitorowania pracy serwera,
+            diagnozowania ewentualnych problemów oraz analizy funkcjonowania
+            Strony.
+          </li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>§11. Stosowanie profilowania</h2>
         <p>
-          Adres e-mail, adres IP zapisu i potwierdzenia, znacznik czasu oraz
-          wersję wyrażonej zgody.
+          Administrator nie podejmuje decyzji w oparciu o automatyczne
+          przetwarzanie danych osobowych wywołujące wobec Użytkownika skutki
+          prawne lub w podobny sposób istotnie na niego wpływające.
         </p>
       </section>
+
       <section>
-        <h2 class="text-lg font-semibold text-ink">
-          3. Cel i podstawa prawna
-        </h2>
+        <h2>§12. Kontakt za pośrednictwem poczty elektronicznej</h2>
+        <ol>
+          <li>
+            Kontaktując się z Administratorem za pośrednictwem poczty
+            elektronicznej, Użytkownik przekazuje dane osobowe takie jak adres
+            e-mail, imię i nazwisko, opcjonalnie adres IP, a także wszelkie dane,
+            które zawarte są w treści wiadomości.
+          </li>
+          <li>
+            Informacje wskazane w ust. 1 są przetwarzane w celu:
+            <ul>
+              <li>
+                umożliwienia kontaktu z Administratorem oraz zapewnienia ciągłości
+                komunikacji na podstawie art. 6 ust. 1 lit. f RODO, w zakresie
+                prawnie uzasadnionego interesu Administratora, którym jest
+                zapewnienie możliwości kontaktu i komunikacji;
+              </li>
+              <li>
+                archiwizacji danych w celu możliwości wykazania faktów w
+                przyszłości na podstawie art. 6 ust. 1 lit. f RODO, w zakresie
+                prawnie uzasadnionego interesu Administratora jakim jest obrona lub
+                kierowanie potencjalnych roszczeń, do czasu upływu terminu
+                przedawnienia roszczeń.
+              </li>
+            </ul>
+          </li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>§13. Reklamy targetowane</h2>
         <p>
-          Wysyłka kuponu rabatowego oraz informacji o starcie usługi. Podstawa:
-          zgoda (art. 6 ust. 1 lit. a RODO), potwierdzona w modelu double opt-in.
+          Strona korzysta z reklam targetowanych, wykorzystując do tego anonimowe
+          dane analityczne zgromadzone przez podmioty trzecie: Google Ads (Google
+          LLC) oraz Facebook i Instagram Ads (Meta Platforms Ireland Limited).
+          Wskazane podmioty przetwarzają dane na podstawie własnych zasad
+          przetwarzania. Szczegółowe zasady przetwarzania danych znajdują się w
+          politykach prywatności wskazanych podmiotów.
         </p>
       </section>
+
       <section>
-        <h2 class="text-lg font-semibold text-ink">4. Okres przechowywania</h2>
-        <p>[UZUPEŁNIĆ — np. do wycofania zgody lub przez czas trwania akcji.]</p>
+        <h2>§14. Księgowość i rachunkowość</h2>
+        <ol>
+          <li>
+            W przypadku skorzystania z odpłatnych usług Administrator korzysta z
+            usług podmiotu świadczącego usługi księgowe i rachunkowe oraz zawarł z
+            nim umowę powierzenia przetwarzania danych osobowych.
+          </li>
+          <li>
+            W ramach tej współpracy mogą być przetwarzane następujące dane: adres
+            e-mail, imię i nazwisko, adres zamieszkania, adres rozliczeniowy, numer
+            telefonu, NIP oraz dane dotyczące rachunku bankowego.
+          </li>
+          <li>
+            Dane przetwarzane są w celu realizacji obowiązku prawnego wynikającego z
+            przepisów z zakresu księgowości i rachunkowości oraz przepisów
+            podatkowych na podstawie art. 6 ust. 1 lit. c RODO, do czasu upływu
+            terminu obowiązku przechowywania dokumentacji księgowej, wynikającego z
+            przepisów ustawy o rachunkowości, Ordynacji podatkowej, ustawy o
+            podatku od towarów i usług i innych właściwych aktów prawnych.
+          </li>
+        </ol>
       </section>
+
       <section>
-        <h2 class="text-lg font-semibold text-ink">5. Twoje prawa</h2>
-        <p>
-          Dostęp do danych, sprostowanie, usunięcie, ograniczenie przetwarzania
-          oraz wycofanie zgody w każdej chwili (link „wypisz się" w każdym mailu).
-        </p>
+        <h2>§15. Cele archiwalne i dowodowe</h2>
+        <ol>
+          <li>
+            Wszelkie dane osobowe wskazane w Polityce mogą podlegać archiwizacji,
+            przetwarzaniu w związku z dochodzeniem lub obroną przed roszczeniami,
+            lub mogą być przetwarzane w celu wykazania określonych zdarzeń w
+            przyszłości.
+          </li>
+          <li>
+            W zakresie archiwizacji dokumentacji na potrzeby wykazania jej treści w
+            przyszłości na podstawie art. 6 ust. 1 lit. f RODO, dane przetwarzane
+            są w celu prawnie uzasadnionego interesu Administratora, którym jest
+            możliwość obrony lub występowania z potencjalnymi roszczeniami, do czasu
+            upływu terminu przedawnienia.
+          </li>
+        </ol>
       </section>
+
       <section>
-        <h2 class="text-lg font-semibold text-ink">6. Kontakt</h2>
-        <p>[adres e-mail do kontaktu w sprawach danych — UZUPEŁNIĆ]</p>
+        <h2>§16. Okres przetwarzania danych osobowych</h2>
+        <ol>
+          <li>
+            Okresy przetwarzania danych osobowych są określone indywidualnie dla
+            każdego z wymienionych w Polityce celów przetwarzania.
+          </li>
+          <li>
+            Po upływie okresu przetwarzania dane osobowe są nieodwracalnie usuwane
+            lub anonimizowane.
+          </li>
+          <li>
+            W celu uzyskania szerszych informacji dotyczących poszczególnych
+            okresów przechowywania danych osobowych należy skontaktować się z
+            Administratorem.
+          </li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>§17. Prawa Użytkownika</h2>
+        <ol>
+          <li>
+            W związku z przetwarzaniem danych przez Administratora, zgodnie z RODO,
+            Użytkownikowi przysługują następujące uprawnienia:
+            <ul>
+              <li>prawo dostępu do danych – art. 15 RODO;</li>
+              <li>prawo do otrzymania kopii danych – art. 15 ust. 3 RODO;</li>
+              <li>prawo do sprostowania danych – art. 16 RODO;</li>
+              <li>prawo do usunięcia danych – art. 17 RODO;</li>
+              <li>prawo do ograniczenia przetwarzania – art. 18 RODO;</li>
+              <li>prawo do przenoszenia danych – art. 20 RODO;</li>
+              <li>prawo do sprzeciwu wobec przetwarzania danych – art. 21 RODO;</li>
+              <li>prawo do cofnięcia zgody na przetwarzanie danych – art. 7 ust. 3 RODO;</li>
+              <li>
+                prawo do złożenia skargi w razie uznania, że Administrator
+                przetwarza dane osobowe niezgodnie z obowiązującymi przepisami –
+                art. 77 RODO.
+              </li>
+            </ul>
+          </li>
+          <li>
+            W celu skorzystania z uprawnień wskazanych w ust. 1 należy skontaktować
+            się z Administratorem.
+          </li>
+          <li>
+            W razie uznania przez Użytkownika, że Administrator przetwarza dane
+            osobowe niezgodnie z obowiązującymi przepisami, przysługuje mu skarga
+            do właściwego organu nadzorczego, tj. Prezesa Urzędu Ochrony Danych
+            Osobowych z siedzibą w Warszawie, ul. Stawki 2, z którym można
+            kontaktować się w następujący sposób:
+            <ul>
+              <li>listownie: ul. Stawki 2, 00-193 Warszawa;</li>
+              <li>
+                przez elektroniczną skrzynkę podawczą dostępną na stronie: <a
+                  href="https://www.uodo.gov.pl/pl/p/kontakt"
+                  rel="noopener"
+                  target="_blank">https://www.uodo.gov.pl/pl/p/kontakt</a
+                >;
+              </li>
+              <li>telefonicznie: (22) 531 03 00.</li>
+            </ul>
+          </li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>§18. Powierzanie przetwarzania danych osobowych innym podmiotom</h2>
+        <ol>
+          <li>
+            Do danych osobowych zbieranych przez Administratora mają dostęp
+            podmioty, z których usług korzysta Administrator w celach dotyczących
+            prowadzenia działalności gospodarczej.
+          </li>
+          <li>
+            Przetwarzanie danych osobowych przez te podmioty odbywa się zgodnie z
+            przepisami prawa, zazwyczaj na podstawie powierzenia przetwarzania
+            danych osobowych i zawartych odpowiednich umów. Podmioty te gwarantują
+            odpowiedni w świetle obowiązujących przepisów poziom ochrony danych
+            osobowych.
+          </li>
+          <li>
+            Przetwarzanie danych osobowych Użytkowników jest powierzane:
+            <ul>
+              <li>
+                podmiotom obsługującym systemy informatyczne, świadczącym usługi
+                hostingowe, usługi składowania danych, usługi telekomunikacyjne,
+                obsługującym pocztę elektroniczną oraz wysyłkę mailingów (w tym
+                Resend, Inc.);
+              </li>
+              <li>dostawcom modeli AI wykorzystywanych w ramach Serwisu;</li>
+              <li>podmiotom obsługującym płatności;</li>
+              <li>podmiotom prowadzącym rachunkowość i rozliczenia podatkowe;</li>
+              <li>podmiotom świadczącym usługi prawne lub usługi doradcze;</li>
+              <li>partnerom promującym usługi.</li>
+            </ul>
+          </li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>§19. Zmiany w Polityce</h2>
+        <ol>
+          <li>
+            Administrator zastrzega sobie prawo zmiany Polityki. Zmiany wchodzą w
+            życie z chwilą umieszczenia treści zmienionej Polityki na stronie
+            internetowej narzedziadlatworcow.pl, w zakładce Polityka prywatności i
+            plików cookies.
+          </li>
+          <li>Polityka wchodzi w życie z dniem {EFFECTIVE_DATE}</li>
+        </ol>
       </section>
     </div>
   </main>

@@ -1,71 +1,82 @@
+// Consent Mode v2 + Google Tag Manager.
+//
+// GTM jest jedynym loaderem tagów — GA4, Microsoft Clarity, Meta Pixel,
+// Google Ads i LinkedIn konfigurujemy w panelu GTM, nie w kodzie. Tu wozimy
+// wyłącznie: (1) Consent Mode v2 default ustawiany PRZED gtm.js,
+// (2) załadowanie kontenera GTM, (3) `consent update` przy wyborze w bannerze.
+
 const STORAGE_KEY = "ndt-consent";
-const GA_ID = "G-J6GW0YNJK6";
-const CLARITY_ID = "wi8yoqxauc";
+const GTM_ID = import.meta.env.PUBLIC_GTM_ID as string | undefined;
 
-export type ConsentValue = "granted" | "denied";
+export type Consent = { analytics: boolean; marketing: boolean };
 
-type GlobalWithAnalytics = {
-  dataLayer?: unknown[];
-  gtag?: (...args: unknown[]) => void;
-  clarity?: { q?: unknown[] } & ((...args: unknown[]) => void);
-};
+type GlobalWithDataLayer = { dataLayer?: unknown[] };
 
-const win = () => window as unknown as GlobalWithAnalytics;
+const win = () => window as unknown as GlobalWithDataLayer;
 
-export function getStoredConsent(): ConsentValue | null {
+function gtag(...args: unknown[]) {
+  const w = win();
+  w.dataLayer = w.dataLayer || [];
+  w.dataLayer.push(args);
+}
+
+function consentState(c: Consent) {
+  return {
+    ad_storage: c.marketing ? "granted" : "denied",
+    ad_user_data: c.marketing ? "granted" : "denied",
+    ad_personalization: c.marketing ? "granted" : "denied",
+    analytics_storage: c.analytics ? "granted" : "denied",
+    functionality_storage: "granted",
+    security_storage: "granted",
+  };
+}
+
+export function getStoredConsent(): Consent | null {
   try {
-    const v = localStorage.getItem(STORAGE_KEY);
-    return v === "granted" || v === "denied" ? v : null;
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    // Wsteczna zgodność ze starym binarnym zapisem ("granted" / "denied").
+    if (raw === "granted") return { analytics: true, marketing: true };
+    if (raw === "denied") return { analytics: false, marketing: false };
+    const c = JSON.parse(raw) as Partial<Consent>;
+    return { analytics: !!c.analytics, marketing: !!c.marketing };
   } catch {
     return null;
   }
 }
 
-function storeConsent(value: ConsentValue) {
+export function initConsentMode() {
+  const stored = getStoredConsent();
+  const initial: Consent = stored ?? { analytics: false, marketing: false };
+
+  // Consent Mode v2 default — MUSI trafić do dataLayer przed gtm.js.
+  gtag("consent", "default", {
+    ...consentState(initial),
+    wait_for_update: 500,
+  });
+  gtag("js", new Date());
+
+  if (!GTM_ID) return;
+
+  // gtm.js (loader wszystkich tagów) — samo POBRANIE odraczamy do bezczynności,
+  // ale consent default i gtm.start są już w dataLayer, więc GTM odczyta
+  // poprawny stan zgody, gdy się doładuje. Zdejmuje skrypt ze ścieżki krytycznej.
+  win().dataLayer!.push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+  whenIdle(() => {
+    const s = document.createElement("script");
+    s.async = true;
+    s.src = `https://www.googletagmanager.com/gtm.js?id=${GTM_ID}`;
+    document.head.appendChild(s);
+  });
+}
+
+export function setConsent(c: Consent) {
   try {
-    localStorage.setItem(STORAGE_KEY, value);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(c));
   } catch {
     // ignore — quota / private mode
   }
-}
-
-export function initConsentMode() {
-  const w = win();
-  w.dataLayer = w.dataLayer || [];
-  const gtag = (...args: unknown[]) => {
-    w.dataLayer!.push(args);
-  };
-  w.gtag = gtag;
-
-  const stored = getStoredConsent();
-  const granted = stored === "granted";
-
-  // Consent Mode v2 — defaults BEFORE gtag.js loads
-  gtag("consent", "default", {
-    ad_storage: granted ? "granted" : "denied",
-    ad_user_data: granted ? "granted" : "denied",
-    ad_personalization: granted ? "granted" : "denied",
-    analytics_storage: granted ? "granted" : "denied",
-    functionality_storage: "granted",
-    security_storage: "granted",
-    wait_for_update: 500,
-  });
-
-  gtag("js", new Date());
-  gtag("config", GA_ID);
-
-  // gtag.js (158KB) leci zawsze, ale odraczamy SAMO POBRANIE do bezczynności
-  // po pełnym załadowaniu strony — consent default + config są już w dataLayer,
-  // więc gtag.js odczyta poprawny stan zgody, gdy się doładuje. Zdejmuje 158KB
-  // ze ścieżki krytycznej (LCP/FCP), nie psując Consent Mode v2.
-  whenIdle(() => {
-    const gaTag = document.createElement("script");
-    gaTag.async = true;
-    gaTag.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
-    document.head.appendChild(gaTag);
-  });
-
-  if (granted) loadClarity();
+  gtag("consent", "update", consentState(c));
 }
 
 // Odpala callback gdy przeglądarka jest bezczynna, najwcześniej po `load`.
@@ -79,38 +90,4 @@ function whenIdle(cb: () => void) {
   };
   if (document.readyState === "complete") schedule();
   else window.addEventListener("load", schedule, { once: true });
-}
-
-function loadClarity() {
-  const w = win();
-  if (w.clarity) return;
-
-  const stub = function (...args: unknown[]) {
-    (stub.q = stub.q || []).push(args);
-  } as { (...args: unknown[]): void; q?: unknown[] };
-  w.clarity = stub;
-
-  const tag = document.createElement("script");
-  tag.async = true;
-  tag.src = `https://www.clarity.ms/tag/${CLARITY_ID}`;
-  document.head.appendChild(tag);
-}
-
-export function grantConsent() {
-  storeConsent("granted");
-  const gtag = win().gtag;
-  if (gtag) {
-    gtag("consent", "update", {
-      ad_storage: "granted",
-      ad_user_data: "granted",
-      ad_personalization: "granted",
-      analytics_storage: "granted",
-    });
-  }
-  if (import.meta.env.PROD) loadClarity();
-}
-
-export function denyConsent() {
-  storeConsent("denied");
-  // gtag pozostaje w default denied; Clarity nie został załadowany
 }

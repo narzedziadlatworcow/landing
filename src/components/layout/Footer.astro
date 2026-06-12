@@ -21,7 +21,10 @@ const cols = [
   {
     title: "Kontakt",
     links: [
-      { label: "hello@ndt.pl", href: "mailto:hello@ndt.pl" },
+      {
+        label: "biuro@polskistartup.org.pl",
+        href: "mailto:biuro@polskistartup.org.pl",
+      },
       { label: "Regulamin", href: "/regulamin" },
       { label: "Polityka prywatności", href: "/polityka-prywatnosci" },
     ],
@@ -74,9 +77,27 @@ const year = new Date().getFullYear();
       class="mt-8 pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-[11px] text-white/40"
     >
       <span>© {year} NDT · Narzędzia dla Twórców</span>
-      <span class="font-hand text-[13px] text-white/55">
-        Zrobione w Polsce · z głową
-      </span>
+      <div class="flex items-center gap-4">
+        <button
+          type="button"
+          data-open-consent
+          class="text-[11px] text-white/40 hover:text-white/75 transition-colors"
+        >
+          Zmień zgodę na cookies
+        </button>
+        <span class="font-hand text-[13px] text-white/55">
+          Zrobione w Polsce · z głową
+        </span>
+      </div>
     </div>
   </div>
 </footer>
+
+<script>
+  // Ponowne otwarcie bannera zgód — wymóg RODO (wycofanie zgody).
+  document
+    .querySelector("[data-open-consent]")
+    ?.addEventListener("click", () => {
+      window.dispatchEvent(new Event("ndt:openConsent"));
+    });
+</script>
