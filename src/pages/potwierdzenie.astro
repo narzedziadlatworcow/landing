@@ -1,0 +1,154 @@
+---
+import Base from "@/layouts/Base.astro";
+import Nav from "@/components/layout/Nav.astro";
+import Footer from "@/components/layout/Footer.astro";
+
+// Strona „dziękujemy za zapis". Link z maila potwierdzającego prowadzi tu z
+// `?token=…`. Potwierdzenie wykonuje route platformy `/mailing/confirm`
+// (mutacja: kupon + confirm) — wołane fetch-em (CORS), a stan renderujemy tu.
+// Transakcyjna, poza indeksem.
+---
+
+<Base
+  title="Potwierdzenie zapisu · Narzędzia dla Twórców"
+  description="Potwierdzenie zapisu na listę oczekujących Narzędzi dla Twórców."
+  noindex={true}
+>
+  <Nav />
+  <main class="mx-auto flex max-w-xl flex-col items-center px-6 py-24 text-center">
+    <div
+      class="w-full rounded-2xl border border-border-soft bg-white/80 px-8 py-12 shadow-[0_10px_30px_-12px_rgba(43,10,61,0.15)]"
+    >
+      {/* Loading — domyślny, dopóki fetch nie wróci */}
+      <div id="state-loading" data-state>
+        <div class="text-[40px] leading-none mb-3">⏳</div>
+        <h1 class="text-2xl font-semibold text-ink">Potwierdzamy zapis…</h1>
+        <p class="mt-2 text-[15px] text-ink/70">Chwila, sprawdzamy Twój link.</p>
+      </div>
+
+      {/* Potwierdzono */}
+      <div id="state-confirmed" data-state hidden>
+        <div class="text-[40px] leading-none mb-3">✅</div>
+        <h1 class="text-2xl font-semibold text-ink">Potwierdzono!</h1>
+        <p class="mt-2 text-[15px] text-ink/70">
+          Dziękujemy! Twój zapis na listę oczekujących jest potwierdzony.
+          Damy Ci znać, gdy ruszamy.
+        </p>
+      </div>
+
+      {/* Już potwierdzone */}
+      <div id="state-already" data-state hidden>
+        <div class="text-[40px] leading-none mb-3">👍</div>
+        <h1 class="text-2xl font-semibold text-ink">Już jesteś na liście</h1>
+        <p class="mt-2 text-[15px] text-ink/70">
+          Ten zapis był już potwierdzony. Damy Ci znać, gdy ruszamy.
+        </p>
+      </div>
+
+      {/* Link wygasł */}
+      <div id="state-expired" data-state hidden>
+        <div class="text-[40px] leading-none mb-3">⌛</div>
+        <h1 class="text-2xl font-semibold text-ink">Link wygasł</h1>
+        <p class="mt-2 text-[15px] text-ink/70">
+          Ten link potwierdzający jest już nieaktywny.
+        </p>
+        <a
+          href="/#pricing"
+          class="mt-5 inline-block rounded-lg bg-brand px-5 py-2.5 text-[14px] font-semibold text-white transition-colors hover:bg-brand/90"
+        >
+          Zapisz się ponownie
+        </a>
+      </div>
+
+      {/* Zapis był wypisany */}
+      <div id="state-resubscribe" data-state hidden>
+        <div class="text-[40px] leading-none mb-3">✉️</div>
+        <h1 class="text-2xl font-semibold text-ink">Ten zapis został wypisany</h1>
+        <p class="mt-2 text-[15px] text-ink/70">
+          Wypisano Cię z listy, więc ten link nie jest już aktywny. Jeśli chcesz
+          wrócić — zapisz się ponownie.
+        </p>
+        <a
+          href="/#pricing"
+          class="mt-5 inline-block rounded-lg bg-brand px-5 py-2.5 text-[14px] font-semibold text-white transition-colors hover:bg-brand/90"
+        >
+          Zapisz się ponownie
+        </a>
+      </div>
+
+      {/* Nieprawidłowy link / błąd sieci */}
+      <div id="state-invalid" data-state hidden>
+        <div class="text-[40px] leading-none mb-3">⚠️</div>
+        <h1 class="text-2xl font-semibold text-ink">Nieprawidłowy link</h1>
+        <p class="mt-2 text-[15px] text-ink/70">
+          Ten link jest niepoprawny lub niekompletny.
+        </p>
+        <a
+          href="/#pricing"
+          class="mt-5 inline-block rounded-lg bg-brand px-5 py-2.5 text-[14px] font-semibold text-white transition-colors hover:bg-brand/90"
+        >
+          Zapisz się
+        </a>
+      </div>
+
+      {/* Błąd połączenia — pozwól spróbować ponownie */}
+      <div id="state-error" data-state hidden>
+        <div class="text-[40px] leading-none mb-3">🔌</div>
+        <h1 class="text-2xl font-semibold text-ink">Coś poszło nie tak</h1>
+        <p class="mt-2 text-[15px] text-ink/70">
+          Nie udało się połączyć z serwerem. Sprawdź połączenie i spróbuj
+          ponownie.
+        </p>
+        <button
+          id="retry-btn"
+          class="mt-5 inline-block rounded-lg bg-brand px-5 py-2.5 text-[14px] font-semibold text-white transition-colors hover:bg-brand/90"
+        >
+          Spróbuj ponownie
+        </button>
+      </div>
+    </div>
+  </main>
+  <Footer />
+
+  <script>
+    const API = import.meta.env.PUBLIC_MAILING_API_URL;
+    const token = new URLSearchParams(location.search).get("token");
+
+    function show(state: string) {
+      document
+        .querySelectorAll<HTMLElement>("[data-state]")
+        .forEach((el) => (el.hidden = el.id !== `state-${state}`));
+    }
+
+    // Mapa stanów z route → id sekcji. Nieznany stan → invalid.
+    const STATES = new Set([
+      "confirmed",
+      "already",
+      "expired",
+      "resubscribe",
+      "invalid",
+    ]);
+
+    async function confirm() {
+      if (!token) {
+        show("invalid");
+        return;
+      }
+      show("loading");
+      try {
+        // GET bez custom headers = request „prosty" (CORS-safelisted, bez
+        // preflight). Token już zakodowany w location.search.
+        const res = await fetch(
+          `${API}/route/mailing/confirm?token=${encodeURIComponent(token)}`,
+        );
+        const data = (await res.json()) as { state?: string };
+        show(STATES.has(data.state ?? "") ? data.state! : "invalid");
+      } catch {
+        show("error");
+      }
+    }
+
+    document.getElementById("retry-btn")?.addEventListener("click", confirm);
+    confirm();
+  </script>
+</Base>
