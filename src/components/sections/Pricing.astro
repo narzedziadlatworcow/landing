@@ -9,7 +9,6 @@ import {
   PRICE,
   PRICE_UNIT,
   PRICE_FIRST,
-  LAUNCH_DATE,
 } from "@/data/offer";
 
 // Co siedzi w jednej subskrypcji — trzy warstwy wartości (kurs → strategia → aplikacja).
@@ -61,8 +60,8 @@ const reassurance = [
             </>
           ) : (
             <>
-              Kurs, strategia i aplikacja w jednej subskrypcji. Start{" "}
-              {LAUNCH_DATE}: zapisz się teraz, a pierwszy miesiąc zapłacisz{" "}
+              Kurs, strategia i aplikacja w jednej subskrypcji. Już wkrótce
+              start — zapisz się teraz, a pierwszy miesiąc zapłacisz{" "}
               {PRICE_FIRST} zamiast {PRICE}.
             </>
           )
@@ -80,7 +79,7 @@ const reassurance = [
           <div class="absolute -top-3.5 left-6">
             <Badge tone="brand">
               <Icon name="lucide:zap" class="size-3" slot="icon" />
-              Start {LAUNCH_DATE}
+              Już wkrótce
             </Badge>
           </div>
         )}
@@ -142,7 +141,7 @@ const reassurance = [
               <>
                 <div id="signup-area">
                   <div class="text-[13px] text-ink/70 text-center mb-2.5 leading-snug">
-                    Zapisz się, a 15.06 dostaniesz kupon na{" "}
+                    Zapisz się, a w dniu startu dostaniesz kupon na{" "}
                     <b class="text-ink">pierwszy miesiąc {PRICE_FIRST}</b>.
                   </div>
                   <form id="signup-form" class="flex flex-col gap-1.5">

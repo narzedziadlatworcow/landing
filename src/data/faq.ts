@@ -1,10 +1,4 @@
-import {
-  LAUNCHED,
-  PRICE,
-  PRICE_UNIT,
-  PRICE_FIRST,
-  LAUNCH_DATE,
-} from "@/data/offer";
+import { LAUNCHED, PRICE, PRICE_UNIT, PRICE_FIRST } from "@/data/offer";
 
 export interface Faq {
   q: string;
@@ -32,7 +26,7 @@ export const faqs: Faq[] = [
   },
   {
     q: "Kiedy startujecie?",
-    a: `Publiczny start to ${LAUNCH_DATE}. Kurs, strategia i aplikacja ruszają naraz.${
+    a: `Publiczny start już wkrótce. Kurs, strategia i aplikacja ruszają naraz.${
       LAUNCHED
         ? ""
         : ` Do tego czasu zostaw maila przez formularz, a w dniu startu dostaniesz kupon na pierwszy miesiąc w cenie ${PRICE_FIRST} zamiast ${PRICE}.`
@@ -43,7 +37,7 @@ export const faqs: Faq[] = [
     : [
         {
           q: `Na czym polega pierwszy miesiąc za ${PRICE_FIRST}?`,
-          a: `Jeśli zapiszesz się przed startem (${LAUNCH_DATE}), dostaniesz jednorazowy kupon na pierwszy miesiąc: zapłacisz ${PRICE_FIRST} zamiast ${PRICE}. To zniżka tylko na pierwszy miesiąc; od kolejnego subskrypcja kosztuje ${PRICE}${PRICE_UNIT}. Płatność dopiero w dniu startu. Teraz zostawiasz wyłącznie adres e-mail.`,
+          a: `Jeśli zapiszesz się przed startem, dostaniesz jednorazowy kupon na pierwszy miesiąc: zapłacisz ${PRICE_FIRST} zamiast ${PRICE}. To zniżka tylko na pierwszy miesiąc; od kolejnego subskrypcja kosztuje ${PRICE}${PRICE_UNIT}. Płatność dopiero w dniu startu. Teraz zostawiasz wyłącznie adres e-mail.`,
         },
       ]),
   {
