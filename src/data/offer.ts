@@ -1,6 +1,6 @@
 // Jedno źródło prawdy oferty NDT.
 //
-// 15.06.2026 (dzień launchu) → przełącz LAUNCHED na `true`.
+// W dniu launchu → przełącz LAUNCHED na `true`.
 // To jeden ręczny swap: cały landing przechodzi z trybu pre-launch
 // (zbiórka maili + kupon na pierwszy miesiąc) na tryb sprzedaży
 // (CTA redirectuje na checkout). Trzymamy boolean ręczny, nie automat
@@ -17,9 +17,6 @@ export const PRICE_UNIT = "/ mies";
 
 /** Cena pierwszego miesiąca dla zapisanych przed launchem (kupon −20 zł). */
 export const PRICE_FIRST = "59 zł";
-
-/** Data publicznego startu — komunikowana jako wydarzenie. */
-export const LAUNCH_DATE = "15.06";
 
 /** Główne CTA — etykieta zależna od stanu launchu. */
 export const CTA_LABEL = LAUNCHED
