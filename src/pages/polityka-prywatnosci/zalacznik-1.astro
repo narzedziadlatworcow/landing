@@ -1,0 +1,261 @@
+---
+import Base from "@/layouts/Base.astro";
+import Nav from "@/components/layout/Nav.astro";
+import Footer from "@/components/layout/Footer.astro";
+
+const EFFECTIVE_DATE = "9 czerwca 2026 r.";
+
+const td = "border border-ink/15 p-2 align-top";
+const th = "border border-ink/15 p-2 align-top text-left font-semibold text-ink";
+
+type Provider = { name: string; entity: string; scope: string; policy: string };
+
+const textModels: Provider[] = [
+  {
+    name: "OpenAI",
+    entity:
+      "OpenAI Ireland Limited, 1st Floor, The Liffey Trust Centre, 117–126 Sheriff Street Upper, Dublin 1, D01 YC43, Irlandia (dla użytkowników EOG)",
+    scope:
+      "analiza tekstu, generowanie treści, tworzenie strategii, scenariuszy, automatyzacja pracy z tekstem",
+    policy: "https://openai.com/pl-PL/policies/eu-privacy-policy/",
+  },
+  {
+    name: "Anthropic",
+    entity:
+      "Anthropic PBC (Anthropic Public Benefit Corporation), 548 Market Street, PMB 248, San Francisco, CA 94104, USA",
+    scope:
+      "analiza informacji, generowanie i przetwarzanie treści tekstowych, wsparcie procesów kreatywnych i analitycznych",
+    policy: "https://www.anthropic.com/legal/privacy",
+  },
+  {
+    name: "Google",
+    entity: "Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irlandia",
+    scope: "analiza, generowanie treści, rozumowanie, przetwarzanie informacji",
+    policy: "https://policies.google.com/privacy",
+  },
+];
+
+const imageModels: Provider[] = [
+  {
+    name: "OpenAI",
+    entity:
+      "OpenAI Ireland Limited, 1st Floor, The Liffey Trust Centre, 117–126 Sheriff Street Upper, Dublin 1, D01 YC43, Irlandia (dla użytkowników EOG)",
+    scope: "generowanie i modyfikacja obrazów, tworzenie materiałów wizualnych",
+    policy: "https://openai.com/pl-PL/policies/eu-privacy-policy/",
+  },
+  {
+    name: "Google",
+    entity: "Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irlandia",
+    scope: "generowanie oraz przetwarzanie obrazów",
+    policy: "https://policies.google.com/privacy",
+  },
+  {
+    name: "Midjourney",
+    entity: "Midjourney, Inc., San Francisco, Kalifornia, USA",
+    scope: "generowanie obrazów i materiałów graficznych",
+    policy:
+      "https://docs.midjourney.com/hc/en-us/articles/32083472637453-Privacy-Policy",
+  },
+  {
+    name: "Black Forest Labs",
+    entity: "Black Forest Labs Inc., Stany Zjednoczone",
+    scope: "generowanie obrazów oraz materiałów wizualnych",
+    policy: "https://bfl.ai/legal/privacy-policy",
+  },
+];
+
+const videoModels: Provider[] = [
+  {
+    name: "OpenAI",
+    entity:
+      "OpenAI Ireland Limited, 1st Floor, The Liffey Trust Centre, 117–126 Sheriff Street Upper, Dublin 1, D01 YC43, Irlandia (dla użytkowników EOG)",
+    scope:
+      "generowanie materiałów wideo na podstawie opisów tekstowych lub innych danych wejściowych",
+    policy: "https://openai.com/pl-PL/policies/eu-privacy-policy/",
+  },
+  {
+    name: "Google",
+    entity: "Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irlandia",
+    scope: "generowanie oraz przetwarzanie materiałów wideo",
+    policy: "https://policies.google.com/privacy",
+  },
+  {
+    name: "Runway",
+    entity: "Runway AI, Inc., New York, Nowy Jork, USA",
+    scope: "tworzenie, animacja i edycja materiałów wideo",
+    policy: "https://runwayml.com/privacy-policy",
+  },
+  {
+    name: "Luma AI",
+    entity: "Luma AI, Inc., San Francisco, Kalifornia, USA",
+    scope: "generowanie animacji oraz materiałów wideo",
+    policy: "https://lumalabs.ai/legal/privacy-policy",
+  },
+  {
+    name: "Kuaishou Technology",
+    entity: "Kuaishou Technology Co., Ltd., Beijing, Chiny",
+    scope: "generowanie materiałów wideo oraz animacji",
+    policy: "https://ky.kuaishou.com/protocol/privacy/",
+  },
+];
+
+const sections: { title: string; rows: Provider[] }[] = [
+  {
+    title:
+      "Modele tekstowe – analiza, generowanie treści, strategii, scenariuszy oraz praca z tekstem",
+    rows: textModels,
+  },
+  {
+    title:
+      "Modele graficzne – generowanie obrazów statycznych, grafik i materiałów wizualnych",
+    rows: imageModels,
+  },
+  {
+    title:
+      "Modele wideo i animacji – generowanie, edycja oraz przetwarzanie materiałów ruchomych",
+    rows: videoModels,
+  },
+];
+---
+
+<Base
+  title="Załącznik nr 1 do Polityki prywatności · Narzędzia dla Twórców"
+  description="Wykaz wykorzystywanych technologii i dostawców sztucznej inteligencji (AI) w ramach Platformy Narzędzia dla Twórców."
+  noindex={false}
+>
+  <Nav />
+  <main class="mx-auto max-w-2xl px-6 py-16 text-ink">
+    <p class="text-sm">
+      <a href="/polityka-prywatnosci" class="text-brand underline"
+        >← Polityka prywatności i plików cookies</a
+      >
+    </p>
+
+    <h1 class="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
+      Załącznik nr 1. Wykaz wykorzystywanych technologii i dostawców sztucznej
+      inteligencji (AI)
+    </h1>
+    <p class="mt-2 text-sm text-muted">obowiązuje od {EFFECTIVE_DATE}</p>
+
+    <div
+      class="mt-8 space-y-8 text-[15px] leading-relaxed text-ink/80 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:space-y-1.5 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_a]:text-brand [&_a]:underline [&_a]:break-words [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:text-ink [&_h3]:font-semibold [&_h3]:text-ink [&_section]:space-y-2.5"
+    >
+      <section>
+        <h2>1. Informacje ogólne</h2>
+        <ol>
+          <li>
+            Usługodawca wykorzystuje w ramach Platformy rozwiązania oparte na
+            sztucznej inteligencji (AI) w celu wspierania funkcjonalności
+            związanych w szczególności z analizą treści, generowaniem tekstów,
+            tworzeniem strategii, przygotowywaniem scenariuszy, generowaniem
+            obrazów oraz tworzeniem i przetwarzaniem materiałów wideo.
+          </li>
+          <li>
+            W zależności od rodzaju wykorzystywanej usługi, konfiguracji
+            technicznej, sposobu integracji oraz warunków świadczenia usług danego
+            dostawcy, podmioty wskazane w niniejszym załączniku mogą występować
+            jako:
+            <ul>
+              <li>
+                <b>podmioty przetwarzające dane osobowe (procesorzy)</b> – jeżeli
+                przetwarzają dane wyłącznie na udokumentowane polecenie Usługodawcy
+                w celu świadczenia usługi na rzecz Platformy;
+              </li>
+              <li>
+                <b>dalsze podmioty przetwarzające (podprocesorzy)</b> – jeżeli
+                realizują część procesu przetwarzania przy wykorzystaniu własnych
+                podwykonawców lub infrastruktury;
+              </li>
+              <li>
+                <b>niezależni administratorzy danych</b> – w zakresie danych
+                przetwarzanych dla własnych, określonych celów wynikających z
+                dokumentacji danego dostawcy.
+              </li>
+            </ul>
+          </li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>2. Wykaz modeli AI</h2>
+        {
+          sections.map((s) => (
+            <div class="space-y-2.5">
+              <h3>{s.title}</h3>
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse text-[13px] leading-snug">
+                  <thead>
+                    <tr>
+                      <th class={th}>Dostawca</th>
+                      <th class={th}>Pełna nazwa i adres</th>
+                      <th class={th}>Zakres wykorzystania</th>
+                      <th class={th}>Polityka prywatności</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {s.rows.map((r) => (
+                      <tr>
+                        <td class={td}>
+                          <b>{r.name}</b>
+                        </td>
+                        <td class={td}>{r.entity}</td>
+                        <td class={td}>{r.scope}</td>
+                        <td class={td}>
+                          <a href={r.policy} rel="noopener" target="_blank">
+                            {r.policy}
+                          </a>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          ))
+        }
+      </section>
+
+      <section>
+        <h2>3. Kategorie danych przekazywanych do modeli AI</h2>
+        <ol>
+          <li>
+            W zależności od funkcjonalności Platformy do modeli AI mogą być
+            przekazywane wyłącznie dane niezbędne do realizacji danej funkcji, w
+            szczególności:
+            <ul>
+              <li>treści tekstowe wprowadzone przez Użytkownika;</li>
+              <li>polecenia i instrukcje przekazane do systemu AI;</li>
+              <li>materiały graficzne lub multimedialne przesłane przez Użytkownika;</li>
+              <li>dane kontekstowe niezbędne do wygenerowania odpowiedzi lub materiału;</li>
+              <li>techniczne dane związane z realizacją żądania.</li>
+            </ul>
+          </li>
+          <li>
+            Usługodawca stosuje zasadę minimalizacji danych oraz ogranicza
+            przekazywanie danych umożliwiających bezpośrednią identyfikację osoby,
+            jeżeli nie jest to konieczne dla realizacji funkcjonalności.
+          </li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>4. Zmiany wykazu dostawców AI</h2>
+        <p>
+          Ze względu na dynamiczny rozwój technologii sztucznej inteligencji
+          Administrator zastrzega możliwość aktualizacji wskazanego w Załączniku
+          wykazu poprzez dodanie, zmianę lub usunięcie wykorzystywanych modeli AI
+          lub dostawców technologii, przy zachowaniu zasad ochrony danych osobowych
+          określonych w <a href="/polityka-prywatnosci">Polityce prywatności</a>
+          oraz obowiązujących przepisach prawa.
+        </p>
+      </section>
+    </div>
+
+    <p class="mt-10 text-sm">
+      <a href="/polityka-prywatnosci" class="text-brand underline"
+        >← Powrót do Polityki prywatności</a
+      >
+    </p>
+  </main>
+  <Footer />
+</Base>
