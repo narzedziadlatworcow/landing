@@ -3,7 +3,8 @@ import Base from "@/layouts/Base.astro";
 import Nav from "@/components/layout/Nav.astro";
 import Footer from "@/components/layout/Footer.astro";
 
-const EFFECTIVE_DATE = "9 czerwca 2026 r.";
+const PUBLICATION_DATE = "22 sierpnia 2026 r.";
+const EFFECTIVE_DATE = "5 września 2026 r.";
 ---
 
 <Base
@@ -17,7 +18,9 @@ const EFFECTIVE_DATE = "9 czerwca 2026 r.";
       Regulamin świadczenia usług oraz sklepu internetowego pod adresem
       narzedziadlatworcow.pl
     </h1>
-    <p class="mt-2 text-sm text-muted">obowiązuje od {EFFECTIVE_DATE}</p>
+    <p class="mt-2 text-sm text-muted">
+      opublikowano {PUBLICATION_DATE} · obowiązuje od {EFFECTIVE_DATE}
+    </p>
 
     <p class="mt-4 text-sm">
       Zapis na newsletter reguluje odrębny <a
@@ -260,6 +263,15 @@ const EFFECTIVE_DATE = "9 czerwca 2026 r.";
             inaczej.
           </li>
           <li>Wszelkie naruszenia prawa własności intelektualnej podlegają ochronie prawnej.</li>
+          <li>
+            Sprzedawca nie rości sobie praw do treści wygenerowanych przez
+            Użytkownika przy użyciu Funkcji AI Platformy. W zakresie, w jakim
+            treściom tym przysługuje ochrona prawna, wszelkie prawa do nich nabywa
+            Użytkownik z chwilą ich wygenerowania, a Sprzedawca – w najszerszym
+            dopuszczalnym prawem zakresie – przenosi je na Użytkownika lub udziela
+            mu niewyłącznej, nieograniczonej czasowo i terytorialnie licencji
+            obejmującej korzystanie komercyjne.
+          </li>
         </ol>
       </section>
 
@@ -376,6 +388,20 @@ const EFFECTIVE_DATE = "9 czerwca 2026 r.";
             wykonania oraz wysokość wynagrodzenia, ustalane są każdorazowo
             indywidualnie pomiędzy Sprzedawcą a Klientem, w szczególności za
             pośrednictwem korespondencji elektronicznej.
+          </li>
+          <li>
+            Kredyty AI stanowią wyłącznie wewnętrzną jednostkę rozliczeniową
+            uprawniającą do korzystania z funkcjonalności AI Platformy świadczonych
+            przez Sprzedawcę, w szczególności generowania treści. Kredyty AI: a)
+            podlegają wymianie wyłącznie na usługi świadczone przez Sprzedawcę w
+            ramach Platformy; b) nie stanowią środka płatniczego, pieniądza
+            elektronicznego ani instrumentu płatniczego w rozumieniu ustawy z dnia
+            19 sierpnia 2011 r. o usługach płatniczych; c) są przypisane do konta
+            Użytkownika i nie mogą być przenoszone na innych Użytkowników ani na
+            osoby trzecie; d) nie mogą służyć do nabywania towarów lub usług
+            podmiotów trzecich; e) nie podlegają wymianie na środki pieniężne, z
+            zastrzeżeniem bezwzględnie obowiązujących przepisów o prawie
+            odstąpienia od umowy.
           </li>
         </ol>
       </section>
@@ -502,10 +528,17 @@ const EFFECTIVE_DATE = "9 czerwca 2026 r.";
             rozumieniu ustawy z dnia 19 sierpnia 2011 r. o usługach płatniczych.
           </li>
           <li>
+            Sprzedawca umożliwia Klientowi dokonywanie płatności w Sklepie lub na
+            Platformie w formie płatności elektronicznej również za pośrednictwem
+            podmiotu Stripe Payments Europe, Limited z siedzibą w Dublinie
+            (Irlandia), The One Building, 1 Grand Canal Street Lower, Dublin 2,
+            będącego dostawcą usług płatniczych.
+          </li>
+          <li>
             Klient przed dokonaniem płatności powinien zapoznać się z regulaminami
             pośredników obsługujących płatność, a w szczególności z warunkami
-            sprzedaży i płatności oraz polityką prywatności PayU, dostępnymi pod
-            niżej wskazanymi linkami:
+            sprzedaży i płatności oraz politykami prywatności PayU i Stripe,
+            dostępnymi pod niżej wskazanymi linkami:
             <ul>
               <li>
                 Regulaminy usługi PayU (dla Kupujących): <a
@@ -516,10 +549,24 @@ const EFFECTIVE_DATE = "9 czerwca 2026 r.";
                 >;
               </li>
               <li>
-                Polityka prywatności: <a
+                Polityka prywatności PayU: <a
                   href="https://poland.payu.com/zasady-prywatnosci-w-payu/"
                   rel="noopener"
                   target="_blank">https://poland.payu.com/zasady-prywatnosci-w-payu/</a
+                >;
+              </li>
+              <li>
+                Regulamin usług Stripe (dla konsumentów): <a
+                  href="https://stripe.com/en-pl/legal/consumer"
+                  rel="noopener"
+                  target="_blank">https://stripe.com/en-pl/legal/consumer</a
+                >;
+              </li>
+              <li>
+                Polityka prywatności Stripe: <a
+                  href="https://stripe.com/en-pl/privacy"
+                  rel="noopener"
+                  target="_blank">https://stripe.com/en-pl/privacy</a
                 >.
               </li>
             </ul>
@@ -580,17 +627,19 @@ const EFFECTIVE_DATE = "9 czerwca 2026 r.";
           <li>
             Użytkownik, zawierając umowę ze Sprzedawcą oraz wybierając określony
             pakiet/usługę/subskrypcję, wyraża zgodę na cykliczne, comiesięczne lub
-            coroczne pobieranie przez operatora płatności PayU S.A. z karty
-            płatniczej kwoty pieniężnej odpowiadającej wysokości wartości opłaty za
-            pakiet/usługę/subskrypcję. Opłata będzie pobierana przez operatora
-            płatności raz w miesiącu lub rocznie w zależności od wybranego przez
-            Klienta planu dostępowego.
+            coroczne pobieranie przez operatora płatności (PayU S.A. albo Stripe
+            Payments Europe, Limited — w zależności od operatora wybranego przy
+            zakupie) z karty płatniczej kwoty pieniężnej odpowiadającej wysokości
+            wartości opłaty za pakiet/usługę/subskrypcję. Opłata będzie pobierana
+            przez operatora płatności raz w miesiącu lub rocznie w zależności od
+            wybranego przez Klienta planu dostępowego.
           </li>
           <li>
             Użytkownik w ramach usługi płatności cyklicznych (w modelu
             subskrypcyjnym) ma możliwość zapisania danych karty i zlecenia stałego
-            polecenia zapłaty. Dane karty będą przechowywane przez operatora
-            płatności PayU S.A. PayU, pośrednicząc w dokonaniu płatności, udostępnia
+            polecenia zapłaty. Dane karty będą przechowywane przez wybranego
+            operatora płatności. W przypadku płatności realizowanych za
+            pośrednictwem PayU S.A. — PayU, pośrednicząc w dokonaniu płatności, udostępnia
             narzędzie Token (wirtualny identyfikator karty), umożliwiające
             przypisanie do indywidualnego Użytkownika unikalnego identyfikatora, za
             pomocą którego Użytkownik cyklicznie dokonuje płatności na rzecz
@@ -885,6 +934,12 @@ const EFFECTIVE_DATE = "9 czerwca 2026 r.";
             otrzymane od Konsumenta lub Przedsiębiorcy na prawach konsumenta płatności
             niezwłocznie, nie później jednak niż w terminie 14 dni od dnia otrzymania
             oświadczenia o odstąpieniu od Umowy.
+          </li>
+          <li>
+            Wykorzystanie kredytów AI (wymiana na wygenerowaną treść) stanowi
+            spełnienie świadczenia w rozumieniu ust. 1 i 2. W przypadku odstąpienia
+            od umowy w terminie 14 dni od zakupu Klientowi przysługuje zwrot
+            proporcjonalny do liczby niewykorzystanych kredytów.
           </li>
         </ol>
       </section>

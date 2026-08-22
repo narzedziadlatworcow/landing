@@ -3,7 +3,7 @@ import Base from "@/layouts/Base.astro";
 import Nav from "@/components/layout/Nav.astro";
 import Footer from "@/components/layout/Footer.astro";
 
-const EFFECTIVE_DATE = "9 czerwca 2026 r.";
+const EFFECTIVE_DATE = "22 sierpnia 2026 r.";
 
 const td = "border border-ink/15 p-2 align-top";
 const th = "border border-ink/15 p-2 align-top text-left font-semibold text-ink";
@@ -16,7 +16,7 @@ const textModels: Provider[] = [
     entity:
       "OpenAI Ireland Limited, 1st Floor, The Liffey Trust Centre, 117–126 Sheriff Street Upper, Dublin 1, D01 YC43, Irlandia (dla użytkowników EOG)",
     scope:
-      "analiza tekstu, generowanie treści, tworzenie strategii, scenariuszy, automatyzacja pracy z tekstem",
+      "modele językowe GPT oraz model transkrypcji mowy Whisper (dostęp poprzez API) – analiza tekstu, generowanie treści, tworzenie strategii, scenariuszy, automatyzacja pracy z tekstem, transkrypcja mowy",
     policy: "https://openai.com/pl-PL/policies/eu-privacy-policy/",
   },
   {
@@ -30,7 +30,8 @@ const textModels: Provider[] = [
   {
     name: "Google",
     entity: "Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irlandia",
-    scope: "analiza, generowanie treści, rozumowanie, przetwarzanie informacji",
+    scope:
+      "modele Gemini (dostęp poprzez API) – analiza, generowanie treści, rozumowanie, przetwarzanie informacji",
     policy: "https://policies.google.com/privacy",
   },
 ];
@@ -172,6 +173,13 @@ const sections: { title: string; rows: Provider[] }[] = [
                 dokumentacji danego dostawcy.
               </li>
             </ul>
+          </li>
+          <li>
+            Z dostawcami modeli AI działającymi jako podmioty przetwarzające lub
+            podprocesorzy zawarto umowy powierzenia przetwarzania danych. Dostęp do
+            modeli odbywa się poprzez API, a zgodnie z warunkami korzystania z API
+            dane Użytkowników nie są wykorzystywane do trenowania ani ulepszania
+            modeli AI.
           </li>
         </ol>
       </section>
